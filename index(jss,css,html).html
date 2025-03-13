@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Interactive Wheel System</title>
+    <style>
+        /*test product fiallyyy*/
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            position: fixed;
+            width: 100%;
+            touch-action: none;
+            overflow: hidden;
+        }
+
+        body, html {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 800px;
+            height: 800px;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wheel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .wheel-large {
+            width: 800px;
+            height: 800px;
+            z-index: 1;
+            background: conic-gradient(
+                #2970db 0% 12.5%, 
+                #3179cc 12.5% 25%, 
+                #1976D2 25% 37.5%, 
+                #1E88E5 37.5% 50%, 
+                #2196F3 50% 62.5%, 
+                #42A5F5 62.5% 75%, 
+                #64B5F6 75% 87.5%, 
+                #90CAF9 87.5% 100%
+            );
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .wheel-medium {
+            width: 530px;
+            height: 530px;
+            z-index: 2;
+            background: conic-gradient(
+                #007fe0 0% 12.5%, 
+                #008bdb 12.5% 25%, 
+                #0288D1 25% 37.5%, 
+                #039BE5 37.5% 50%, 
+                #03A9F4 50% 62.5%, 
+                #29B6F6 62.5% 75%, 
+                #4FC3F7 75% 87.5%, 
+                #58c5f8 87.5% 100%
+            );
+        }
+
+        .wheel-small {
+            width: 200px;
+            height: 200px;
+            z-index: 3;
+            background: conic-gradient(
+                #0D47A1 0% 25%, 
+                #1976D2 25% 50%, 
+                #2196F3 50% 75%, 
+                #64B5F6 75% 100%
+            );
+        }
+
+        .section-divider {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 2px;
+            background-color: rgba(0, 0, 0, 0.2);
+            transform-origin: left center;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .section-label {
+            position: absolute;
+            background-color: transparent;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            transform: translate(-50%, -50%);
+            z-index: 15;
+            pointer-events: all;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            text-align: center;
+        }
+
+        .clickable-label {
+            cursor: pointer;
+            transition: transform 0.2s, text-shadow 0.2s;
+            padding: 10px;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        .clickable-label:hover {
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            touch-action: none;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: 0;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            touch-action: pan-y;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .nested-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            touch-action: none;
+        }
+
+        .nested-modal-content {
+            background-color: #fefefe;
+            margin: 0;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-height: 90vh;
+            overflow-y: auto;
+            touch-action: pan-y;
+        }
+
+        .content-box {
+            background-color: #f8f9fa;
+            padding: 25px;
+            margin: 15px auto;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            font-size: 16px;
+            max-width: 90%;
+            text-align: center;
+            min-height: 44px;
+        }
+
+        .content-box:hover {
+            background-color: #e9ecef;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .modal-title {
+            margin-top: 0;
+            color: #2970db;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            font-size: 24px;
+        }
+
+        .modal-body {
+            margin: 20px 0;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            color: #ff0000;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .help-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #2970db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        .help-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 480px) {
+            .wheel-container {
+                transform: scale(0.6);
+            }
+            .section-label {
+                font-size: 14px !important;
+                padding: 8px;
+            }
+            .modal-content {
+                width: 95% !important;
+                max-width: 350px !important;
+                padding: 15px;
+            }
+            .nested-modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+            .modal-title {
+                font-size: 20px;
+            }
+            .modal-body {
+                font-size: 16px;
+            }
+            .content-box {
+                padding: 15px;
+                min-height: 44px;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .wheel-container {
+                transform: scale(0.75);
+            }
+            .section-label {
+                font-size: 16px !important;
+            }
+            .modal-content, .nested-modal-content {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="help-button" onclick="openHelpModal()">?</button>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeHelpModal()">&times;</span>
+            <h2 class="modal-title">=info</h2>
+            <div class="modal-body">
+                <h3>info:</h3>
+                <ol style="line-height: 1.6">
+                    <li>Untuk Mobile pergi ke : diatas kanan screen dan bukak tapak  dekstop</li>
+                    <li>Klik pada mana-mana bahagian dalam roda luar yang besar untuk melihat penjelasan </li>
+                </ol>
+                <h3>...</h3>
+                <ul style="line-height: 1.6">
+                    <li>Website ini masih dalam penambahbaikan... </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="wheel-container" id="wheel-container">
+        <!-- Large wheel 8 sections -->
+        <div class="wheel wheel-large" id="large-wheel"></div>
+        
+        <!-- Medium wheel 8 sections -->
+        <div class="wheel wheel-medium" id="medium-wheel"></div>
+        
+        <!-- Small wheel 8 sections -->
+        <div class="wheel wheel-small" id="small-wheel"></div>
+    </div>
+
+    <!-- Modal Template -->
+    <div id="section-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title" id="modal-title">Section Title</h2>
+            <div class="modal-body" id="modal-body">
+                <div id="modal-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nested Modal Template -->
+    <div id="nested-modal" class="nested-modal">
+        <div class="nested-modal-content">
+            <span class="close-btn" onclick="closeNestedModal()">&times;</span>
+            <h2 class="modal-title" id="nested-modal-title">Nested Modal Title</h2>
+            <div class="modal-body">
+                <div id="nested-modal-content" style="white-space: pre-line;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Prevent default touch behavior to avoid unwanted scrolling
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.closest('.modal-content') || e.target.closest('.nested-modal-content')) {
+                // Allow scrolling inside modals
+                return;
+            }
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchmove', function(e) {
+            if (e.target.closest('.modal-content') || e.target.closest('.nested-modal-content')) {
+                // Allow scrolling inside modals
+                return;
+            }
+            e.preventDefault();
+        }, { passive: false });
+
+        // Section content for the large wheel
+        const sectionContent = {
+            "Section 1": {
+                title: "Section 1 - Huruf Darab Huruf",
+                content: `
+                    <h3>Pilih</h3>
+                    <div class="content-box" onclick="openNestedModal('Huruf Sama', 'test')">Huruf Sama</div>
+                    <div class="content-box" onclick="openNestedModal('Huruf Tak Sama', 'test')">Huruf Tak Sama</div>
+                `
+            },
+            "Section 2": {
+                title: "Section 2 - Huruf darab no, No darab huruf",
+                content: `
+                   <h3>Penjelasan</h3>
+                           Tulis nombor atau hasil darab nombor diikuti huruf
+
+                           Contoh : -3 x y²
+                           Jawapan : -3y²
+                `
+            },
+            "Section 3": {
+                title: "Section 3 - Huruf Bahagi Huruf",
+                content: `
+                    <h3>Pilih</h3>
+                    <div class="content-box" onclick="openNestedModal('Huruf Sama', '
+                    Tolak kuasa 
+                     Contoh : m⁸ ÷ m⁵
+                     Jawapan : m⁸-⁵ = m³
+
+                     Contoh 2: 12p⁷ ÷ 3p²
+                     Jawapan : (12÷3)p⁷-²
+                             =4p³
+                    
+                    
+                    .')">Huruf Bahagi Huruf</div>
+                    <div class="content-box" onclick="openNestedModal('Huruf tak sama', 'test')">Huruf tak sama</div>
+                `
+            },
+            "Section 4": {
+                title: "Section 4 - Huruf Bahagi no, No bahagi huruf",
+                content: `
+                    <h3>Penjelasan</h3>
+                    nil
+                `
+            },
+            "Section 5": {
+                title: "Section 5 - Sebutan Serupa",
+                content: `
+                    <h3>Penjelasan</h3>
+                    Jumlahkan nombor diikuti huruf.
+                    (TEKAN KALKULATOR)
+                  Contoh : 3x + 5x
+                  Jawapan : 8x
+                `
+            },
+            "Section 6": {
+                title: "Section 6 - Sebuan Tak Serupa",
+                content: `
+                    <h3>Penjelasan</h3>
+                    Salin balik soalan yang diberikan
+                    Contoh : 8x + 5y
+                    Jawapan : 8x + 5y
+                `
+            },
+            "Section 7": {
+                title: "Sebutan Tak Serupa",
+                content: `
+                     <h3>Penjelasan</h3>
+                  Tolakkan nombor diikuti huruf
+                  (TEKAN KALKULATOR)
+                  
+                  Contoh : 12x - 7x
+                  Jawapan : 5x
+                `
+            },
+            "Section 8": {
+                title: "Section 8 - Sebutan Tak Serupa",
+                content: `
+                    <h3>Penjelasan</h3>
+                    Salin balik soalan yang diberikan
+                    Contoh : 12x - x²
+                    Jawapan : 12x - x²
+                `
+            }
+        };
+
+        // Create wheel sections
+        function createWheelSections(wheelId, numSections, radius, labels, fontSize, labelRadiusPercent) {
+            const wheel = document.getElementById(wheelId);
+            const angleStep = 360 / numSections;
+            
+            for (let i = 0; i < numSections; i++) {
+                // Create divider
+                const divider = document.createElement('div');
+                divider.className = 'section-divider';
+                divider.style.width = radius + 'px';
+                divider.style.transform = `rotate(${i * angleStep}deg)`;
+                wheel.appendChild(divider);
+                
+                // Calculate label position
+                const labelAngle = (i * angleStep) + (angleStep / 2);
+                const labelRadius = radius * labelRadiusPercent;
+                const labelRadian = (labelAngle * Math.PI) / 180;
+                const x = 50 + (Math.cos(labelRadian) * labelRadius / (radius * 2) * 100);
+                const y = 50 + (Math.sin(labelRadian) * labelRadius / (radius * 2) * 100);
+                
+                // Create the label
+                const label = document.createElement('div');
+                label.className = 'section-label';
+                const labelText = labels[i % labels.length];
+                const words = labelText.split(' ');
+                label.textContent = words.length > 3 ? words.slice(0, 3).join(' ') + '\n' + words.slice(3).join(' ') : labelText;
+                label.style.whiteSpace = 'pre-line';
+                label.style.left = `${x}%`;
+                label.style.top = `${y}%`;
+                label.style.fontSize = `${fontSize}px`;
+                
+                // For large wheel, make text clickable
+                if (wheelId === 'large-wheel') {
+                    label.className += ' clickable-label';
+                    label.id = `section-${i+1}-label`;
+                    label.setAttribute('data-section', labelText);
+                    
+                    // Add both click and touch events
+                    label.addEventListener('click', function() {
+                        openModal(labelText);
+                    });
+                    
+                    label.addEventListener('touchend', function(e) {
+                        e.preventDefault();
+                        openModal(labelText);
+                    }, { passive: false });
+                }
+                
+                wheel.appendChild(label);
+            }
+        }
+        
+        // Modal functions
+        function openModal(sectionName, customContent = null) {
+            const modal = document.getElementById('section-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            
+            const section = sectionContent[sectionName] || {
+                title: sectionName,
+                content: `<p>Content for ${sectionName} will be available soon.</p>`
+            };
+
+            // Clear previous content
+            modalContent.innerHTML = '';
+
+            // Set modal title
+            modalTitle.textContent = section.title;
+
+            // Add custom content if provided
+            if (customContent) {
+                const contentDiv = document.createElement('div');
+                contentDiv.innerHTML = customContent.replace(/\n/g, '<br>');
+                modalContent.appendChild(contentDiv);
+            } else {
+                // Add default content
+                const contentDiv = document.createElement('div');
+                contentDiv.innerHTML = section.content.replace(/\n/g, '<br>');
+                modalContent.appendChild(contentDiv);
+            }
+
+            // Show modal
+            modal.style.display = 'block';
+        }
+        
+        // Open nested modal
+        function openNestedModal(title, content) {
+            document.getElementById('nested-modal-title').textContent = title;
+            document.getElementById('nested-modal-content').innerHTML = content.replace(/\n/g, '<br>');
+            document.getElementById('nested-modal').style.display = 'block';
+        }
+        
+        // Close nested modal
+        function closeNestedModal() {
+            document.getElementById('nested-modal').style.display = 'none';
+        }
+        
+        // Help Modal Functions
+        function openHelpModal() {
+            document.getElementById('help-modal').style.display = 'block';
+        }
+
+        function closeHelpModal() {
+            document.getElementById('help-modal').style.display = 'none';
+        }
+        
+        // Close modal handlers
+        document.querySelectorAll('.close-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let modal = this.closest('.modal, .nested-modal');
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+        
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            let helpModal = document.getElementById('help-modal');
+            let nestedModal = document.getElementById('nested-modal');
+            let sectionModal = document.getElementById('section-modal');
+            
+            if (event.target == helpModal) {
+                helpModal.style.display = 'none';
+            } else if (event.target == nestedModal) {
+                nestedModal.style.display = 'none';
+            } else if (event.target == sectionModal) {
+                sectionModal.style.display = 'none';
+            }
+        });
+        
+        // Close modals when tapping outside on mobile
+        window.addEventListener('touchend', function(event) {
+            let helpModal = document.getElementById('help-modal');
+            let nestedModal = document.getElementById('nested-modal');
+            let sectionModal = document.getElementById('section-modal');
+            
+            if (event.target == helpModal) {
+                helpModal.style.display = 'none';
+            } else if (event.target == nestedModal) {
+                nestedModal.style.display = 'none';
+            } else if (event.target == sectionModal) {
+                sectionModal.style.display = 'none';
+            }
+        });
+        
+        // Define wheel data
+        const smallWheelLabels = ['x', 'x', '÷', '÷', '+', '+', '-', '-'];
+        const mediumWheelLabels = ['Huruf Darab Huruf', 'Huruf Darab No, No Darab Huruf', 'Huruf Bahagi Huruf', 'Huruf bahagi no, no Bahagi Huruf', 'Sebutan Serupa', 'Sebutan Tak Serupa', 'Sebutan Serupa', 'Sebutan Tak Serupa'];
+        const largeWheelLabels = ['Section 1', 'Section 2', 'Section 3', 'Section 4', 'Section 5', 'Section 6', 'Section 7', 'Section 8'];
+
+        // Create the wheels
+        window.addEventListener('DOMContentLoaded', function() {
+            createWheelSections('small-wheel', 8, 100, smallWheelLabels, 28, 0.6);
+            createWheelSections('medium-wheel', 8, 250, mediumWheelLabels, 15, 0.75);
+            createWheelSections('large-wheel', 8, 400, largeWheelLabels, 18, 0.8);
+            
+            // Add extra touch zone for better touch detection on mobile
+            const largeWheel = document.getElementById('large-wheel');
+            
+            largeWheel.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                handleTouchInteraction(touch.clientX, touch.clientY);
+            }, { passive: false });
+            
+            function handleTouchInteraction(x, y) {
+                const element = document.elementFromPoint(x, y);
+                if (element && element.classList.contains('clickable-label')) {
+                    const sectionName = element.getAttribute('data-section');
+                    if (sectionName) {
+                        openModal(sectionName);
+                    }
+                }
+            }
+        });
+        
+        // Handle orientation changes for better mobile experience
+        window.addEventListener('orientationchange', function() {
+            setTimeout(function() {
+                const container = document.getElementById('wheel-container');
+                if (window.innerHeight > window.innerWidth) {
+                    // Portrait mode
+                    container.style.transform = 'scale(0.6)';
+                } else {
+                    // Landscape mode
+                    container.style.transform = 'scale(0.8)';
+                }
+            }, 200);
+        });
+    </script>
+</body>
+</html>
