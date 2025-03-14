@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Projects</title>
+    <title>Interactive Wheels System</title>
     <style>
-        /*test product fiallyyy*/
+        /* Your existing CSS styles */
         body {
             display: flex;
             justify-content: center;
@@ -317,30 +317,50 @@
                 width: 90%;
             }
         }
+         /* Update the rotatable wheel container */
+         .rotatable-wheel-container {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10; /* Ensure it's on top */
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+
+        /* Update the rotatable wheel styles */
+        .rotatable-wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            cursor: grab;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+
+        .wheel-part {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: rgba(128, 128, 128, 1); /* Solid gray color */
+            clip-path: polygon(50% 50%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%);
+            transform: rotate(54deg); /* Start after the cutout */
+            transform-origin: center;
+            pointer-events: auto; /* Allow dragging on the wheel part */
+            backdrop-filter: brightness(1.1); /* Subtle effect on underlying wheels */
+        }
+
+        .rotatable-wheel.active {
+            cursor: grabbing;
+        }
     </style>
 </head>
 <body>
-    <button class="help-button" onclick="openHelpModal()">?</button>
-
-    <!-- Help Modal -->
-    <div id="help-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeHelpModal()">&times;</span>
-            <h2 class="modal-title">=info</h2>
-            <div class="modal-body">
-                <h3>info:</h3>
-                <ol style="line-height: 1.6">
-                    <li>Untuk Mobile pergi ke : diatas kanan screen dan bukak tapak  dekstop</li>
-                    <li>Klik pada mana-mana bahagian dalam roda luar yang besar untuk melihat penjelasan </li>
-                </ol>
-                <h3>...</h3>
-                <ul style="line-height: 1.6">
-                    <li>Website ini masih dalam penambahbaikan... </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
     <div class="wheel-container" id="wheel-container">
         <!-- Large wheel 8 sections -->
         <div class="wheel wheel-large" id="large-wheel"></div>
@@ -350,6 +370,14 @@
         
         <!-- Small wheel 8 sections -->
         <div class="wheel wheel-small" id="small-wheel"></div>
+        
+        <!-- Rotatable wheel with cutout -->
+        <div class="rotatable-wheel-container">
+            <div class="rotatable-wheel" id="rotatable-wheel">
+                <div class="wheel-part"></div>
+                <div class="center"></div>
+            </div>
+        </div>
     </div>
 
     <!-- Modal Template -->
@@ -536,6 +564,7 @@
             const modalTitle = document.getElementById('modal-title');
             const modalContent = document.getElementById('modal-content');
             
+            // Get the section content from the sectionContent object
             const section = sectionContent[sectionName] || {
                 title: sectionName,
                 content: `<p>Content for ${sectionName} will be available soon.</p>`
@@ -575,15 +604,6 @@
             document.getElementById('nested-modal').style.display = 'none';
         }
         
-        // Help Modal Functions
-        function openHelpModal() {
-            document.getElementById('help-modal').style.display = 'block';
-        }
-
-        function closeHelpModal() {
-            document.getElementById('help-modal').style.display = 'none';
-        }
-        
         // Close modal handlers
         document.querySelectorAll('.close-btn').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -596,13 +616,10 @@
         
         // Close modals when clicking outside
         window.addEventListener('click', function(event) {
-            let helpModal = document.getElementById('help-modal');
             let nestedModal = document.getElementById('nested-modal');
             let sectionModal = document.getElementById('section-modal');
             
-            if (event.target == helpModal) {
-                helpModal.style.display = 'none';
-            } else if (event.target == nestedModal) {
+            if (event.target == nestedModal) {
                 nestedModal.style.display = 'none';
             } else if (event.target == sectionModal) {
                 sectionModal.style.display = 'none';
@@ -611,28 +628,103 @@
         
         // Close modals when tapping outside on mobile
         window.addEventListener('touchend', function(event) {
-            let helpModal = document.getElementById('help-modal');
             let nestedModal = document.getElementById('nested-modal');
             let sectionModal = document.getElementById('section-modal');
             
-            if (event.target == helpModal) {
-                helpModal.style.display = 'none';
-            } else if (event.target == nestedModal) {
+            if (event.target == nestedModal) {
                 nestedModal.style.display = 'none';
             } else if (event.target == sectionModal) {
                 sectionModal.style.display = 'none';
             }
         });
         
+        // Rotatable wheel functionality
+        const rotatableWheel = document.getElementById('rotatable-wheel');
+        const wheelPart = document.querySelector('.wheel-part');
+        let isDragging = false;
+        let startAngle = 0;
+        let currentRotation = 54; // Start with the cutout at 54 degrees
+        
+        // Apply initial rotation
+        wheelPart.style.transform = `rotate(${currentRotation}deg)`;
+        
+        // Function to handle both mouse and touch events for rotatable wheel
+        function handleStart(e) {
+            if (e.target !== wheelPart) return; // Only handle events on the wheel part
+            
+            isDragging = true;
+            rotatableWheel.classList.add('active');
+            
+            // Get the center of the wheel
+            const rect = rotatableWheel.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // Get starting position (mouse or touch)
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+            
+            // Calculate starting angle
+            startAngle = Math.atan2(clientY - centerY, clientX - centerX) * 180 / Math.PI;
+            
+            // Prevent default behavior to avoid scrolling on mobile
+            e.preventDefault();
+        }
+        
+        function handleMove(e) {
+            if (!isDragging) return;
+            
+            // Get the center of the wheel
+            const rect = rotatableWheel.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // Get current position (mouse or touch)
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+            
+            // Calculate current angle
+            const angle = Math.atan2(clientY - centerY, clientX - centerX) * 180 / Math.PI;
+            
+            // Calculate rotation
+            const rotation = angle - startAngle;
+            
+            // Update current rotation
+            currentRotation = (currentRotation + rotation) % 360;
+            wheelPart.style.transform = `rotate(${currentRotation}deg)`;
+            
+            // Reset start angle for next move
+            startAngle = angle;
+            
+            // Prevent default behavior to avoid scrolling on mobile
+            e.preventDefault();
+        }
+        
+        function handleEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            rotatableWheel.classList.remove('active');
+        }
+        
+        // Add mouse event listeners for rotatable wheel
+        document.addEventListener('mousedown', handleStart);
+        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('mouseup', handleEnd);
+        
+        // Add touch event listeners for rotatable wheel on mobile
+        document.addEventListener('touchstart', handleStart, { passive: false });
+        document.addEventListener('touchmove', handleMove, { passive: false });
+        document.addEventListener('touchend', handleEnd);
+        
         // Define wheel data
         const smallWheelLabels = ['x', 'x', '÷', '÷', '+', '+', '-', '-'];
         const mediumWheelLabels = ['Huruf Darab Huruf', 'Huruf Darab No, No Darab Huruf', 'Huruf Bahagi Huruf', 'Huruf bahagi no, no Bahagi Huruf', 'Sebutan Serupa', 'Sebutan Tak Serupa', 'Sebutan Serupa', 'Sebutan Tak Serupa'];
         const largeWheelLabels = ['Section 1', 'Section 2', 'Section 3', 'Section 4', 'Section 5', 'Section 6', 'Section 7', 'Section 8'];
-
+        
         // Create the wheels
         window.addEventListener('DOMContentLoaded', function() {
-            createWheelSections('small-wheel', 8, 100, smallWheelLabels, 39, 0.6);
-            createWheelSections('medium-wheel', 8, 250, mediumWheelLabels, 15, 0.75);
+            createWheelSections('small-wheel', 8, 100, smallWheelLabels, 47, 0.6);
+            createWheelSections('medium-wheel', 8, 250, mediumWheelLabels, 15, 0.78);
             createWheelSections('large-wheel', 8, 400, largeWheelLabels, 18, 0.8);
             
             // Add extra touch zone for better touch detection on mobile
@@ -659,12 +751,15 @@
         window.addEventListener('orientationchange', function() {
             setTimeout(function() {
                 const container = document.getElementById('wheel-container');
+                const rotatableContainer = document.querySelector('.rotatable-wheel-container');
                 if (window.innerHeight > window.innerWidth) {
                     // Portrait mode
-                    container.style.transform = 'scale(0.6)';
+                    container.style.transform = 'translate(-50%, -50%) scale(0.6)';
+                    rotatableContainer.style.transform = 'translate(-50%, -50%) scale(0.6)';
                 } else {
                     // Landscape mode
-                    container.style.transform = 'scale(0.8)';
+                    container.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    rotatableContainer.style.transform = 'translate(-50%, -50%) scale(0.8)';
                 }
             }, 200);
         });
