@@ -96,6 +96,19 @@
             );
         }
 
+        .wheel-larger {
+    width: 900px;
+    height: 900px;
+    z-index: 0;
+    background: conic-gradient(
+        #0D47A1 0% 25%, 
+        #1976D2 25% 50%, 
+        #2196F3 50% 75%, 
+        #64B5F6 75% 100%
+    );
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
         .section-divider {
             position: absolute;
             top: 50%;
@@ -254,23 +267,7 @@
             text-decoration: none;
         }
 
-        .help-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background-color: #2970db;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            z-index: 99;
-        }
-
+       
         .help-button:hover {
             transform: scale(1.1);
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -347,7 +344,7 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background-color: rgba(128, 128, 128, 1); /* Solid gray color */
+            background-color: #1972b6 ;
             clip-path: polygon(50% 50%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%);
             transform: rotate(54deg); /* Start after the cutout */
             transform-origin: center;
@@ -370,6 +367,9 @@
         
         <!-- Small wheel 8 sections -->
         <div class="wheel wheel-small" id="small-wheel"></div>
+
+        <!-- Larger wheel 4 sections -->
+<div class="wheel wheel-larger" id="larger-wheel"></div>
         
         <!-- Rotatable wheel with cutout -->
         <div class="rotatable-wheel-container">
@@ -422,88 +422,7 @@
 
         // Section content for the large wheel
         const sectionContent = {
-            "Section 1": {
-                title: "Section 1 - Huruf Darab Huruf",
-                content: `
-                    <h3>Pilih</h3>
-                    <div class="content-box" onclick="openNestedModal('Huruf Sama', 'test')">Huruf Sama</div>
-                    <div class="content-box" onclick="openNestedModal('Huruf Tak Sama', 'test')">Huruf Tak Sama</div>
-                `
-            },
-            "Section 2": {
-                title: "Section 2 - Huruf darab no, No darab huruf",
-                content: `
-                   <h3>Penjelasan</h3>
-                           Tulis nombor atau hasil darab nombor diikuti huruf
-
-                           Contoh : -3 x y²
-                           Jawapan : -3y²
-                `
-            },
-            "Section 3": {
-                title: "Section 3 - Huruf Bahagi Huruf",
-                content: `
-                    <h3>Pilih</h3>
-                    <div class="content-box" onclick="openNestedModal('Huruf Sama', '
-                    Tolak kuasa 
-                     Contoh : m⁸ ÷ m⁵
-                     Jawapan : m⁸-⁵ = m³
-
-                     Contoh 2: 12p⁷ ÷ 3p²
-                     Jawapan : (12÷3)p⁷-²
-                             =4p³
-                    
-                    
-                    .')">Huruf Bahagi Huruf</div>
-                    <div class="content-box" onclick="openNestedModal('Huruf tak sama', 'test')">Huruf tak sama</div>
-                `
-            },
-            "Section 4": {
-                title: "Section 4 - Huruf Bahagi no, No bahagi huruf",
-                content: `
-                    <h3>Penjelasan</h3>
-                    nil
-                `
-            },
-            "Section 5": {
-                title: "Section 5 - Sebutan Serupa",
-                content: `
-                    <h3>Penjelasan</h3>
-                    Jumlahkan nombor diikuti huruf.
-                    (TEKAN KALKULATOR)
-                  Contoh : 3x + 5x
-                  Jawapan : 8x
-                `
-            },
-            "Section 6": {
-                title: "Section 6 - Sebutan Tak Serupa",
-                content: `
-                    <h3>Penjelasan</h3>
-                    Salin balik soalan yang diberikan
-                    Contoh : 8x + 5y
-                    Jawapan : 8x + 5y
-                `
-            },
-            "Section 7": {
-                title: "Sebutan Tak Serupa",
-                content: `
-                     <h3>Penjelasan</h3>
-                  Tolakkan nombor diikuti huruf
-                  (TEKAN KALKULATOR)
-                  
-                  Contoh : 12x - 7x
-                  Jawapan : 5x
-                `
-            },
-            "Section 8": {
-                title: "Section 8 - Sebutan Tak Serupa",
-                content: `
-                    <h3>Penjelasan</h3>
-                    Salin balik soalan yang diberikan
-                    Contoh : 12x - x²
-                    Jawapan : 12x - x²
-                `
-            }
+           // Dont remove 
         };
 
         // Create wheel sections
@@ -717,15 +636,19 @@
         document.addEventListener('touchend', handleEnd);
         
         // Define wheel data
+        const largerWheelLabels = ['x', '÷', '+', '-'];
         const smallWheelLabels = ['x', 'x', '÷', '÷', '+', '+', '-', '-'];
         const mediumWheelLabels = ['Huruf Darab Huruf', 'Huruf Darab No, No Darab Huruf', 'Huruf Bahagi Huruf', 'Huruf bahagi no, no Bahagi Huruf', 'Sebutan Serupa', 'Sebutan Tak Serupa', 'Sebutan Serupa', 'Sebutan Tak Serupa'];
         const largeWheelLabels = ['Section 1', 'Section 2', 'Section 3', 'Section 4', 'Section 5', 'Section 6', 'Section 7', 'Section 8'];
         
         // Create the wheels
         window.addEventListener('DOMContentLoaded', function() {
+            
+            createWheelSections('larger-wheel', 4, 450, largerWheelLabels, 34, 0.93);
             createWheelSections('small-wheel', 8, 100, smallWheelLabels, 47, 0.6);
             createWheelSections('medium-wheel', 8, 250, mediumWheelLabels, 15, 0.78);
             createWheelSections('large-wheel', 8, 400, largeWheelLabels, 18, 0.8);
+           
             
             // Add extra touch zone for better touch detection on mobile
             const largeWheel = document.getElementById('large-wheel');
