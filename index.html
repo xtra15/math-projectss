@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Interactive Wheels System</title>
     <style>
-        /* Your existing CSS styles */
+       
         body {
             display: flex;
             justify-content: center;
@@ -114,7 +114,7 @@
             top: 50%;
             left: 50%;
             height: 2px;
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.2);
             transform-origin: left center;
             z-index: 10;
             pointer-events: none;
@@ -423,6 +423,89 @@
         // Section content for the large wheel
         const sectionContent = {
            // Dont remove 
+           "Section 1": {
+                title: "Section 1 - Huruf Darab Huruf",
+                content: `
+                    <h3>Pilih</h3>
+                    <div class="content-box" onclick="openNestedModal('Huruf Sama', 'test')">Huruf Sama</div>
+                    <div class="content-box" onclick="openNestedModal('Huruf Tak Sama', 'test')">Huruf Tak Sama</div>
+                `
+            },
+            "Section 2": {
+                title: "Section 2 - Huruf darab no, No darab huruf",
+                content: `
+                   <h3>Penjelasan</h3>
+                           Tulis nombor atau hasil darab nombor diikuti huruf
+
+                           Contoh : -3 x y²
+                           Jawapan : -3y²
+                
+                `
+            },
+            "Section 3": {
+                title: "Section 3 - Huruf Bahagi Huruf",
+                content: `
+                    <h3>Pilih</h3>
+                    <div class="content-box" onclick="openNestedModal('Huruf Sama', '
+                    Tolak kuasa 
+                     Contoh : m⁸ ÷ m⁵
+                     Jawapan : m⁸-⁵ = m³
+
+                     Contoh 2: 12p⁷ ÷ 3p²
+                     Jawapan : (12÷3)p⁷-²
+                             =4p³
+                    
+                    
+                    .')">Huruf Bahagi Huruf</div>
+                    <div class="content-box" onclick="openNestedModal('Huruf tak sama', 'test')">Huruf tak sama</div>
+                `
+            },
+            "Section 4": {
+                title: "Section 4 - Huruf Bahagi no, No bahagi huruf",
+                content: `
+                    <h3>Penjelasan</h3>
+                    nil
+                `
+            },
+            "Section 5": {
+                title: "Section 5 - Sebutan Serupa",
+                content: `
+                    <h3>Penjelasan</h3>
+                    Jumlahkan nombor diikuti huruf.
+                    (TEKAN KALKULATOR)
+                  Contoh : 3x + 5x
+                  Jawapan : 8x
+                `
+            },
+            "Section 6": {
+                title: "Section 6 - Sebutan Tak Serupa",
+                content: `
+                    <h3>Penjelasan</h3>
+                    Salin balik soalan yang diberikan
+                    Contoh : 8x + 5y
+                    Jawapan : 8x + 5y
+                `
+            },
+            "Section 7": {
+                title: "Sebutan Tak Serupa",
+                content: `
+                     <h3>Penjelasan</h3>
+                  Tolakkan nombor diikuti huruf
+                  (TEKAN KALKULATOR)
+                  
+                  Contoh : 12x - 7x
+                  Jawapan : 5x
+                `
+            },
+            "Section 8": {
+                title: "Section 8 - Sebutan Tak Serupa",
+                content: `
+                    <h3>Penjelasan</h3>
+                    Salin balik soalan yang diberikan
+                    Contoh : 12x - x²
+                    Jawapan : 12x - x²
+                `
+            }
         };
 
         // Create wheel sections
