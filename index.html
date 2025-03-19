@@ -424,7 +424,7 @@
         // Section content for the large wheel
         const sectionContent = {
            // Dont remove 
-           "Section 1": {
+           "🔎¹": {
                 title: "Section 1 - Huruf Darab Huruf",
                 content: `
                     <h3>Pilih</h3>
@@ -432,7 +432,7 @@
                     <div class="content-box" onclick="openNestedModal('Huruf Tak Sama', 'test')">Huruf Tak Sama</div>
                 `
             },
-            "Section 2": {
+            "🔎²": {
                 title: "Section 2 - Huruf darab no, No darab huruf",
                 content: `
                    <h3>Penjelasan</h3>
@@ -443,7 +443,7 @@
                 
                 `
             },
-            "Section 3": {
+            "🔎³": {
                 title: "Section 3 - Huruf Bahagi Huruf",
                 content: `
                     <h3>Pilih</h3>
@@ -461,14 +461,14 @@
                     <div class="content-box" onclick="openNestedModal('Huruf tak sama', 'test')">Huruf tak sama</div>
                 `
             },
-            "Section 4": {
+            "🔎⁴": {
                 title: "Section 4 - Huruf Bahagi no, No bahagi huruf",
                 content: `
                     <h3>Penjelasan</h3>
                     nil
                 `
             },
-            "Section 5": {
+            "🔎⁵": {
                 title: "Section 5 - Sebutan Serupa",
                 content: `
                     <h3>Penjelasan</h3>
@@ -478,7 +478,7 @@
                   Jawapan : 8x
                 `
             },
-            "Section 6": {
+            "🔎⁶": {
                 title: "Section 6 - Sebutan Tak Serupa",
                 content: `
                     <h3>Penjelasan</h3>
@@ -487,7 +487,7 @@
                     Jawapan : 8x + 5y
                 `
             },
-            "Section 7": {
+            "🔎⁷": {
                 title: "Sebutan Tak Serupa",
                 content: `
                      <h3>Penjelasan</h3>
@@ -498,7 +498,7 @@
                   Jawapan : 5x
                 `
             },
-            "Section 8": {
+            "🔎⁸": {
                 title: "Section 8 - Sebutan Tak Serupa",
                 content: `
                     <h3>Penjelasan</h3>
@@ -723,14 +723,14 @@
         const largerWheelLabels = ['x', '÷', '+', '-'];
         const smallWheelLabels = ['x', 'x', '÷', '÷', '+', '+', '-', '-'];
         const mediumWheelLabels = ['Huruf Darab Huruf', 'Huruf Darab No, No Darab Huruf', 'Huruf Bahagi Huruf', 'Huruf bahagi no, no Bahagi Huruf', 'Sebutan Serupa', 'Sebutan Tak Serupa', 'Sebutan Serupa', 'Sebutan Tak Serupa'];
-        const largeWheelLabels = ['Section 1', 'Section 2', 'Section 3', 'Section 4', 'Section 5', 'Section 6', 'Section 7', 'Section 8'];
+        const largeWheelLabels = ['🔎¹', '🔎²', '🔎³', '🔎⁴', '🔎⁵', '🔎⁶', '🔎⁷', '🔎⁸'];
         
         // Create the wheels
         window.addEventListener('DOMContentLoaded', function() {
             
             createWheelSections('larger-wheel', 4, 450, largerWheelLabels, 34, 0.93);
             createWheelSections('small-wheel', 8, 100, smallWheelLabels, 47, 0.6);
-            createWheelSections('medium-wheel', 8, 250, mediumWheelLabels, 15, 0.78);
+            createWheelSections('medium-wheel', 8, 250, mediumWheelLabels, 15, 0.77);
             createWheelSections('large-wheel', 8, 400, largeWheelLabels, 18, 0.8);
            
             
