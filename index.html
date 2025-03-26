@@ -209,6 +209,12 @@
             max-height: 90vh;
             overflow-y: auto;
             touch-action: pan-y;
+            white-space: pre-wrap;
+        }
+
+        #modal-content, #nested-modal-content {
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
 
         .content-box {
@@ -273,7 +279,44 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
-        /* Responsive Adjustments */
+        /* ads */
+
+        .text-box-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+            z-index: 11; /* Below modal but above other elements */
+            pointer-events: none;
+            gap: 220px;
+        }
+
+        .text-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #2970db;
+            border-radius: 8px;
+            padding: 10px;
+            width: 150px;
+            text-align: center;
+            font-weight: bold;
+            color: #2970db;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            pointer-events: auto; /* Allow interaction */
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .text-box:hover {
+            background-color: #2970db;
+            color: white;
+            transform: scale(1.05);
+        }
+
+       
         /* Responsive Adjustments */
         @media (max-width: 480px) {
             .wheel-container {
@@ -400,6 +443,12 @@
         </div>
     </div>
 
+    <div class="text-box-container" id="text-box-container">
+        <div class="text-box" id="left-text-box">Nota 1</div>
+        <div class="text-box" id="right-text-box">Nota 2</div>
+    
+</div>
+
     <!-- Modal Template -->
     <div id="section-modal" class="modal">
         <div class="modal-content">
@@ -447,8 +496,25 @@
                 title: "Huruf Darab Huruf",
                 content: `
                     <h3>Pilih</h3>
-                    <div class="content-box" onclick="openNestedModal('Huruf Sama', 'test')">Huruf Sama</div>
-                    <div class="content-box" onclick="openNestedModal('Huruf Tak Sama', 'test')">Huruf Tak Sama</div>
+                    <div class="content-box" onclick="openNestedModal('Huruf Sama', '<h2>Tambah kuasa</h2>
+                    Contoh : X² x X⁵  
+                    Jawapan : X²⁺⁵ 
+                    = X⁸
+
+                    Contoh 2 : -5y⁵ x 2y⁶ 
+                    Jawapan = (-5 x 2)y⁵⁺⁶ 
+                    = 10y⁹
+                    ')">Huruf Sama</div>
+
+                    <div class="content-box" onclick="openNestedModal('Huruf Tak Sama', 'Letak sebelah-sebelah
+                    Contoh : a⁷ x b¹¹ 
+                    Jawapan : a⁷b¹¹
+
+                    Contoh 2 : 4a² x 6b⁵
+                    Jawapan : (4x6)a²b⁵  
+                    = 24a²b⁵
+                    
+')">Huruf Tak Sama</div>
                 `
             },
             "🔎²": {
@@ -472,7 +538,7 @@
                     <div class="content-box" onclick="openNestedModal('Huruf Sama', '
                     Tolak kuasa 
                      Contoh : m⁸ ÷ m⁵
-                     Jawapan : m⁸-⁵ = m³
+                     Jawapan : m⁸⁻⁵ = m³
 
                      Contoh 2: 12p⁷ ÷ 3p²
                      Jawapan : (12÷3)p⁷-²
@@ -487,7 +553,22 @@
                 title: "Huruf Bahagi no, No bahagi huruf",
                 content: `
                     <h3>Penjelasan</h3>
-                    nil
+                    Huruf tulis macam biasa
+                    (Selesaikan Pembahagian nombor kalau ada)
+
+         Contoh :  35       Jawapan : 35
+                     ───                       ──
+                        y5                         y5
+
+        Contoh 2 :  z9     Jawapan : z9
+                            ──                    ──
+                             4                       4
+
+
+        Contoh 3 :  16z⁴                         Jawapan : 4z⁴
+                            ──    (16 bahagi 4)
+                             4
+                        
                 `
             },
             "🔎⁵": {
@@ -664,12 +745,16 @@
         });
         
         // Rotatable wheel functionality
-        const rotatableWheel = document.getElementById('rotatable-wheel');
+       // Existing script with modification to keep text boxes and text stationary
+       const rotatableWheel = document.getElementById('rotatable-wheel');
+        
         const wheelPart = document.querySelector('.wheel-part');
         let isDragging = false;
         let startAngle = 0;
-        let currentRotation = 54; // Start with the cutout at 54 degrees
+        let currentRotation = 90; // Start with the cutout at 54 degrees
         
+       
+
         // Apply initial rotation
         wheelPart.style.transform = `rotate(${currentRotation}deg)`;
         
@@ -718,19 +803,81 @@
             currentRotation = (currentRotation + rotation) % 360;
             wheelPart.style.transform = `rotate(${currentRotation}deg)`;
             
+            // Rotate text box container to match wheel rotation (REVERSED)
+            const textBoxContainer = document.getElementById('text-box-container');
+            textBoxContainer.style.transform = `translate(-50%, -50%) rotate(${currentRotation * 0.9 - 65}deg)`;
+            
             // Reset start angle for next move
             startAngle = angle;
             
             // Prevent default behavior to avoid scrolling on mobile
             e.preventDefault();
         }
-        
+
+        // Add event listeners for text boxes
+        document.addEventListener('DOMContentLoaded', function() {
+            const leftTextBox = document.getElementById('left-text-box');
+            const rightTextBox = document.getElementById('right-text-box');
+
+            // Example interaction
+            leftTextBox.addEventListener('click', function() {
+                openModal('Left Box', '<p>This is the content for the left text box.</p>');
+            });
+
+            rightTextBox.addEventListener('click', function() {
+                openModal('Right Box', '<p>This is the content for the right text box.</p>');
+            });
+        });
+
         function handleEnd() {
             if (!isDragging) return;
             isDragging = false;
             rotatableWheel.classList.remove('active');
         }
-        
+        /*ads*/
+        document.addEventListener('DOMContentLoaded', function() {
+            const leftTextBox = document.getElementById('left-text-box');
+            const rightTextBox = document.getElementById('right-text-box');
+
+            // Example interaction (you can customize this)
+const content1 = {
+    "1": {
+                
+                a : `
+                2x,-3x², 4 , -5x³, -8x                             
+                            ─                                                  |─ Huruf sama
+                            3                       Sebutan Serupa-|
+                                                                                |─ Kuasa pada huruf sama
+
+                            Sebutan Serupa :
+                            2x, 4,-8x
+                                 ─
+                                 3
+                `
+            },
+
+      "2" : {
+        b : `
+               Untuk x/÷ ⮕ Gabungan nombor dan huruf  x/÷
+                            gabungan nombor dan huruf
+                         ⮕ Nombor darab atau bahagi macam biasa, huruf-rujuk bahagian huruf x/÷
+                `
+      }
+};
+    
+
+
+
+            leftTextBox.addEventListener('click', function() {
+                openModal('Nota 1', content1["1"].a);
+            });
+
+            rightTextBox.addEventListener('click', function() {
+                openModal('Nota 2', content1["2"].b);
+            });
+        });
+
+
         // Add mouse event listeners for rotatable wheel
         document.addEventListener('mousedown', handleStart);
         document.addEventListener('mousemove', handleMove);
