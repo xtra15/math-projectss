@@ -281,7 +281,6 @@
 
         /* ads */
 
-        /* Text box container adjustments */
         .text-box-container {
             position: absolute;
             top: 50%;
@@ -291,28 +290,24 @@
             flex-direction: column;
             align-items: center;
             width: 300px;
-            z-index: 11;
+            z-index: 11; /* Below modal but above other elements */
             pointer-events: none;
             gap: 220px;
         }
+
         .text-box {
             background-color: rgba(255, 255, 255, 0.8);
             border: 2px solid #2970db;
             border-radius: 8px;
-            padding: 8px; /* Reduced padding */
-            width: 120px; /* Slightly narrower */
+            padding: 10px;
+            width: 150px;
             text-align: center;
             font-weight: bold;
             color: #2970db;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            pointer-events: auto;
+            pointer-events: auto; /* Allow interaction */
             transition: all 0.3s ease;
             cursor: pointer;
-            font-size: 14px; /* Smaller font size */
-            min-height: 40px; /* Ensure touch target is large enough */
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .text-box:hover {
@@ -321,11 +316,6 @@
             transform: scale(1.05);
         }
 
-        /* Reduce section label sizes */
-        .section-label {
-            font-size: 12px !important; /* Smaller font size */
-            padding: 4px 8px;
-        }
        
         /* Responsive Adjustments */
         @media (max-width: 480px) {
@@ -360,7 +350,7 @@
                 padding: 25px;
             }
             .nested-modal-content {
-                width: 90%;
+                width: 95%;
                 padding: 20px;
             }
             .modal-title {
@@ -845,7 +835,7 @@
             rotatableWheel.classList.remove('active');
         }
         /*ads*/
-        document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('DOMContentLoaded', function() {
             const leftTextBox = document.getElementById('left-text-box');
             const rightTextBox = document.getElementById('right-text-box');
 
