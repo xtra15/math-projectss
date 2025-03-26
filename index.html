@@ -281,6 +281,7 @@
 
         /* ads */
 
+        /* Text box container adjustments */
         .text-box-container {
             position: absolute;
             top: 50%;
@@ -290,24 +291,28 @@
             flex-direction: column;
             align-items: center;
             width: 300px;
-            z-index: 11; /* Below modal but above other elements */
+            z-index: 11;
             pointer-events: none;
             gap: 220px;
         }
-
         .text-box {
             background-color: rgba(255, 255, 255, 0.8);
             border: 2px solid #2970db;
             border-radius: 8px;
-            padding: 10px;
-            width: 150px;
+            padding: 8px; /* Reduced padding */
+            width: 120px; /* Slightly narrower */
             text-align: center;
             font-weight: bold;
             color: #2970db;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            pointer-events: auto; /* Allow interaction */
+            pointer-events: auto;
             transition: all 0.3s ease;
             cursor: pointer;
+            font-size: 14px; /* Smaller font size */
+            min-height: 40px; /* Ensure touch target is large enough */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .text-box:hover {
@@ -316,6 +321,11 @@
             transform: scale(1.05);
         }
 
+        /* Reduce section label sizes */
+        .section-label {
+            font-size: 12px !important; /* Smaller font size */
+            padding: 4px 8px;
+        }
        
         /* Responsive Adjustments */
         @media (max-width: 480px) {
@@ -350,7 +360,7 @@
                 padding: 25px;
             }
             .nested-modal-content {
-                width: 95%;
+                width: 90%;
                 padding: 20px;
             }
             .modal-title {
@@ -839,42 +849,47 @@
             const leftTextBox = document.getElementById('left-text-box');
             const rightTextBox = document.getElementById('right-text-box');
 
-            // Example interaction (you can customize this)
-const content1 = {
-    "1": {
-                
-                a : `
-                2x,-3x², 4 , -5x³, -8x                             
-                            ─                                                  |─ Huruf sama
-                            3                       Sebutan Serupa-|
-                                                                                |─ Kuasa pada huruf sama
+            // Content for text boxes
+            const content1 = {
+                "1": {
+                    a: `
+2x,-3x², 4 , -5x³, -8x                             
+            ─                                                  |─ Huruf sama
+            3                       Sebutan Serupa-|
+                                                                |─ Kuasa pada huruf sama
 
-                            Sebutan Serupa :
-                            2x, 4,-8x
-                                 ─
-                                 3
-                `
-            },
+            Sebutan Serupa :
+            2x, 4,-8x
+                 ─
+                 3
+                    `
+                },
+                "2": {
+                    b: `
+   Untuk x/÷ ⮕ Gabungan nombor dan huruf  x/÷
+                gabungan nombor dan huruf
+             ⮕ Nombor darab atau bahagi macam biasa, huruf-rujuk bahagian huruf x/÷
+                    `
+                }
+            };
 
-      "2" : {
-        b : `
-               Untuk x/÷ ⮕ Gabungan nombor dan huruf  x/÷
-                            gabungan nombor dan huruf
-                         ⮕ Nombor darab atau bahagi macam biasa, huruf-rujuk bahagian huruf x/÷
-                `
-      }
-};
-    
+            // Enhanced touch and click handling
+            function addTouchHandler(element, content, title) {
+                // Add click event
+                element.addEventListener('click', function() {
+                    openModal(title, content);
+                });
 
+                // Add touch event
+                element.addEventListener('touchstart', function(e) {
+                    e.preventDefault(); // Prevent default touch behavior
+                    openModal(title, content);
+                }, { passive: false });
+            }
 
-
-            leftTextBox.addEventListener('click', function() {
-                openModal('Nota 1', content1["1"].a);
-            });
-
-            rightTextBox.addEventListener('click', function() {
-                openModal('Nota 2', content1["2"].b);
-            });
+            // Apply touch and click handlers
+            addTouchHandler(leftTextBox, content1["1"].a, 'Nota 1');
+            addTouchHandler(rightTextBox, content1["2"].b, 'Nota 2');
         });
 
 
