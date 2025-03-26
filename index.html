@@ -363,6 +363,17 @@
                 padding: 15px;
                 min-height: 44px;
             }
+
+            .text-box-container {
+                width: 200px; /* Reduced width */
+                gap: 120px; /* Reduced gap between text boxes */
+            }
+
+            .text-box {
+                width: 100px; /* Smaller width */
+                padding: 6px; /* Reduced padding */
+                font-size: 14px; /* Smaller font size */
+            }
       
         }
         
@@ -375,8 +386,21 @@
             }
             .modal-content, .nested-modal-content {
                 width: 90%;
+
+            }
+
+            .text-box-container {
+                width: 250px; /* Slightly adjusted for tablets */
+                gap: 150px;
+            }
+
+            .text-box {
+                width: 120px;
+                padding: 8px;
+                font-size: 15px;
             }
         }
+        
          /* Update the rotatable wheel container */
          .rotatable-wheel-container {
             position: absolute;
@@ -844,20 +868,26 @@
                 "1": {
                     a: `
 2x,-3x², 4 , -5x³, -8x                             
-            ─                                                  |─ Huruf sama
-            3                       Sebutan Serupa-|
-                                                                |─ Kuasa pada huruf sama
+            ─                                                 
+            3    
+
+    Sebutan Serupa
+     - Huruf sama
+     ─ Kuasa pada huruf sama                                                  
 
             Sebutan Serupa :
             2x, 4,-8x
                  ─
                  3
+
+     
+
                     `
                 },
                 "2": {
                     b: `
    Untuk x/÷ ⮕ Gabungan nombor dan huruf  x/÷
-                gabungan nombor dan huruf
+                
              ⮕ Nombor darab atau bahagi macam biasa, huruf-rujuk bahagian huruf x/÷
                     `
                 }
