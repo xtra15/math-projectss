@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2 dalam 1 Roda MtSc</title>
+    <title>Interactive Wheels System</title>
     <style>
         /* Your existing CSS styles */
         body {
@@ -328,6 +328,14 @@
             .wheel-container {
                 transform: scale(0.52);
             }
+            #wheel-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 12px 20px;
+                font-size: 14px;
+                min-width: 44px;
+                min-height: 44px;
+            }
            /* .section-label {
           /      font-size: 21px !important;
            /     padding: 8px;
@@ -356,7 +364,7 @@
                 padding: 25px;
             }
             .nested-modal-content {
-                width: 95%;
+                width: 90%;
                 padding: 20px;
             }
             .modal-title {
@@ -386,6 +394,12 @@
         @media (min-width: 481px) and (max-width: 768px) {
             .wheel-container {
                 transform: scale(0.75);
+            }
+            #wheel-toggle {
+                top: 15px;
+                right: 15px;
+                padding: 13px 22px;
+                font-size: 15px;
             }
             .section-label {
                 font-size: 16px !important;
@@ -451,9 +465,9 @@
     </style>
 </head>
 <body>
-    <button id="wheel-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000; padding: 15px 25px; background-color: #2970db; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; min-width: 120px; min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: all 0.3s ease;">Science</button>
+    <button id="wheel-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000; padding: 15px 25px; background-color: #2970db; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; min-width: 44px; min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform 0.2s ease, background-color 0.2s ease;">Switch Wheel</button>
     
-    <div class="wheel-container" id="wheel-container-1" style="display: block;" data-title="Science">
+    <div class="wheel-container" id="wheel-container-1" style="display: block;">
         <!-- Large wheel 8 sections -->
         <div class="wheel wheel-large" id="large-wheel"></div>
         
@@ -475,7 +489,7 @@
         </div>
     </div>
 
-    <div class="wheel-container" id="wheel-container-2" style="display: none;" data-title="Math">
+    <div class="wheel-container" id="wheel-container-2" style="display: none;">
         <!-- Large wheel 8 sections -->
         <div class="wheel wheel-large" id="large-wheel-2"></div>
         
@@ -532,29 +546,21 @@
                 // Allow scrolling inside modals
                 return;
             }
+            if (e.target.id === 'wheel-toggle') {
+                e.target.style.transform = 'scale(0.95)';
+                e.target.style.backgroundColor = '#1e5bb0';
+            }
             e.preventDefault();
         }, { passive: false });
 
-        // Update button text based on active wheel
-function updateButtonText() {
-    const button = document.getElementById('wheel-toggle');
-    const container1 = document.getElementById('wheel-container-1');
-    button.textContent = container1.style.display === 'block' ? 'Science' : 'Math';
-}
+        document.addEventListener('touchend', function(e) {
+            if (e.target.id === 'wheel-toggle') {
+                e.target.style.transform = '';
+                e.target.style.backgroundColor = '#2970db';
+            }
+        });
 
-// Add hover and active states for better touch feedback
-const wheelToggle = document.getElementById('wheel-toggle');
-wheelToggle.addEventListener('touchstart', function() {
-    this.style.transform = 'scale(0.95)';
-    this.style.boxShadow = '0 1px 2px rgba(0,0,0,0.2)';
-});
-
-wheelToggle.addEventListener('touchend', function() {
-    this.style.transform = 'scale(1)';
-    this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-});
-
-document.addEventListener('touchmove', function(e) {
+        document.addEventListener('touchmove', function(e) {
             if (e.target.closest('.modal-content') || e.target.closest('.nested-modal-content')) {
                 // Allow scrolling inside modals
                 return;
