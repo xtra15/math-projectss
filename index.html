@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Interactive Wheels System</title>
+    <title>2 dalam 1 Roda MtSc</title>
     <style>
         /* Your existing CSS styles */
         body {
@@ -36,6 +36,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .wheel-container.hidden {
+            opacity: 0;
         }
 
         .wheel {
@@ -445,7 +451,9 @@
     </style>
 </head>
 <body>
-    <div class="wheel-container" id="wheel-container">
+    <button id="wheel-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000; padding: 15px 25px; background-color: #2970db; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; min-width: 120px; min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: all 0.3s ease;">Science</button>
+    
+    <div class="wheel-container" id="wheel-container-1" style="display: block;" data-title="Science">
         <!-- Large wheel 8 sections -->
         <div class="wheel wheel-large" id="large-wheel"></div>
         
@@ -461,6 +469,28 @@
         <!-- Rotatable wheel with cutout -->
         <div class="rotatable-wheel-container">
             <div class="rotatable-wheel" id="rotatable-wheel">
+                <div class="wheel-part"></div>
+                <div class="center"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wheel-container" id="wheel-container-2" style="display: none;" data-title="Math">
+        <!-- Large wheel 8 sections -->
+        <div class="wheel wheel-large" id="large-wheel-2"></div>
+        
+        <!-- Medium wheel 8 sections -->
+        <div class="wheel wheel-medium" id="medium-wheel-2"></div>
+        
+        <!-- Small wheel 8 sections -->
+        <div class="wheel wheel-small" id="small-wheel-2"></div>
+
+        <!-- Larger wheel 4 sections -->
+        <div class="wheel wheel-larger" id="larger-wheel-2"></div>
+        
+        <!-- Rotatable wheel with cutout -->
+        <div class="rotatable-wheel-container">
+            <div class="rotatable-wheel" id="rotatable-wheel-2">
                 <div class="wheel-part"></div>
                 <div class="center"></div>
             </div>
@@ -505,7 +535,26 @@
             e.preventDefault();
         }, { passive: false });
 
-        document.addEventListener('touchmove', function(e) {
+        // Update button text based on active wheel
+function updateButtonText() {
+    const button = document.getElementById('wheel-toggle');
+    const container1 = document.getElementById('wheel-container-1');
+    button.textContent = container1.style.display === 'block' ? 'Science' : 'Math';
+}
+
+// Add hover and active states for better touch feedback
+const wheelToggle = document.getElementById('wheel-toggle');
+wheelToggle.addEventListener('touchstart', function() {
+    this.style.transform = 'scale(0.95)';
+    this.style.boxShadow = '0 1px 2px rgba(0,0,0,0.2)';
+});
+
+wheelToggle.addEventListener('touchend', function() {
+    this.style.transform = 'scale(1)';
+    this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+});
+
+document.addEventListener('touchmove', function(e) {
             if (e.target.closest('.modal-content') || e.target.closest('.nested-modal-content')) {
                 // Allow scrolling inside modals
                 return;
@@ -513,7 +562,36 @@
             e.preventDefault();
         }, { passive: false });
 
+        const fixads = {
+      "1": {
+                    a: `
+                      Tulis Semula atas,bawah (Selesaikan jika ada no)
+                    Contoh : x⁴
+‎‎  ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  ──
+                                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎  y²
+                    Jawapan : x⁴
+‎‎  ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎  ──
+                                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ y²
+
+
+                        Contoh 2 : 15x² 
+‎‎  ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎‎‎ ‎‎‎‎                       ──
+                                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎ ‎‎ -3y⁷   
+
+Jawapan  : (15/-3)x² 
+‎‎  ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎‎‎ ‎‎‎‎ ‎ ‎ ‎‎ ‎‎ ‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎─
+                                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎y⁷   
+‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  = -5x² 
+ ‎‎‎‎ ‎‎‎‎ ‎ ‎ ‎‎ ‎‎ ‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎─
+                                    ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎y⁷ 
+
+                    `
+}
+}
+
         // Section content for the large wheel
+        
+
         const sectionContent = {
            // Dont remove 
            "🔎¹": {
@@ -570,7 +648,7 @@
                     
                     
                     .')">Huruf Bahagi Huruf</div>
-                    <div class="content-box" onclick="openNestedModal('Huruf tak sama', 'test')">Huruf tak sama</div>
+                    <div class="content-box" onclick="openNestedModal('Huruf tak sama',fixads[1].a)">Huruf tak sama</div>
                 `
             },
             "🔎⁴": {
@@ -633,7 +711,73 @@
                     Contoh : 12x - x²
                     Jawapan : 12x - x²
                 `
+            },
+            "📚¹": {
+                title: "Test",
+                content: `
+                    <h3>Test</h3>
+                    <div class="content-box" onclick="openNestedModal('Test 1', 'This is test content 1')">Test 1</div>
+                    <div class="content-box" onclick="openNestedModal('Test 2', 'This is test content 2')">Test 2</div>
+                `
+            },
+            "📚²": {
+                title: "Test",
+                content: `
+                    <h3>Test</h3>
+                    <div class="content-box" onclick="openNestedModal('Test 3', 'This is test content 3')">Test 3</div>
+                    <div class="content-box" onclick="openNestedModal('Test 4', 'This is test content 4')">Test 4</div>
+                `
+            },
+            "📚³": {
+                title: "Test",
+                content: `
+                    <h3>Test</h3>
+                    <div class="content-box" onclick="openNestedModal('Test 5', 'This is test content 5')">Test 5</div>
+                    <div class="content-box" onclick="openNestedModal('Test 6', 'This is test content 6')">Test 6</div>
+                `
+            },
+            "📚⁴": {
+                title: "Test",
+                content: `
+                    <h3>Test</h3>
+                    <div class="content-box" onclick="openNestedModal('Test 7', 'This is test content 7')">Test 7</div>
+                    <div class="content-box" onclick="openNestedModal('Test 8', 'This is test content 8')">Test 8</div>
+                `
+            },
+            "📚⁵": {
+                title: "Test",
+                content: `
+                    <h3>Test</h3>
+                    <div class="content-box" onclick="openNestedModal('Test 9', 'This is test content 9')">Test 9</div>
+                    <div class="content-box" onclick="openNestedModal('Test 10', 'This is test content 10')">Test 10</div>
+                `
+            },
+            "📚⁶": {
+                title: "Test",
+                content: `
+                    <h3>Test</h3>
+                    <div class="content-box" onclick="openNestedModal('Test 11', 'This is test content 11')">Test 11</div>
+                    <div class="content-box" onclick="openNestedModal('Test 12', 'This is test content 12')">Test 12</div>
+                `
+            },
+            "📚⁷": {
+                title: "Test",
+                content: `
+                    <h3>Test</h3>
+                    <div class="content-box" onclick="openNestedModal('Test 13', 'This is test content 13')">Test 13</div>
+                    <div class="content-box" onclick="openNestedModal('Test 14', 'This is test content 14')">Test 14</div>
+                `
+            },
+            "📚⁸": {
+                title: "Test",
+                content: `
+                    <h3>Test</h3>
+                    <div class="content-box" onclick="openNestedModal('Test 15', 'This is test content 15')">Test 15</div>
+                    <div class="content-box" onclick="openNestedModal('Test 16', 'This is test content 16')">Test 16</div>
+                `
             }
+
+
         };
 
         // Create wheel sections
@@ -667,10 +811,10 @@
                 label.style.top = `${y}%`;
                 label.style.fontSize = `${fontSize}px`;
                 
-                // For large wheel, make text clickable
-                if (wheelId === 'large-wheel') {
+                // Make text clickable for both large wheels
+                if (wheelId === 'large-wheel' || wheelId === 'large-wheel-2') {
                     label.className += ' clickable-label';
-                    label.id = `section-${i+1}-label`;
+                    label.id = `section-${i+1}-label-${wheelId}`;
                     label.setAttribute('data-section', labelText);
                     
                     // Add both click and touch events
@@ -689,7 +833,8 @@
         }
         
         // Modal functions
-        function openModal(sectionName, customContent = null) {
+         // Modify content box to preserve whitespace when opened
+         function openModal(sectionName, customContent = null) {
             const modal = document.getElementById('section-modal');
             const modalTitle = document.getElementById('modal-title');
             const modalContent = document.getElementById('modal-content');
@@ -709,23 +854,32 @@
             // Add custom content if provided
             if (customContent) {
                 const contentDiv = document.createElement('div');
+                // Use pre-line to preserve line breaks while collapsing multiple spaces
+                contentDiv.style.whiteSpace = 'pre-line';
                 contentDiv.innerHTML = customContent.replace(/\n/g, '<br>');
                 modalContent.appendChild(contentDiv);
             } else {
                 // Add default content
                 const contentDiv = document.createElement('div');
+                contentDiv.style.whiteSpace = 'pre-line';
                 contentDiv.innerHTML = section.content.replace(/\n/g, '<br>');
                 modalContent.appendChild(contentDiv);
             }
 
-            // Show modal
             modal.style.display = 'block';
         }
         
         // Open nested modal
         function openNestedModal(title, content) {
             document.getElementById('nested-modal-title').textContent = title;
-            document.getElementById('nested-modal-content').innerHTML = content.replace(/\n/g, '<br>');
+            
+            // Use pre-line white-space style to preserve line breaks while collapsing multiple spaces
+            const nestedModalContent = document.getElementById('nested-modal-content');
+            nestedModalContent.style.whiteSpace = 'pre-line';
+            
+            // Replace newlines with <br> to preserve formatting
+            nestedModalContent.innerHTML = content.replace(/\n/g, '<br>');
+            
             document.getElementById('nested-modal').style.display = 'block';
         }
         
@@ -768,25 +922,29 @@
             }
         });
         
-        // Rotatable wheel functionality
-       // Existing script with modification to keep text boxes and text stationary
-       const rotatableWheel = document.getElementById('rotatable-wheel');
-        
-        const wheelPart = document.querySelector('.wheel-part');
-        let isDragging = false;
-        let startAngle = 0;
-        let currentRotation = 90; // Start with the cutout at 54 degrees
+        // Rotatable wheel functionality for both wheels
+const rotatableWheel1 = document.getElementById('rotatable-wheel');
+const rotatableWheel2 = document.getElementById('rotatable-wheel-2');
+
+const wheelParts = document.querySelectorAll('.wheel-part');
+let isDragging = false;
+let startAngle = 0;
+let currentRotation1 = 90;
+let currentRotation2 = 90;
         
        
 
-        // Apply initial rotation
-        wheelPart.style.transform = `rotate(${currentRotation}deg)`;
+        // Apply initial rotation to both wheels
+wheelParts[0].style.transform = `rotate(${currentRotation1}deg)`;
+wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
         
         // Function to handle both mouse and touch events for rotatable wheel
         function handleStart(e) {
-            if (e.target !== wheelPart) return; // Only handle events on the wheel part
+            const wheelPart = e.target.closest('.wheel-part');
+            if (!wheelPart) return;
             
             isDragging = true;
+            const rotatableWheel = wheelPart.closest('.rotatable-wheel');
             rotatableWheel.classList.add('active');
             
             // Get the center of the wheel
@@ -808,6 +966,12 @@
         function handleMove(e) {
             if (!isDragging) return;
             
+            const wheelPart = document.querySelector('.wheel-part:hover') || document.elementFromPoint(e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY).closest('.wheel-part');
+            if (!wheelPart) return;
+            
+            const rotatableWheel = wheelPart.closest('.rotatable-wheel');
+            const isWheel1 = rotatableWheel.id === 'rotatable-wheel';
+            
             // Get the center of the wheel
             const rect = rotatableWheel.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
@@ -823,13 +987,20 @@
             // Calculate rotation
             const rotation = angle - startAngle;
             
-            // Update current rotation
-            currentRotation = (currentRotation + rotation) % 360;
-            wheelPart.style.transform = `rotate(${currentRotation}deg)`;
+            // Update current rotation for the active wheel
+            if (isWheel1) {
+                currentRotation1 = (currentRotation1 + rotation) % 360;
+                wheelPart.style.transform = `rotate(${currentRotation1}deg)`;
+            } else {
+                currentRotation2 = (currentRotation2 + rotation) % 360;
+                wheelPart.style.transform = `rotate(${currentRotation2}deg)`;
+            }
             
             // Rotate text box container to match wheel rotation (REVERSED)
             const textBoxContainer = document.getElementById('text-box-container');
-            textBoxContainer.style.transform = `translate(-50%, -50%) rotate(${currentRotation * 0.9 - 65}deg)`;
+            const activeWheel = document.getElementById('wheel-container-1').style.display === 'block' ? 1 : 2;
+            const currentRotationValue = activeWheel === 1 ? currentRotation1 : currentRotation2;
+            textBoxContainer.style.transform = `translate(-50%, -50%) rotate(${currentRotationValue * 0.9 - 65}deg)`;
             
             // Reset start angle for next move
             startAngle = angle;
@@ -923,19 +1094,93 @@
         document.addEventListener('touchmove', handleMove, { passive: false });
         document.addEventListener('touchend', handleEnd);
         
-        // Define wheel data
+        // Define wheel data for first set
         const largerWheelLabels = ['x', '÷', '+', '-'];
         const smallWheelLabels = ['x', 'x', '÷', '÷', '+', '+', '-', '-'];
         const mediumWheelLabels = ['Huruf Darab Huruf', 'Huruf Darab No, No Darab Huruf', 'Huruf Bahagi Huruf', 'Huruf bahagi no, no Bahagi Huruf', 'Sebutan Serupa', 'Sebutan Tak Serupa', 'Sebutan Serupa', 'Sebutan Tak Serupa'];
         const largeWheelLabels = ['🔎¹', '🔎²', '🔎³', '🔎⁴', '🔎⁵', '🔎⁶', '🔎⁷', '🔎⁸'];
+
+        // Define wheel data for second set
+        const largerWheelLabels2 = ['A', 'B', 'C', 'D'];
+        const smallWheelLabels2 = ['1', '2', '3', '4', '5', '6', '7', '8'];
+        const mediumWheelLabels2 = ['Text 1', 'Text 2', 'Text 3', 'Text 4', 'Text 5', 'Text 6', 'Text 7', 'Text 8'];
+        const largeWheelLabels2 = ['📚¹', '📚²', '📚³', '📚⁴', '📚⁵', '📚⁶', '📚⁷', '📚⁸'];
         
         // Create the wheels
         window.addEventListener('DOMContentLoaded', function() {
-            
+            // Initialize first wheel set
             createWheelSections('larger-wheel', 4, 450, largerWheelLabels, 34, 0.93);
             createWheelSections('small-wheel', 8, 100, smallWheelLabels, 47, 0.6);
             createWheelSections('medium-wheel', 8, 250, mediumWheelLabels, 16, 0.79);
             createWheelSections('large-wheel', 8, 400, largeWheelLabels, 44, 0.8);
+
+            // Initialize second wheel set with different labels
+            createWheelSections('larger-wheel-2', 4, 450, largerWheelLabels2, 34, 0.93);
+            createWheelSections('small-wheel-2', 8, 100, smallWheelLabels2, 47, 0.6);
+            createWheelSections('medium-wheel-2', 8, 250, mediumWheelLabels2, 16, 0.79);
+            createWheelSections('large-wheel-2', 8, 400, largeWheelLabels2, 44, 0.8);
+
+            // Add wheel toggle functionality
+            const wheelToggle = document.getElementById('wheel-toggle');
+            const wheelContainer1 = document.getElementById('wheel-container-1');
+            const wheelContainer2 = document.getElementById('wheel-container-2');
+
+            wheelToggle.addEventListener('click', function() {
+                const isWheel1Visible = wheelContainer1.style.display === 'block';
+                
+                // Add hidden class first to trigger fade out
+                if (isWheel1Visible) {
+                    wheelContainer1.classList.add('hidden');
+                } else {
+                    wheelContainer2.classList.add('hidden');
+                }
+                
+                // Wait for fade out animation to complete
+                setTimeout(() => {
+                    wheelContainer1.style.display = isWheel1Visible ? 'none' : 'block';
+                    wheelContainer2.style.display = isWheel1Visible ? 'block' : 'none';
+                    
+                    // Remove hidden class to trigger fade in
+                    if (isWheel1Visible) {
+                        wheelContainer2.classList.remove('hidden');
+                    } else {
+                        wheelContainer1.classList.remove('hidden');
+                    }
+                    
+                    // Toggle text box container visibility
+                    const textBoxContainer = document.querySelector('.text-box-container');
+                    textBoxContainer.style.display = isWheel1Visible ? 'none' : 'flex';
+                }, 300); // Match the transition duration
+            });
+
+            wheelToggle.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                const isWheel1Visible = wheelContainer1.style.display === 'block';
+                
+                // Add hidden class first to trigger fade out
+                if (isWheel1Visible) {
+                    wheelContainer1.classList.add('hidden');
+                } else {
+                    wheelContainer2.classList.add('hidden');
+                }
+                
+                // Wait for fade out animation to complete
+                setTimeout(() => {
+                    wheelContainer1.style.display = isWheel1Visible ? 'none' : 'block';
+                    wheelContainer2.style.display = isWheel1Visible ? 'block' : 'none';
+                    
+                    // Remove hidden class to trigger fade in
+                    if (isWheel1Visible) {
+                        wheelContainer2.classList.remove('hidden');
+                    } else {
+                        wheelContainer1.classList.remove('hidden');
+                    }
+                    
+                    // Toggle text box container visibility
+                    const textBoxContainer = document.querySelector('.text-box-container');
+                    textBoxContainer.style.display = isWheel1Visible ? 'none' : 'flex';
+                }, 300); // Match the transition duration
+            }, { passive: false });
            
             
             // Add extra touch zone for better touch detection on mobile
@@ -961,16 +1206,24 @@
         // Handle orientation changes for better mobile experience
         window.addEventListener('orientationchange', function() {
             setTimeout(function() {
-                const container = document.getElementById('wheel-container');
-                const rotatableContainer = document.querySelector('.rotatable-wheel-container');
+                const container1 = document.getElementById('wheel-container-1');
+                const container2 = document.getElementById('wheel-container-2');
+                const rotatableContainers = document.querySelectorAll('.rotatable-wheel-container');
+                
                 if (window.innerHeight > window.innerWidth) {
                     // Portrait mode
-                    container.style.transform = 'translate(-50%, -50%) scale(0.6)';
-                    rotatableContainer.style.transform = 'translate(-50%, -50%) scale(0.6)';
+                    container1.style.transform = 'translate(-50%, -50%) scale(0.6)';
+                    container2.style.transform = 'translate(-50%, -50%) scale(0.6)';
+                    rotatableContainers.forEach(container => {
+                        container.style.transform = 'translate(-50%, -50%) scale(0.6)';
+                    });
                 } else {
                     // Landscape mode
-                    container.style.transform = 'translate(-50%, -50%) scale(0.8)';
-                    rotatableContainer.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    container1.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    container2.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    rotatableContainers.forEach(container => {
+                        container.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    });
                 }
             }, 200);
         });
