@@ -323,6 +323,20 @@
         }
 
        
+        /* Wheel Images Styling */
+        .wheel-image {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            z-index: 20;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
         /* Responsive Adjustments */
         @media (max-width: 480px) {
             .wheel-container {
@@ -356,6 +370,34 @@
             .wheel-medium .section-label {
                 font: 21px;
                 padding: 8px;
+            }
+
+            /* Wheel image adjustments for mobile */
+            .wheel-image {
+                width: 120px !important;
+                height: 120px !important;
+                z-index: 20 !important; /* Ensure images are on top */
+                transform: scale(1.1) !important; /* Make images slightly larger for better visibility */
+            }
+            
+            #wheel-image-1 {
+                top: 20% !important;
+                left: 15% !important;
+            }
+            
+            #wheel-image-2 {
+                top: 20% !important;
+                right: 10% !important;
+            }
+            
+            #wheel-image-3 {
+                bottom: 10% !important;
+                left: 15% !important;
+            }
+            
+            #wheel-image-4 {
+                bottom: 10% !important;
+                right: 10% !important;
             }
 
             .modal-content {
@@ -418,6 +460,13 @@
                 width: 120px;
                 padding: 8px;
                 font-size: 15px;
+            }
+            
+            /* Wheel image adjustments for tablets */
+            #wheel-image-1, #wheel-image-2, #wheel-image-3, #wheel-image-4 {
+                width: 150px !important;
+                height: 150px !important;
+                z-index: 20 !important;
             }
         }
         
@@ -507,12 +556,11 @@
         </div>
         
         <!-- Image elements for wheel 2 container -->
-        <img id="wheel-image-1" src="images/wheel-image1.svg" alt="Wheel Image 1" style="display: none; position: absolute; width: 700px; height: auto; top: 5%; left: 25%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
-        <img id="wheel-image-2" src="images/wheel-image2.svg" alt="Wheel Image 2" style="display: none; position: absolute; width: 700px; height: auto; top: 5%; right: 25%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
-        <img id="wheel-image-3" src="images/wheel-image3.svg" alt="Wheel Image 3" style="display: none; position: absolute; width: 700px; height: auto; bottom: 5%; left: -13%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
-        <img id="wheel-image-4" src="images/wheel-image4.svg" alt="Wheel Image 4" style="display: none; position: absolute; width: 700px; height: auto; bottom: 5%; right: -13%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
+        <img id="wheel-image-1" src="images/wheel-image1.svg" alt="Wheel Image 1" class="wheel-image" style="top: 30%; left: 25%;">
+        <img id="wheel-image-2" src="images/wheel-image2.svg" alt="Wheel Image 2" class="wheel-image" style="top: 30%; right: 15%;">
+        <img id="wheel-image-3" src="images/wheel-image3.svg" alt="Wheel Image 3" class="wheel-image" style="bottom: 5%; left: 25%;">
+        <img id="wheel-image-4" src="images/wheel-image4.svg" alt="Wheel Image 4" class="wheel-image" style="bottom: 5%; right: 15%;">
 
-    
         <!-- Larger wheel 4 sections -->
         <div class="wheel wheel-larger" id="larger-wheel-2"></div>
         
@@ -769,7 +817,7 @@ Contoh 3 :  16z⁴                         Jawapan : 4z⁴
                     // Create a container for the circular text
                     label.style.position = 'absolute';
                     label.style.left = '50%';
-                    label.style.top = '49.5%';
+                    label.style.top = '50%';
                     label.style.transform = 'translate(-50%, -50%)';
                     label.style.width = `${radius * 2}px`;
                     label.style.height = `${radius * 2}px`;
@@ -797,7 +845,7 @@ Contoh 3 :  16z⁴                         Jawapan : 4z⁴
                         charSpan.style.fontSize = `${fontSize}px`;
                         charSpan.style.color = 'black';
                         charSpan.style.fontWeight = 'bold';
-                        // Removed text shadow to eliminate white stroke effect
+                        
                         
                         // Calculate position along the arc - distribute characters evenly
                         const charAngle = startAngle + (index * (arcAngle / (chars.length - 1 || 1)));
@@ -1136,7 +1184,7 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
             .circular-text span {
                 position: absolute;
                 left: 50%;
-                transform-origin: 0 450px; /* Match the radius of larger wheel */
+                transform-origin: 0 410px; /* Match the radius of larger wheel */
                 font-weight: bold;
             }
         `;
@@ -1153,7 +1201,7 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
             createWheelSections('large-wheel', 8, 400, largeWheelLabels, 44, 0.8);
 
             // Initialize second wheel set with different labels
-            createWheelSections('larger-wheel-2', 4, 450, largerWheelLabels2, 34, 0.93);
+            createWheelSections('larger-wheel-2', 4, 450, largerWheelLabels2, 30, 0.90);
             
             createWheelSections('large-wheel-2', 4, 400, largeWheelLabels2, 44, 0.6);
 
@@ -1188,10 +1236,22 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
                     wheelImages.forEach(img => {
                         if (isWheel1Visible) {
                             // Show images when wheel 2 is visible
-                            img.style.display = 'block';
+                            setTimeout(() => {
+                                img.style.display = 'block';
+                                // Small delay to ensure display property is applied before opacity
+                                setTimeout(() => {
+                                    img.style.opacity = '1';
+                                    img.style.visibility = 'visible';
+                                }, 50);
+                            }, 300); // Wait for container transition
                         } else {
                             // Hide images when wheel 1 is visible
-                            img.style.display = 'none';
+                            img.style.opacity = '0';
+                            img.style.visibility = 'hidden';
+                            // Wait for fade out before changing display property
+                            setTimeout(() => {
+                                img.style.display = 'none';
+                            }, 300);
                         }
                     });
                     
