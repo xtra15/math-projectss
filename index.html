@@ -364,7 +364,7 @@
                 padding: 25px;
             }
             .nested-modal-content {
-                width: 90%;
+                width: 95%;
                 padding: 20px;
             }
             .modal-title {
@@ -379,14 +379,14 @@
             }
 
             .text-box-container {
-                width: 200px; /* Reduced width */
-                gap: 120px; /* Reduced gap between text boxes */
+                width: 200px; 
+                gap: 120px; 
             }
 
             .text-box {
-                width: 100px; /* Smaller width */
-                padding: 6px; /* Reduced padding */
-                font-size: 14px; /* Smaller font size */
+                width: 100px; 
+                padding: 6px; 
+                font-size: 14px; 
             }
       
         }
@@ -446,17 +446,28 @@
             pointer-events: none; /* Allow clicks to pass through */
         }
 
+        /* Base wheel part styles */
         .wheel-part {
             position: absolute;
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background-color: #1972b6 ;
-            clip-path: polygon(50% 50%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%);
-            transform: rotate(54deg); /* Start after the cutout */
+            background-color: #1972b6;
             transform-origin: center;
             pointer-events: auto; /* Allow dragging on the wheel part */
             backdrop-filter: brightness(1.1); /* Subtle effect on underlying wheels */
+        }
+        
+        /* First wheel with standard cutout */
+        #rotatable-wheel .wheel-part {
+            clip-path: polygon(50% 50%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%);
+            transform: rotate(54deg); /* Start after the cutout */
+        }
+        
+        /* Second wheel with larger cutout */
+        #rotatable-wheel-2 .wheel-part {
+            clip-path: polygon(50% 50%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 1% 0%);
+            transform: rotate(54deg); /* Start after the cutout */
         }
 
         .rotatable-wheel.active {
@@ -491,14 +502,17 @@
 
     <div class="wheel-container" id="wheel-container-2" style="display: none;">
         <!-- Large wheel 8 sections -->
-        <div class="wheel wheel-large" id="large-wheel-2"></div>
+        <div class="wheel wheel-large" id="large-wheel-2" >
+            
+        </div>
         
-        <!-- Medium wheel 8 sections -->
-        <div class="wheel wheel-medium" id="medium-wheel-2"></div>
-        
-        <!-- Small wheel 8 sections -->
-        <div class="wheel wheel-small" id="small-wheel-2"></div>
+        <!-- Image elements for wheel 2 container -->
+        <img id="wheel-image-1" src="images/wheel-image1.svg" alt="Wheel Image 1" style="display: none; position: absolute; width: 700px; height: auto; top: 5%; left: 25%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
+        <img id="wheel-image-2" src="images/wheel-image2.svg" alt="Wheel Image 2" style="display: none; position: absolute; width: 700px; height: auto; top: 5%; right: 25%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
+        <img id="wheel-image-3" src="images/wheel-image3.svg" alt="Wheel Image 3" style="display: none; position: absolute; width: 700px; height: auto; bottom: 5%; left: -13%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
+        <img id="wheel-image-4" src="images/wheel-image4.svg" alt="Wheel Image 4" style="display: none; position: absolute; width: 700px; height: auto; bottom: 5%; right: -13%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
 
+    
         <!-- Larger wheel 4 sections -->
         <div class="wheel wheel-larger" id="larger-wheel-2"></div>
         
@@ -569,29 +583,30 @@
         }, { passive: false });
 
         const fixads = {
-      "1": {
-                    a: `
-                      Tulis Semula atas,bawah (Selesaikan jika ada no)
-                    Contoh : x⁴
+      //dont remove
+"1": {
+    a: `
+      Tulis Semula atas,bawah (Selesaikan jika ada no)
+    Contoh : x⁴
 ‎‎  ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  ──
-                                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎  y²
-                    Jawapan : x⁴
+                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎  y²
+    Jawapan : x⁴
 ‎‎  ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎  ──
-                                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ y²
+                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ y²
 
 
-                        Contoh 2 : 15x² 
+        Contoh 2 : 15x² 
 ‎‎  ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎‎‎ ‎‎‎‎                       ──
-                                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎ ‎‎ -3y⁷   
+                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎ ‎‎ -3y⁷   
 
 Jawapan  : (15/-3)x² 
 ‎‎  ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎‎‎ ‎‎‎‎ ‎ ‎ ‎‎ ‎‎ ‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎─
-                                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎y⁷   
+                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎y⁷   
 ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  = -5x² 
- ‎‎‎‎ ‎‎‎‎ ‎ ‎ ‎‎ ‎‎ ‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎─
-                                    ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎y⁷ 
+‎‎‎‎ ‎‎‎‎ ‎ ‎ ‎‎ ‎‎ ‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎─
+                    ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎y⁷ 
 
-                    `
+    `
 }
 }
 
@@ -600,188 +615,125 @@ Jawapan  : (15/-3)x²
 
         const sectionContent = {
            // Dont remove 
-           "🔎¹": {
-                title: "Huruf Darab Huruf",
-                content: `
-                    <h3>Pilih</h3>
-                    <div class="content-box" onclick="openNestedModal('Huruf Sama', '<h2>Tambah kuasa</h2>
-                    Contoh : X² x X⁵  
-                    Jawapan : X²⁺⁵ 
-                    = X⁸
+          "🔎¹": {
+    title: "Huruf Darab Huruf",
+    content: `
+        <h3>Pilih</h3>
+        <div class="content-box" onclick="openNestedModal('Huruf Sama', '<h2>Tambah kuasa</h2>
+        Contoh : X² x X⁵  
+        Jawapan : X²⁺⁵ 
+        = X⁸
 
-                    Contoh 2 : -5y⁵ x 2y⁶ 
-                    Jawapan = (-5 x 2)y⁵⁺⁶ 
-                    = 10y⁹
-                    ')">Huruf Sama</div>
+        Contoh 2 : -5y⁵ x 2y⁶ 
+        Jawapan = (-5 x 2)y⁵⁺⁶ 
+        = 10y⁹
+        ')">Huruf Sama</div>
 
-                    <div class="content-box" onclick="openNestedModal('Huruf Tak Sama', 'Letak sebelah-sebelah
-                    Contoh : a⁷ x b¹¹ 
-                    Jawapan : a⁷b¹¹
+        <div class="content-box" onclick="openNestedModal('Huruf Tak Sama', 'Letak sebelah-sebelah
+        Contoh : a⁷ x b¹¹ 
+        Jawapan : a⁷b¹¹
 
-                    Contoh 2 : 4a² x 6b⁵
-                    Jawapan : (4x6)a²b⁵  
-                    = 24a²b⁵
-                    
+        Contoh 2 : 4a² x 6b⁵
+        Jawapan : (4x6)a²b⁵  
+        = 24a²b⁵
+        
 ')">Huruf Tak Sama</div>
-                `
-            },
-            "🔎²": {
-                title: "Huruf darab no, No darab huruf",
-                content: `
-                   <h3>Penjelasan</h3>
-                           Tulis nombor atau hasil darab nombor diikuti huruf
+    `
+},
+"🔎²": {
+    title: "Huruf darab no, No darab huruf",
+    content: `
+       <h3>Penjelasan</h3>
+               Tulis nombor atau hasil darab nombor diikuti huruf
 
-                           Contoh : -3 x y²
-                           Jawapan : -3y²
+               Contoh : -3 x y²
+               Jawapan : -3y²
 
-                           Contoh 2 : 3 x 2x⁵
-                           Jawapan : 6x⁵
-                
-                `
-            },
-            "🔎³": {
-                title: "Huruf Bahagi Huruf",
-                content: `
-                    <h3>Pilih</h3>
-                    <div class="content-box" onclick="openNestedModal('Huruf Sama', '
-                    Tolak kuasa 
-                     Contoh : m⁸ ÷ m⁵
-                     Jawapan : m⁸⁻⁵ = m³
+               Contoh 2 : 3 x 2x⁵
+               Jawapan : 6x⁵
+    
+    `
+},
+"🔎³": {
+    title: "Huruf Bahagi Huruf",
+    content: `
+        <h3>Pilih</h3>
+        <div class="content-box" onclick="openNestedModal('Huruf Sama', '
+        Tolak kuasa 
+         Contoh : m⁸ ÷ m⁵
+         Jawapan : m⁸⁻⁵ = m³
 
-                     Contoh 2: 12p⁷ ÷ 3p²
-                     Jawapan : (12÷3)p⁷-²
-                             =4p³
-                    
-                    
-                    .')">Huruf Bahagi Huruf</div>
-                    <div class="content-box" onclick="openNestedModal('Huruf tak sama',fixads[1].a)">Huruf tak sama</div>
-                `
-            },
-            "🔎⁴": {
-                title: "Huruf Bahagi no, No bahagi huruf",
-                content: `
-                    <h3>Penjelasan</h3>
-                    Huruf tulis macam biasa
-                    (Selesaikan Pembahagian nombor kalau ada)
+         Contoh 2: 12p⁷ ÷ 3p²
+         Jawapan : (12÷3)p⁷-²
+                 =4p³
+        
+        
+        .')">Huruf Bahagi Huruf</div>
+        <div class="content-box" onclick="openNestedModal('Huruf tak sama',fixads[1].a)">Huruf tak sama</div>
+    `
+},
+"🔎⁴": {
+    title: "Huruf Bahagi no, No bahagi huruf",
+    content: `
+        <h3>Penjelasan</h3>
+        Huruf tulis macam biasa
+        (Selesaikan Pembahagian nombor kalau ada)
 
-         Contoh :  35       Jawapan : 35
-                     ───                       ──
-                        y5                         y5
+Contoh :  35       Jawapan : 35
+         ───                       ──
+            y5                         y5
 
-        Contoh 2 :  z9     Jawapan : z9
-                            ──                    ──
-                             4                       4
+Contoh 2 :  z9     Jawapan : z9
+                ──                    ──
+                 4                       4
 
 
-        Contoh 3 :  16z⁴                         Jawapan : 4z⁴
-                            ──    (16 bahagi 4)
-                             4
-                        
-                `
-            },
-            "🔎⁵": {
-                title: "Sebutan Serupa",
-                content: `
-                    <h3>Penjelasan</h3>
-                    Jumlahkan nombor diikuti huruf.
-                    (TEKAN KALKULATOR)
-                  Contoh : 3x + 5x
-                  Jawapan : 8x
-                `
-            },
-            "🔎⁶": {
-                title: "Sebutan Tak Serupa",
-                content: `
-                    <h3>Penjelasan</h3>
-                    Salin balik soalan yang diberikan
-                    Contoh : 8x + 5y
-                    Jawapan : 8x + 5y
-                `
-            },
-            "🔎⁷": {
-                title: "Sebutan Tak Serupa",
-                content: `
-                     <h3>Penjelasan</h3>
-                  Tolakkan nombor diikuti huruf
-                  (TEKAN KALKULATOR)
-                  
-                  Contoh : 12x - 7x
-                  Jawapan : 5x
-                `
-            },
-            "🔎⁸": {
-                title: "Sebutan Tak Serupa",
-                content: `
-                    <h3>Penjelasan</h3>
-                    Salin balik soalan yang diberikan
-                    Contoh : 12x - x²
-                    Jawapan : 12x - x²
-                `
-            },
-            "📚¹": {
-                title: "Test",
-                content: `
-                    <h3>Test</h3>
-                    <div class="content-box" onclick="openNestedModal('Test 1', 'This is test content 1')">Test 1</div>
-                    <div class="content-box" onclick="openNestedModal('Test 2', 'This is test content 2')">Test 2</div>
-                `
-            },
-            "📚²": {
-                title: "Test",
-                content: `
-                    <h3>Test</h3>
-                    <div class="content-box" onclick="openNestedModal('Test 3', 'This is test content 3')">Test 3</div>
-                    <div class="content-box" onclick="openNestedModal('Test 4', 'This is test content 4')">Test 4</div>
-                `
-            },
-            "📚³": {
-                title: "Test",
-                content: `
-                    <h3>Test</h3>
-                    <div class="content-box" onclick="openNestedModal('Test 5', 'This is test content 5')">Test 5</div>
-                    <div class="content-box" onclick="openNestedModal('Test 6', 'This is test content 6')">Test 6</div>
-                `
-            },
-            "📚⁴": {
-                title: "Test",
-                content: `
-                    <h3>Test</h3>
-                    <div class="content-box" onclick="openNestedModal('Test 7', 'This is test content 7')">Test 7</div>
-                    <div class="content-box" onclick="openNestedModal('Test 8', 'This is test content 8')">Test 8</div>
-                `
-            },
-            "📚⁵": {
-                title: "Test",
-                content: `
-                    <h3>Test</h3>
-                    <div class="content-box" onclick="openNestedModal('Test 9', 'This is test content 9')">Test 9</div>
-                    <div class="content-box" onclick="openNestedModal('Test 10', 'This is test content 10')">Test 10</div>
-                `
-            },
-            "📚⁶": {
-                title: "Test",
-                content: `
-                    <h3>Test</h3>
-                    <div class="content-box" onclick="openNestedModal('Test 11', 'This is test content 11')">Test 11</div>
-                    <div class="content-box" onclick="openNestedModal('Test 12', 'This is test content 12')">Test 12</div>
-                `
-            },
-            "📚⁷": {
-                title: "Test",
-                content: `
-                    <h3>Test</h3>
-                    <div class="content-box" onclick="openNestedModal('Test 13', 'This is test content 13')">Test 13</div>
-                    <div class="content-box" onclick="openNestedModal('Test 14', 'This is test content 14')">Test 14</div>
-                `
-            },
-            "📚⁸": {
-                title: "Test",
-                content: `
-                    <h3>Test</h3>
-                    <div class="content-box" onclick="openNestedModal('Test 15', 'This is test content 15')">Test 15</div>
-                    <div class="content-box" onclick="openNestedModal('Test 16', 'This is test content 16')">Test 16</div>
-                `
-            }
+Contoh 3 :  16z⁴                         Jawapan : 4z⁴
+                ──    (16 bahagi 4)
+                 4
+            
+    `
+},
+"🔎⁵": {
+    title: "Sebutan Serupa",
+    content: `
+        <h3>Penjelasan</h3>
+        Jumlahkan nombor diikuti huruf.
+        (TEKAN KALKULATOR)
+      Contoh : 3x + 5x
+      Jawapan : 8x
+    `
+},
+"🔎⁶": {
+    title: "Sebutan Tak Serupa",
+    content: `
+        <h3>Penjelasan</h3>
+        Salin balik soalan yang diberikan
+        Contoh : 8x + 5y
+        Jawapan : 8x + 5y
+    `
+},
+"🔎⁷": {
+    title: "Sebutan Tak Serupa",
+    content: `
+         <h3>Penjelasan</h3>
+      Tolakkan nombor diikuti huruf
+      (TEKAN KALKULATOR)
+      
+      Contoh : 12x - 7x
+      Jawapan : 5x
+    `
+},
+"🔎⁸": {
+    title: "Sebutan Tak Serupa",
+    content: `
+        <h3>Penjelasan</h3>
+        Salin balik soalan yang diberikan
+        Contoh : 12x - x²
+        Jawapan : 12x - x²
+    `
+},
+           
 
 
         };
@@ -790,6 +742,7 @@ Jawapan  : (15/-3)x²
         function createWheelSections(wheelId, numSections, radius, labels, fontSize, labelRadiusPercent) {
             const wheel = document.getElementById(wheelId);
             const angleStep = 360 / numSections;
+            const isSecondLargerWheel = wheelId === 'larger-wheel-2';
             
             for (let i = 0; i < numSections; i++) {
                 // Create divider
@@ -810,28 +763,87 @@ Jawapan  : (15/-3)x²
                 const label = document.createElement('div');
                 label.className = 'section-label';
                 const labelText = labels[i % labels.length];
-                const words = labelText.split(' ');
-                label.textContent = words.length > 3 ? words.slice(0, 3).join(' ') + '\n' + words.slice(3).join(' ') : labelText;
-                label.style.whiteSpace = 'pre-line';
-                label.style.left = `${x}%`;
-                label.style.top = `${y}%`;
-                label.style.fontSize = `${fontSize}px`;
                 
-                // Make text clickable for both large wheels
-                if (wheelId === 'large-wheel' || wheelId === 'large-wheel-2') {
-                    label.className += ' clickable-label';
-                    label.id = `section-${i+1}-label-${wheelId}`;
-                    label.setAttribute('data-section', labelText);
+                // Special handling for larger-wheel-2 to create circular text
+                if (isSecondLargerWheel) {
+                    // Create a container for the circular text
+                    label.style.position = 'absolute';
+                    label.style.left = '50%';
+                    label.style.top = '49.5%';
+                    label.style.transform = 'translate(-50%, -50%)';
+                    label.style.width = `${radius * 2}px`;
+                    label.style.height = `${radius * 2}px`;
+                    label.style.pointerEvents = 'none'; // Prevent interference with clicks
+                   
                     
-                    // Add both click and touch events
-                    label.addEventListener('click', function() {
-                        openModal(labelText);
+                    // Create individual characters and position them in a circle
+                    const chars = labelText.split('');
+                    
+                    // Calculate an appropriate arc angle based on text length
+                    const arcAngle = Math.min(70, 15 + (chars.length * 2.5)); // Wider arc for better readability
+                    
+                    // Position the text centered on the section
+                    const startAngle = labelAngle - (arcAngle / 2) - 90; // Center the text on the section
+                    
+                    // Adjust radius for text placement - slightly larger than the wheel radius for better positioning
+                    const textRadius = labelRadius * 1.02;
+                    
+                    chars.forEach((char, index) => {
+                        if (char === ' ') return; // Skip spaces to avoid empty spans
+                        
+                        const charSpan = document.createElement('span');
+                        charSpan.textContent = char;
+                        charSpan.style.position = 'absolute';
+                        charSpan.style.fontSize = `${fontSize}px`;
+                        charSpan.style.color = 'black';
+                        charSpan.style.fontWeight = 'bold';
+                        // Removed text shadow to eliminate white stroke effect
+                        
+                        // Calculate position along the arc - distribute characters evenly
+                        const charAngle = startAngle + (index * (arcAngle / (chars.length - 1 || 1)));
+                        const charRadian = (charAngle * Math.PI) / 180;
+                        
+                        // Calculate position with adjusted radius
+                        const charX = 50 + (Math.cos(charRadian) * textRadius / (radius * 2) * 100);
+                        const charY = 50 + (Math.sin(charRadian) * textRadius / (radius * 2) * 100);
+                        
+                        charSpan.style.left = `${charX}%`;
+                        charSpan.style.top = `${charY}%`;
+                        
+                        // Rotate each character to follow the circle tangent
+                        charSpan.style.transform = `translate(-50%, -50%) rotate(${charAngle + 90}deg)`;
+                        
+                        label.appendChild(charSpan);
                     });
                     
-                    label.addEventListener('touchend', function(e) {
-                        e.preventDefault();
-                        openModal(labelText);
-                    }, { passive: false });
+                    // Add pointer events to the entire label for better interaction
+                    label.style.pointerEvents = 'auto';
+                }
+                 else {
+                    // Standard text handling for other wheels
+                    const words = labelText.split(' ');
+                    label.textContent = words.length > 3 ? words.slice(0, 3).join(' ') + '\n' + words.slice(3).join(' ') : labelText;
+                    label.style.whiteSpace = 'pre-line';
+                    label.style.left = `${x}%`;
+                    label.style.top = `${y}%`;
+                    label.style.fontSize = `${fontSize}px`;
+                    
+                    // Make text clickable for large wheel
+                    if (wheelId === 'large-wheel') {
+                        label.className += ' clickable-label';
+                        label.id = `section-${i+1}-label-${wheelId}`;
+                        label.setAttribute('data-section', labelText);
+                        
+                        // Add both click and touch events
+                        label.addEventListener('click', function() {
+                            openModal(labelText);
+                        });
+                        
+                        label.addEventListener('touchend', function(e) {
+                            e.preventDefault();
+                            openModal(labelText);
+                        }, { passive: false });
+                    }
                 }
                 
                 wheel.appendChild(label);
@@ -845,7 +857,7 @@ Jawapan  : (15/-3)x²
             const modalTitle = document.getElementById('modal-title');
             const modalContent = document.getElementById('modal-content');
             
-            // Get the section content from the sectionContent object
+           //  Get the section content from the sectionContent object
             const section = sectionContent[sectionName] || {
                 title: sectionName,
                 content: `<p>Content for ${sectionName} will be available soon.</p>`
@@ -1107,10 +1119,30 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
         const largeWheelLabels = ['🔎¹', '🔎²', '🔎³', '🔎⁴', '🔎⁵', '🔎⁶', '🔎⁷', '🔎⁸'];
 
         // Define wheel data for second set
-        const largerWheelLabels2 = ['A', 'B', 'C', 'D'];
-        const smallWheelLabels2 = ['1', '2', '3', '4', '5', '6', '7', '8'];
-        const mediumWheelLabels2 = ['Text 1', 'Text 2', 'Text 3', 'Text 4', 'Text 5', 'Text 6', 'Text 7', 'Text 8'];
-        const largeWheelLabels2 = ['📚¹', '📚²', '📚³', '📚⁴', '📚⁵', '📚⁶', '📚⁷', '📚⁸'];
+        const largerWheelLabels2 = ['Ketumpatan / Density', 'Kuasa / Power', 'Tenaga / Energy', 'Ohm Law / Hukum Ohm'];
+        const largeWheelLabels2 = ['‎', '‎', '‎', '‎'];
+        
+        // CSS for circular text
+        const circularTextStyle = document.createElement('style');
+        circularTextStyle.textContent = `
+            .circular-text {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                transform-origin: center;
+                text-align: center;
+            }
+            
+            .circular-text span {
+                position: absolute;
+                left: 50%;
+                transform-origin: 0 450px; /* Match the radius of larger wheel */
+                font-weight: bold;
+            }
+        `;
+        document.head.appendChild(circularTextStyle);
+        
+        
         
         // Create the wheels
         window.addEventListener('DOMContentLoaded', function() {
@@ -1122,9 +1154,8 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
 
             // Initialize second wheel set with different labels
             createWheelSections('larger-wheel-2', 4, 450, largerWheelLabels2, 34, 0.93);
-            createWheelSections('small-wheel-2', 8, 100, smallWheelLabels2, 47, 0.6);
-            createWheelSections('medium-wheel-2', 8, 250, mediumWheelLabels2, 16, 0.79);
-            createWheelSections('large-wheel-2', 8, 400, largeWheelLabels2, 44, 0.8);
+            
+            createWheelSections('large-wheel-2', 4, 400, largeWheelLabels2, 44, 0.6);
 
             // Add wheel toggle functionality
             const wheelToggle = document.getElementById('wheel-toggle');
@@ -1145,6 +1176,24 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
                 setTimeout(() => {
                     wheelContainer1.style.display = isWheel1Visible ? 'none' : 'block';
                     wheelContainer2.style.display = isWheel1Visible ? 'block' : 'none';
+                    
+                    // Toggle visibility of wheel images
+                    const wheelImages = [
+                        document.getElementById('wheel-image-1'),
+                        document.getElementById('wheel-image-2'),
+                        document.getElementById('wheel-image-3'),
+                        document.getElementById('wheel-image-4')
+                    ];
+                    
+                    wheelImages.forEach(img => {
+                        if (isWheel1Visible) {
+                            // Show images when wheel 2 is visible
+                            img.style.display = 'block';
+                        } else {
+                            // Hide images when wheel 1 is visible
+                            img.style.display = 'none';
+                        }
+                    });
                     
                     // Remove hidden class to trigger fade in
                     if (isWheel1Visible) {
