@@ -327,7 +327,7 @@
     opacity: 0;
     visibility: hidden;
     position: absolute;
-    width: 800px;
+    width: 700px;
     height: auto;
     z-index: 5;
     user-select: none;
@@ -336,7 +336,15 @@
     pointer-events: none;
 }
 
-
+@media (max-width: 480px) {
+    #wheel-image-1, #wheel-image-2, #wheel-image-3, #wheel-image-4 {
+        width: 350px;
+        max-width: 90%;
+        position: absolute;
+    }
+    
+   
+}
 
        
         /* Responsive Adjustments */
@@ -526,10 +534,10 @@
         </div>
         
         <!-- Image elements for wheel 2 container -->
-        <img id="wheel-image-1" src="images/wheel-image1.png" alt="Wheel Image 1" style="top: 10%; left: 50%; transform: translateX(-50%);">
-        <img id="wheel-image-2" src="images/wheel-image2.png" alt="Wheel Image 2" style="top: 35%; right: 50%; transform: translateX(50%);">
-        <img id="wheel-image-3" src="images/wheel-image3.png" alt="Wheel Image 3" style="bottom: 35%; left: 50%; transform: translateX(-50%);">
-        <img id="wheel-image-4" src="images/wheel-image4.png" alt="Wheel Image 4" style="bottom: 10%; right: 50%; transform: translateX(50%);">
+        <img id="wheel-image-1" src="images/wheel-image1.png" alt="Wheel Image 1" style="top: 5%; left: 25%;">
+        <img id="wheel-image-2" src="images/wheel-image2.png" alt="Wheel Image 2" style="top: 5%; right: 25%;">
+        <img id="wheel-image-3" src="images/wheel-image3.png" alt="Wheel Image 3" style="bottom: 5%; left: 25%;">
+        <img id="wheel-image-4" src="images/wheel-image4.png" alt="Wheel Image 4" style="bottom: 5%; right: 25%;">
     
         <!-- Larger wheel 4 sections -->
         <div class="wheel wheel-larger" id="larger-wheel-2"></div>
