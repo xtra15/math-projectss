@@ -389,30 +389,9 @@
                 font-size: 14px; 
             }
 
-            #wheel-image-1, #wheel-image-2, #wheel-image-3, #wheel-image-4 {
-        width: 350px !important; /* Half the original size */
-        max-width: 100%;
-        z-index: 5 !important; /* Make sure images appear above other elements */
-    }
-    
-    /* Adjust positions for smaller screens */
-    #wheel-image-1 { top: 10% !important; left: 10% !important; }
-    #wheel-image-2 { top: 10% !important; right: 10% !important; }
-    #wheel-image-3 { bottom: 10% !important; left: 10% !important; }
-    #wheel-image-4 { bottom: 10% !important; right: 10% !important; }
-}
-
-/* Force image display when wheel 2 is visible */
-#wheel-container-2:not(.hidden) #wheel-image-1,
-#wheel-container-2:not(.hidden) #wheel-image-2,
-#wheel-container-2:not(.hidden) #wheel-image-3,
-#wheel-container-2:not(.hidden) #wheel-image-4 {
-    display: block !important;
-}
-
          
       
-        
+        }
         
         @media (min-width: 481px) and (max-width: 768px) {
             .wheel-container {
@@ -524,36 +503,29 @@
     </div>
 
     <div class="wheel-container" id="wheel-container-2" style="display: none;">
-    <!-- Large wheel 8 sections -->
-    <div class="wheel wheel-large" id="large-wheel-2"></div>
+        <!-- Large wheel 8 sections -->
+        <div class="wheel wheel-large" id="large-wheel-2" >
+            
+        </div>
+        
+        <!-- Image elements for wheel 2 container -->
+        <img id="wheel-image-1" src="images/wheel-image1.png" alt="Wheel Image 1" style="display: none; position: absolute; width: 700px; height: auto; top: 5%; left: 25%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
+        <img id="wheel-image-2" src="images/wheel-image2.png" alt="Wheel Image 2" style="display: none; position: absolute; width: 700px; height: auto; top: 5%; right: 25%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
+        <img id="wheel-image-3" src="images/wheel-image3.png" alt="Wheel Image 3" style="display: none; position: absolute; width: 700px; height: auto; bottom: 5%; left: -13%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
+        <img id="wheel-image-4" src="images/wheel-image4.png" alt="Wheel Image 4" style="display: none; position: absolute; width: 700px; height: auto; bottom: 5%; right: -13%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;">
+
     
-    <img id="wheel-image-1" src="./images/wheel-image1.png" alt="Wheel Image 1" 
-     style="display: none; position: absolute; width: 700px; height: auto; top: 5%; left: 25%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;"
-     onerror="this.onerror=null; this.src='wheel-image1.png'; console.log('Trying alternate path');">
-
-<img id="wheel-image-2" src="./images/wheel-image2.png" alt="Wheel Image 2" 
-     style="display: none; position: absolute; width: 700px; height: auto; top: 5%; right: 25%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;"
-     onerror="this.onerror=null; this.src='wheel-image2.png'; console.log('Trying alternate path');">
-
-<img id="wheel-image-3" src="./images/wheel-image3.png" alt="Wheel Image 3" 
-     style="display: none; position: absolute; width: 700px; height: auto; bottom: 5%; left: -13%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;"
-     onerror="this.onerror=null; this.src='wheel-image3.png'; console.log('Trying alternate path');">
-
-<img id="wheel-image-4" src="./images/wheel-image4.png" alt="Wheel Image 4" 
-     style="display: none; position: absolute; width: 700px; height: auto; bottom: 5%; right: -13%; z-index: 1; user-select: none; -webkit-user-select: none; -moz-user-select: none;"
-     onerror="this.onerror=null; this.src='wheel-image4.png'; console.log('Trying alternate path');">
-
-    <!-- Larger wheel 4 sections -->
-    <div class="wheel wheel-larger" id="larger-wheel-2"></div>
-    
-    <!-- Rotatable wheel with cutout -->
-    <div class="rotatable-wheel-container">
-        <div class="rotatable-wheel" id="rotatable-wheel-2">
-            <div class="wheel-part"></div>
-            <div class="center"></div>
+        <!-- Larger wheel 4 sections -->
+        <div class="wheel wheel-larger" id="larger-wheel-2"></div>
+        
+        <!-- Rotatable wheel with cutout -->
+        <div class="rotatable-wheel-container">
+            <div class="rotatable-wheel" id="rotatable-wheel-2">
+                <div class="wheel-part"></div>
+                <div class="center"></div>
+            </div>
         </div>
     </div>
-</div>
 
     <div class="text-box-container" id="text-box-container">
         <div class="text-box" id="left-text-box">Nota 1</div>
@@ -1187,50 +1159,56 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
             
             createWheelSections('large-wheel-2', 4, 400, largeWheelLabels2, 44, 0.6);
 
-             // Modify the toggle wheel function 
-    const wheelToggle = document.getElementById('wheel-toggle');
-    const wheelContainer1 = document.getElementById('wheel-container-1');
-    const wheelContainer2 = document.getElementById('wheel-container-2');
+            // Add wheel toggle functionality
+            const wheelToggle = document.getElementById('wheel-toggle');
+            const wheelContainer1 = document.getElementById('wheel-container-1');
+            const wheelContainer2 = document.getElementById('wheel-container-2');
 
-    wheelToggle.addEventListener('click', function() {
-        const isWheel1Visible = wheelContainer1.style.display === 'block';
-        
-        // Add hidden class first to trigger fade out
-        if (isWheel1Visible) {
-            wheelContainer1.classList.add('hidden');
-        } else {
-            wheelContainer2.classList.add('hidden');
-        }
-        
-        // Wait for fade out animation to complete
-        setTimeout(() => {
-            wheelContainer1.style.display = isWheel1Visible ? 'none' : 'block';
-            wheelContainer2.style.display = isWheel1Visible ? 'block' : 'none';
-            
-            // Toggle visibility of wheel images - Fix 3: Show/hide properly
-            imageElements.forEach(img => {
-                if (img) {
-                    if (isWheel1Visible) {
-                        img.style.display = 'block'; // Make sure display is set to block
-                    } else {
-                        img.style.display = 'none';
-                    }
+            wheelToggle.addEventListener('click', function() {
+                const isWheel1Visible = wheelContainer1.style.display === 'block';
+                
+                // Add hidden class first to trigger fade out
+                if (isWheel1Visible) {
+                    wheelContainer1.classList.add('hidden');
+                } else {
+                    wheelContainer2.classList.add('hidden');
                 }
+                
+                // Wait for fade out animation to complete
+                setTimeout(() => {
+                    wheelContainer1.style.display = isWheel1Visible ? 'none' : 'block';
+                    wheelContainer2.style.display = isWheel1Visible ? 'block' : 'none';
+                    
+                    // Toggle visibility of wheel images
+                    const wheelImages = [
+                        document.getElementById('wheel-image-1'),
+                        document.getElementById('wheel-image-2'),
+                        document.getElementById('wheel-image-3'),
+                        document.getElementById('wheel-image-4')
+                    ];
+                    
+                    wheelImages.forEach(img => {
+                        if (isWheel1Visible) {
+                            // Show images when wheel 2 is visible
+                            img.style.display = 'block';
+                        } else {
+                            // Hide images when wheel 1 is visible
+                            img.style.display = 'none';
+                        }
+                    });
+                    
+                    // Remove hidden class to trigger fade in
+                    if (isWheel1Visible) {
+                        wheelContainer2.classList.remove('hidden');
+                    } else {
+                        wheelContainer1.classList.remove('hidden');
+                    }
+                    
+                    // Toggle text box container visibility
+                    const textBoxContainer = document.querySelector('.text-box-container');
+                    textBoxContainer.style.display = isWheel1Visible ? 'none' : 'flex';
+                }, 300); // Match the transition duration
             });
-            
-            // Remove hidden class to trigger fade in
-            if (isWheel1Visible) {
-                wheelContainer2.classList.remove('hidden');
-            } else {
-                wheelContainer1.classList.remove('hidden');
-            }
-            
-            // Toggle text box container visibility
-            const textBoxContainer = document.querySelector('.text-box-container');
-            textBoxContainer.style.display = isWheel1Visible ? 'none' : 'flex';
-        }, 300); // Match the transition duration
-    });
-});
 
             wheelToggle.addEventListener('touchend', function(e) {
                 e.preventDefault();
@@ -1279,9 +1257,9 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
                         openModal(sectionName);
                     }
                 }
-            };
+            }
+        });
         
-    
         // Handle orientation changes for better mobile experience
         window.addEventListener('orientationchange', function() {
             setTimeout(function() {
