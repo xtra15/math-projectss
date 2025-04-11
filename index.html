@@ -324,15 +324,48 @@
 
         #wheel-image-1, #wheel-image-2, #wheel-image-3, #wheel-image-4 {
     transition: opacity 0.3s ease-in-out;
-    
+    opacity: 0;
     visibility: hidden;
     position: absolute;
     width: 700px;
     height: auto;
-    z-index: 100;
+    z-index: 5;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
+    pointer-events: none;
+}
+
+@media (max-width: 480px) {
+    #wheel-image-1, #wheel-image-2, #wheel-image-3, #wheel-image-4 {
+        width: 250px;
+        max-width: 80%;
+        position: absolute;
+    }
+    
+    #wheel-image-1 {
+        top: 10% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    #wheel-image-2 {
+        top: 30% !important;
+        right: 50% !important;
+        transform: translateX(50%) !important;
+    }
+    
+    #wheel-image-3 {
+        bottom: 30% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    #wheel-image-4 {
+        bottom: 10% !important;
+        right: 50% !important;
+        transform: translateX(50%) !important;
+    }
 }
 
        
@@ -502,6 +535,7 @@
         
         <!-- Small wheel 8 sections -->
         <div class="wheel wheel-small" id="small-wheel"></div>
+        
 
         <!-- Larger wheel 4 sections -->
 <div class="wheel wheel-larger" id="larger-wheel"></div>
@@ -522,10 +556,10 @@
         </div>
         
         <!-- Image elements for wheel 2 container -->
-        <img id="wheel-image-1" src="images/wheel-image1.png" alt="Wheel Image 1" style="top: 5%; left: 25%;">
-        <img id="wheel-image-2" src="images/wheel-image2.png" alt="Wheel Image 2" style="top: 5%; right: 25%;">
-        <img id="wheel-image-3" src="images/wheel-image3.png" alt="Wheel Image 3" style="bottom: 5%; left: -13%;">
-        <img id="wheel-image-4" src="images/wheel-image4.png" alt="Wheel Image 4" style="bottom: 5%; right: -13%;">
+        <img id="wheel-image-1" src="images/wheel-image1.png" alt="Wheel Image 1" style="top: 5%; left: 50%; transform: translateX(-50%);">
+        <img id="wheel-image-2" src="images/wheel-image2.png" alt="Wheel Image 2" style="top: 5%; right: 50%; transform: translateX(50%);">
+        <img id="wheel-image-3" src="images/wheel-image3.png" alt="Wheel Image 3" style="bottom: 5%; left: 0;">
+        <img id="wheel-image-4" src="images/wheel-image4.png" alt="Wheel Image 4" style="bottom: 5%; right: 0;">
     
         <!-- Larger wheel 4 sections -->
         <div class="wheel wheel-larger" id="larger-wheel-2"></div>
@@ -1175,6 +1209,28 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
             const wheelToggle = document.getElementById('wheel-toggle');
             const wheelContainer1 = document.getElementById('wheel-container-1');
             const wheelContainer2 = document.getElementById('wheel-container-2');
+            
+            // Function to update wheel images visibility
+            function updateWheelImages(showWheel2) {
+                const wheelImages = [
+                    document.getElementById('wheel-image-1'),
+                    document.getElementById('wheel-image-2'),
+                    document.getElementById('wheel-image-3'),
+                    document.getElementById('wheel-image-4')
+                ];
+                
+                wheelImages.forEach(img => {
+                    if (showWheel2) {
+                        // Show images when wheel 2 is visible
+                        img.style.opacity = '1';
+                        img.style.visibility = 'visible';
+                    } else {
+                        // Hide images when wheel 1 is visible
+                        img.style.opacity = '0';
+                        img.style.visibility = 'hidden';
+                    }
+                });
+            }
 
             wheelToggle.addEventListener('click', function() {
                 const isWheel1Visible = wheelContainer1.style.display === 'block';
@@ -1191,24 +1247,8 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
                     wheelContainer1.style.display = isWheel1Visible ? 'none' : 'block';
                     wheelContainer2.style.display = isWheel1Visible ? 'block' : 'none';
                     
-                    const wheelImages = [
-    document.getElementById('wheel-image-1'),
-    document.getElementById('wheel-image-2'),
-    document.getElementById('wheel-image-3'),
-    document.getElementById('wheel-image-4')
-];
-
-wheelImages.forEach(img => {
-    if (isWheel1Visible) {
-        // Show images when wheel 2 is visible
-        img.style.opacity = '1';
-        img.style.visibility = 'visible';
-    } else {
-        // Hide images when wheel 1 is visible
-        img.style.opacity = '0';
-        img.style.visibility = 'hidden';
-    }
-});
+                    // Update image visibility
+                    updateWheelImages(isWheel1Visible);
                     
                     // Remove hidden class to trigger fade in
                     if (isWheel1Visible) {
@@ -1238,6 +1278,9 @@ wheelImages.forEach(img => {
                 setTimeout(() => {
                     wheelContainer1.style.display = isWheel1Visible ? 'none' : 'block';
                     wheelContainer2.style.display = isWheel1Visible ? 'block' : 'none';
+                    
+                    // Update image visibility for mobile
+                    updateWheelImages(isWheel1Visible);
                     
                     // Remove hidden class to trigger fade in
                     if (isWheel1Visible) {
