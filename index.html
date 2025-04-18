@@ -201,26 +201,35 @@
         }
 
         .nested-modal-content {
-            background-color: #fefefe;
-            margin: 0;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 8px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-height: 90vh;
-            overflow: hidden;
-            touch-action: pan-y;
-            white-space: pre-wrap !important;
-            word-break: keep-all !important;
-            text-align: left !important;
-            font-family: monospace;
-        }
+    background-color: #fefefe;
+    margin: 0;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 90vh;
+    overflow: auto !important; /* Make sure it's scrollable */
+    touch-action: pan-y;
+    text-align: left !important;
+    font-family: Arial, sans-serif; /* Changed from monospace for better readability */
+    line-height: 1.4;
+}
 
+#nested-modal-content {
+    word-wrap: break-word;
+    text-align: left;
+    padding: 5px 0;
+}
+
+#nested-modal-content strong {
+    color: #2970db;
+    font-weight: bold;
+}
         #modal-content, #nested-modal-content {
             white-space: pre-wrap !important;
             word-wrap: break-word;
@@ -403,6 +412,12 @@
            /     padding: 8px;
             }*/
 
+            .nested-modal-content {
+        max-height: 80vh;
+        width: 85%;
+        padding: 15px;
+            }
+
             .wheel-larger.section-label {
                 font-size:29px ;
                 padding: 8px;
@@ -544,6 +559,28 @@
         .rotatable-wheel.active {
             cursor: grabbing;
         }
+
+        /* Fraction styles */
+/* Simple fraction styles */
+/* Simple fraction styles */
+.fraction {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 3px;
+    text-align: center;
+}
+.fraction .numerator, .fraction .denominator {
+    display: block;
+    text-align: center;
+}
+.fraction .numerator {
+    border-bottom: 1px solid #000;
+    padding: 0 3px;
+    margin-bottom: 1px;
+}
+.fraction .denominator {
+    padding: 0 3px;
+}
     </style>
 </head>
 <body>
@@ -654,31 +691,74 @@
         }, { passive: false });
 
         const fixads = {
-      //dont remove
-"1": {
-    a: `
-      Tulis Semula atas,bawah (Selesaikan jika ada no)
-    Contoh : x⁴
-‎‎  ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  ──
-                   ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎  y²
-    Jawapan : x⁴
-‎‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎  ──
-                  ‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ y²
+    //dont remove
+    "1": {
+        a: `
+Tulis semula atas,bawah (Selesaikan jika ada no)
+Contoh :
+ x⁴
+──
+y²
+Jawapan :
+ x⁴
+──
+y²
+
+Contoh 2 : 
+15x² 
+──
+-3y⁷   
+
+Jawapan  : 
+(15/-3)x² 
+─
+y⁷   
+= 
+-5x² 
+─
+y⁷ 
+        `
+    
+    }
+};
+
+const fixads1 = {
+    "1": {
+        a: `
+        <h3>Penjelasan</h3>
+        Huruf tulis macam biasa
+        (Selesaikan Pembahagian nombor kalau ada)
+
+Contoh :
+         35       
+        ──                     
+        y5        
+              Jawapan :
+               35 
+               ──
+               y5
+                              
+                           
+
+Contoh 2 :
+z9    
+──              
+4      
+  Jawapan :
+   z9
+   ──
+    4            
 
 
-        Contoh 2 : 15x² 
-‎‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎‎‎ ‎‎‎‎                       ──
-                  ‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎ ‎‎ -3y⁷   
-
-Jawapan  : (15/-3)x² 
-‎‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎‎‎ ‎‎‎‎ ‎ ‎ ‎‎ ‎‎ ‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎─
-                  ‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎y⁷   
-‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  = -5x² 
-‎‎‎‎ ‎‎‎‎ ‎ ‎ ‎‎ ‎‎ ‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎─
-                    ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎‎ ‎ ‎‎ ‎‎y⁷ 
-
+Contoh 3 :
+  16z⁴                         
+    ──   (16 bahagi 4) 
+    4
+            
+                 Jawapan : 4z⁴
     `
-}
+    }
+    
 }
 
         // Section content for the large wheel
@@ -735,6 +815,7 @@ Jawapan  : (15/-3)x²
          Jawapan : m⁸⁻⁵ = m³
 
          Contoh 2: 12p⁷ ÷ 3p²
+                  
          Jawapan : (12÷3)p⁷-²
                  =4p³
         
@@ -746,24 +827,7 @@ Jawapan  : (15/-3)x²
 "🔎⁴": {
     title: "Huruf Bahagi no, No bahagi huruf",
     content: `
-        <h3>Penjelasan</h3>
-        Huruf tulis macam biasa
-        (Selesaikan Pembahagian nombor kalau ada)
-
-Contoh :  35       Jawapan : 35
-           ───                       ──
-              y5                         y5
-
-Contoh 2 :  z9     Jawapan : z9
-                 ──                    ──
-                  4                       4
-
-
-Contoh 3 :  16z⁴                         
-                ──    (16 bahagi 4)
-                 4
-            
-                 Jawapan : 4z⁴
+       <div class="content-box" onclick="openNestedModal('Huruf Bahagi Huruf',fixads1[1].a)">Huruf Bahagi Huruf</div>
     `
 },
 "🔎⁵": {
@@ -774,6 +838,8 @@ Contoh 3 :  16z⁴
         (TEKAN KALKULATOR)
       Contoh : 3x + 5x
       Jawapan : 8x
+             
+             
     `
 },
 "🔎⁶": {
@@ -924,71 +990,189 @@ Contoh 3 :  16z⁴
         
         // Modal functions
          // Modify content box to preserve whitespace when opened
-         function openModal(sectionName, customContent = null) {
-            const modal = document.getElementById('section-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalContent = document.getElementById('modal-content');
-            
-           //  Get the section content from the sectionContent object
-            const section = sectionContent[sectionName] || {
-                title: sectionName,
-                content: `<p>Content for ${sectionName} will be available soon.</p>`
-            };
+         
 
-            // Clear previous content
-            modalContent.innerHTML = '';
+         // Fixed processFractions function that handles all types of fractions correctly
+        // Improved processFractions function that correctly handles fractions
+// Improved processFractions function that preserves characters next to the fraction line
+function processFractions(content) {
+    // Safety check
+    if (!content || typeof content !== 'string') {
+        return content;
+    }
+    
+    // If no fraction character, return content as is
+    if (!content.includes('─')) {
+        return content;
+    }
+    
+    // For multi-line fractions with possible characters next to the line
+    let result = content.replace(/([^\n]+)\n([^─\n]*)(─+)([^\n]*)\n([^\n]+)/g, function(match, numerator, beforeLine, line, afterLine, denominator) {
+        // Clean up the numerator and denominator
+        const cleanNumerator = numerator.trim();
+        const cleanDenominator = denominator.trim();
+        
+        // Preserve characters before and after the fraction line
+        const beforeText = beforeLine ? beforeLine.trim() : '';
+        const afterText = afterLine ? afterLine.trim() : '';
+        
+        // Create the fraction HTML with preserved characters
+        return `${beforeText}<div class="fraction"><span class="numerator">${cleanNumerator}</span><span class="denominator">${cleanDenominator}</span></div>${afterText}`;
+    });
+    
+    // For inline fractions with possible characters next to the line
+    result = result.replace(/(\S+)\s*([^─\s]*)(─+)([^─\s]*)\s*(\S+)/g, function(match, numerator, beforeLine, line, afterLine, denominator) {
+        // Preserve characters before and after the fraction line
+        const beforeText = beforeLine ? beforeLine : '';
+        const afterText = afterLine ? afterLine : '';
+        
+        // Create the fraction HTML with preserved characters
+        return `${beforeText}<div class="fraction"><span class="numerator">${numerator}</span><span class="denominator">${denominator}</span></div>${afterText}`;
+    });
+    
+    return result;
+}
 
-            // Set modal title
-            modalTitle.textContent = section.title;
 
-            // Add custom content if provided
-            if (customContent) {
-                const contentDiv = document.createElement('div');
-                // Use pre-wrap to preserve all whitespace including spaces
-                contentDiv.style.whiteSpace = 'pre-wrap !important';
-                contentDiv.style.wordBreak = 'keep-all';
-                contentDiv.style.textAlign = 'left';
-                contentDiv.innerHTML = customContent.replace(/\n/g, '<br>');
-                modalContent.appendChild(contentDiv);
-            } else {
-                // Add default content
-                const contentDiv = document.createElement('div');
-                contentDiv.style.whiteSpace = 'pre-wrap !important';
-                contentDiv.style.wordBreak = 'keep-all';
-                contentDiv.style.textAlign = 'left';
-                contentDiv.innerHTML = section.content.replace(/\n/g, '<br>');
-                modalContent.appendChild(contentDiv);
+
+
+
+// Update the openModal function as well
+// Update the openModal function
+// Updated openModal function
+// Updated openModal function
+function openModal(sectionName, customContent = null) {
+    const modal = document.getElementById('section-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContent = document.getElementById('modal-content');
+    
+    // Get the section content from the sectionContent object
+    const section = sectionContent[sectionName] || {
+        title: sectionName,
+        content: `<p>Content for ${sectionName} will be available soon.</p>`
+    };
+
+    // Clear previous content
+    modalContent.innerHTML = '';
+
+    // Set modal title
+    modalTitle.textContent = section.title;
+
+    // Add custom content if provided
+    if (customContent) {
+        const contentDiv = document.createElement('div');
+        contentDiv.style.whiteSpace = 'pre-wrap';
+        contentDiv.style.wordBreak = 'keep-all';
+        contentDiv.style.textAlign = 'left';
+        
+        // Process content for fractions - ensure customContent is a string
+        customContent = customContent || "";
+        
+        // Check for fractions and process them
+        let processedContent = customContent;
+        if (customContent.includes('─')) {
+            try {
+                processedContent = processFractions(customContent);
+            } catch (e) {
+                console.error("Error processing fractions:", e);
             }
-
-            modal.style.display = 'block';
         }
+        
+        // Add line breaks after processing fractions
+        processedContent = processedContent.replace(/\n/g, '<br>');
+        
+        contentDiv.innerHTML = processedContent;
+        modalContent.appendChild(contentDiv);
+    } else {
+        // Just use the existing content directly if it's already HTML
+        if (typeof section.content === 'string' && section.content.trim().startsWith('<')) {
+            modalContent.innerHTML = section.content;
+        } else {
+            // Process as regular content with possible fractions
+            const contentDiv = document.createElement('div');
+            contentDiv.style.whiteSpace = 'pre-wrap';
+            contentDiv.style.wordBreak = 'keep-all';
+            contentDiv.style.textAlign = 'left';
+            
+            // Ensure section.content is a string
+            const sectionContent = section.content || "";
+            
+            // Check for fractions and process them
+            let processedContent = sectionContent;
+            if (sectionContent.includes('─')) {
+                try {
+                    processedContent = processFractions(sectionContent);
+                } catch (e) {
+                    console.error("Error processing fractions:", e);
+                }
+            }
+            
+            // Add line breaks after processing fractions
+            processedContent = processedContent.replace(/\n/g, '<br>');
+            
+            contentDiv.innerHTML = processedContent;
+            modalContent.appendChild(contentDiv);
+        }
+    }
+
+    modal.style.display = 'block';
+}
         
         // Open nested modal
-        function openNestedModal(title, content) {
-            document.getElementById('nested-modal-title').textContent = title;
-            
-            // Use pre-wrap white-space style to preserve all whitespace including spaces
-            const nestedModalContent = document.getElementById('nested-modal-content');
-            nestedModalContent.style.whiteSpace = 'pre-wrap !important';
-            nestedModalContent.style.wordBreak = 'keep-all';
-            nestedModalContent.style.textAlign = 'left';
-            
-            // Replace newlines with <br> and preserve spaces with non-breaking spaces where needed
-            const processedContent = content
-                .replace(/\n/g, '<br>')
-                .replace(/\s{2,}/g, function(match) {
-                    return '&nbsp;'.repeat(match.length);
-                });
-            
-            nestedModalContent.innerHTML = processedContent;
-            
-            document.getElementById('nested-modal').style.display = 'block';
-        }
-        
-        // Close nested modal
-        function closeNestedModal() {
-            document.getElementById('nested-modal').style.display = 'none';
-        }
+        // Update the openNestedModal function
+      // Fixed openNestedModal function that preserves fraction formatting
+     // Updated openNestedModal function to fix whitespace and add scrolling
+function openNestedModal(title, content) {
+    document.getElementById('nested-modal-title').textContent = title;
+    
+    // Get the nested modal content element
+    const nestedModalContent = document.getElementById('nested-modal-content');
+    
+    // Process fractions in the content if needed
+    let processedContent = content;
+    if (content.includes('─')) {
+        processedContent = processFractions(content);
+    }
+    
+    // Fix spacing issues by replacing consecutive spaces and newlines with a single space
+    processedContent = processedContent.replace(/\s+/g, ' ');
+    
+    // Explicitly add line breaks for proper formatting
+    processedContent = processedContent
+        .replace(/Penjelasan/g, '<br><strong>Penjelasan</strong>')
+        .replace(/Contoh :/g, '<br><br><strong>Contoh :</strong>')
+        .replace(/Contoh 2 :/g, '<br><br><strong>Contoh 2 :</strong>')
+        .replace(/Contoh 3 :/g, '<br><br><strong>Contoh 3 :</strong>')
+        .replace(/Jawapan :/g, '<br><strong>Jawapan :</strong>');
+    
+    // Set the content with the processed text
+    nestedModalContent.innerHTML = processedContent;
+    
+    // Make sure scrolling is enabled
+    document.querySelector('.nested-modal-content').style.overflow = 'auto';
+    
+    // Show the modal
+    document.getElementById('nested-modal').style.display = 'block';
+}
+
+
+
+// Make sure this function exists
+function closeNestedModal() {
+    document.getElementById('nested-modal').style.display = 'none';
+}
+
+
+// Add this event listener
+document.addEventListener('DOMContentLoaded', function() {
+    
+    document.querySelector('#nested-modal .close-btn').addEventListener('click', closeNestedModal);
+});
+
+
+
+
+
         
         // Close modal handlers
         document.querySelectorAll('.close-btn').forEach(btn => {
@@ -1001,6 +1185,9 @@ Contoh 3 :  16z⁴
         });
         
         // Close modals when clicking outside
+
+
+        
         window.addEventListener('click', function(event) {
             let nestedModal = document.getElementById('nested-modal');
             let sectionModal = document.getElementById('section-modal');
@@ -1137,34 +1324,38 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
             const rightTextBox = document.getElementById('right-text-box');
 
             // Content for text boxes
-            const content1 = {
-                "1": {
-                    a: `
-2x,-3x², 4 , -5x³, -8x                             
-            ─                                                 
-            3    
+            // Content for text boxes
+const content1 = {
+    "1": {
+        a: `
 
-    Sebutan Serupa
+          Sebutan Serupa
      - Huruf sama
-     ─ Kuasa pada huruf sama                                                  
+     - Kuasa pada huruf sama  
+
+
+        Contoh :
+
+                          4        
+    2x,-3x² , -5x³, -8x,  ─   x                                             
+                           3                             
 
             Sebutan Serupa :
-            2x, 4,-8x
-                 ─
-                 3
-
-     
-
-                    `
-                },
-                "2": {
-                    b: `
-   Untuk x/÷ ⮕ Gabungan nombor dan huruf  x/÷
-                
-             ⮕ Nombor darab atau bahagi macam biasa, huruf-rujuk bahagian huruf x/÷
-                    `
-                }
-            };
+            
+         4
+2x,-8x,  ─  x
+         3
+                `
+    },
+    "2": {
+        b: `
+Untuk x/÷ ⮕ Gabungan nombor dan huruf  x/÷
+              gabungan nombor dan huruf
+            
+         ⮕ Nombor darab atau bahagi macam biasa, huruf-rujuk bahagian huruf x/÷
+                `
+    }
+};
 
             // Enhanced touch and click handling
             function addTouchHandler(element, content, title) {
@@ -1376,6 +1567,51 @@ wheelParts[1].style.transform = `rotate(${currentRotation2}deg)`;
                 }
             }, 200);
         });
+
+        // Add event delegation for content boxes
+// Add event delegation for content boxes
+// Add event delegation for content boxes
+document.addEventListener('click', function(e) {
+    const contentBox = e.target.closest('.content-box');
+    if (contentBox) {
+        const onclickAttr = contentBox.getAttribute('onclick');
+        if (onclickAttr && onclickAttr.includes('openNestedModal')) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Extract parameters from the onclick attribute
+            const match = onclickAttr.match(/openNestedModal\(['"]([^'"]+)['"],\s*['"]([^'"]+)['"]\)/);
+            if (match && match.length >= 3) {
+                const title = match[1];
+                // Replace escaped quotes to restore proper content
+                const content = match[2].replace(/\\'/g, "'").replace(/\\"/g, '"');
+                openNestedModal(title, content);
+            }
+        }
+    }
+});
+
+// Same for touch events
+document.addEventListener('touchend', function(e) {
+    const contentBox = e.target.closest('.content-box');
+    if (contentBox) {
+        const onclickAttr = contentBox.getAttribute('onclick');
+        if (onclickAttr && onclickAttr.includes('openNestedModal')) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Extract parameters from the onclick attribute
+            const match = onclickAttr.match(/openNestedModal\(['"]([^'"]+)['"],\s*['"]([^'"]+)['"]\)/);
+            if (match && match.length >= 3) {
+                const title = match[1];
+                // Replace escaped quotes to restore proper content
+                const content = match[2].replace(/\\'/g, "'").replace(/\\"/g, '"');
+                openNestedModal(title, content);
+            }
+        }
+    }
+}, { passive: false });
+        
     </script>
 </body>
 </html>
