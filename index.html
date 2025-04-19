@@ -250,9 +250,6 @@
             max-width: 90%;
             text-align: center;
             min-height: 44px;
-            min-width: 44px;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
         }
 
         .content-box:hover {
@@ -1119,37 +1116,6 @@ function openModal(sectionName, customContent = null) {
     }
 
     modal.style.display = 'block';
-    
-    // Fix content boxes inside the modal for mobile
-    setTimeout(() => {
-        const contentBoxes = modal.querySelectorAll('.content-box');
-        contentBoxes.forEach(box => {
-            // Remove existing onclick attribute if present
-            if (box.hasAttribute('onclick')) {
-                const onclickValue = box.getAttribute('onclick');
-                box.removeAttribute('onclick');
-                
-                // Extract function parameters
-                const match = onclickValue.match(/openNestedModal\(['"](.+?)['"](,\s*['"](.*?)['"])?\)/i);
-                if (match) {
-                    const subTitle = match[1];
-                    const subContent = match[3] ? match[3].replace(/\\'/g, "'") : '';
-                    
-                    // Add proper event listeners
-                    box.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        openNestedModal(subTitle, subContent);
-                    });
-                    
-                    box.addEventListener('touchend', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        openNestedModal(subTitle, subContent);
-                    }, { passive: false });
-                }
-            }
-        });
-    }, 10);
 }
         
         // Open nested modal
@@ -1182,45 +1148,11 @@ function openNestedModal(title, content) {
     // Set the content with the processed text
     nestedModalContent.innerHTML = processedContent;
     
-    // Make sure scrolling is enabled with important flag
-    const modalContent = document.querySelector('.nested-modal-content');
-    modalContent.style.setProperty('overflow', 'auto', 'important');
-    modalContent.style.setProperty('overscroll-behavior', 'contain', 'important');
-    modalContent.style.setProperty('-webkit-overflow-scrolling', 'touch', 'important');
+    // Make sure scrolling is enabled
+    document.querySelector('.nested-modal-content').style.overflow = 'auto';
     
     // Show the modal
     document.getElementById('nested-modal').style.display = 'block';
-    
-    // Add touch event handlers to any content boxes that might be in the nested modal
-    setTimeout(() => {
-        const contentBoxes = document.querySelectorAll('#nested-modal-content .content-box');
-        contentBoxes.forEach(box => {
-            // Remove existing onclick attribute if present
-            if (box.hasAttribute('onclick')) {
-                const onclickValue = box.getAttribute('onclick');
-                box.removeAttribute('onclick');
-                
-                // Extract function parameters
-                const match = onclickValue.match(/openNestedModal\(['"](.*?)['"],\s*['"](.*?)['"]\)/i);
-                if (match) {
-                    const subTitle = match[1];
-                    const subContent = match[2].replace(/\\'/g, "'");
-                    
-                    // Add proper event listeners
-                    box.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        openNestedModal(subTitle, subContent);
-                    });
-                    
-                    box.addEventListener('touchend', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        openNestedModal(subTitle, subContent);
-                    }, { passive: false });
-                }
-            }
-        });
-    }, 10);
 }
 
 
@@ -1233,52 +1165,8 @@ function closeNestedModal() {
 
 // Add this event listener
 document.addEventListener('DOMContentLoaded', function() {
-    // Add click and touch events to all close buttons
-    const closeBtns = document.querySelectorAll('.close-btn');
     
-    closeBtns.forEach(btn => {
-        // Remove any existing event listeners
-        btn.removeEventListener('click', closeNestedModal);
-        btn.removeEventListener('touchend', closeNestedModal);
-        
-        // Add click event
-        btn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            let modal = this.closest('.modal, .nested-modal');
-            if (modal) {
-                modal.style.display = 'none';
-            }
-        });
-        
-        // Add touch event for mobile with improved handling
-        btn.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            let modal = this.closest('.modal, .nested-modal');
-            if (modal) {
-                modal.style.display = 'none';
-            }
-        }, { passive: false });
-    });
-    
-    // Ensure content boxes have proper touch handling
-    document.querySelectorAll('.content-box').forEach(box => {
-        if (box.hasAttribute('onclick')) {
-            const onclickValue = box.getAttribute('onclick');
-            box.removeAttribute('onclick');
-            
-            // Add proper event listeners based on the onclick attribute
-            box.addEventListener('click', function() {
-                eval(onclickValue);
-            });
-            
-            box.addEventListener('touchend', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                eval(onclickValue);
-            }, { passive: false });
-        }
-    });
+    document.querySelector('#nested-modal .close-btn').addEventListener('click', closeNestedModal);
 });
 
 
@@ -1297,6 +1185,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Close modals when clicking outside
+
+
         
         window.addEventListener('click', function(event) {
             let nestedModal = document.getElementById('nested-modal');
@@ -1319,7 +1209,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (event.target == sectionModal) {
                 sectionModal.style.display = 'none';
             }
-        }, { passive: false });
+        });
         
         // Rotatable wheel functionality for both wheels
 const rotatableWheel1 = document.getElementById('rotatable-wheel');
@@ -1542,35 +1432,6 @@ Untuk x/÷ ⮕ Gabungan nombor dan huruf  x/÷
             
             createWheelSections('large-wheel-2', 4, 400, largeWheelLabels2, 44, 0.6);
 
-            // Improve content box touch handling for mobile
-            document.querySelectorAll('.content-box').forEach(box => {
-                // Get the onclick attribute value
-                const onclickAttr = box.getAttribute('onclick');
-                if (onclickAttr) {
-                    // Remove the onclick attribute
-                    box.removeAttribute('onclick');
-                    
-                    // Parse the function call and arguments
-                    const match = onclickAttr.match(/openNestedModal\('([^']+)',\s*'([^']+)'\)/i);
-                    if (match) {
-                        const title = match[1];
-                        const content = match[2].replace(/\\'/g, "'");
-                        
-                        // Add click event
-                        box.addEventListener('click', function() {
-                            openNestedModal(title, content);
-                        });
-                        
-                        // Add touch event
-                        box.addEventListener('touchend', function(e) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            openNestedModal(title, content);
-                        }, { passive: false });
-                    }
-                }
-            });
-            
             // Add wheel toggle functionality
             const wheelToggle = document.getElementById('wheel-toggle');
             const wheelContainer1 = document.getElementById('wheel-container-1');
