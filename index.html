@@ -691,9 +691,9 @@
         }, { passive: false });
 
         const fixads = {
-            //dont remove
-            "1": {
-                a: `
+    //dont remove
+    "1": {
+        a: `
 Tulis semula atas,bawah (Selesaikan jika ada no)
 Contoh :
  x⁴
@@ -717,16 +717,17 @@ y⁷
 -5x² 
 ─
 y⁷ 
-                `
-            }
-        };
+        `
+    
+    }
+};
 
-        const fixads1 = {
-            "1": {
-                a: `
-                <h3>Penjelasan</h3>
-                Huruf tulis macam biasa
-                (Selesaikan Pembahagian nombor kalau ada)
+const fixads1 = {
+    "1": {
+        a: `
+        <h3>Penjelasan</h3>
+        Huruf tulis macam biasa
+        (Selesaikan Pembahagian nombor kalau ada)
 
 Contoh :
          35       
@@ -755,391 +756,128 @@ Contoh 3 :
     4
             
                  Jawapan : 4z⁴
-            `
-            }
-        };
+    `
+    }
+    
+}
 
         // Section content for the large wheel
+        
+
         const sectionContent = {
-            // Dont remove 
-            "🔎¹": {
-                title: "Huruf Darab Huruf",
-                content: `
-                    <h3>Pilih</h3>
-                    <div class="content-box" data-title="Huruf Sama" data-content="<h2>Tambah kuasa</h2>
-                    Contoh : X² x X⁵  
-                    Jawapan : X²⁺⁵ 
-                    = X⁸
+           // Dont remove 
+          "🔎¹": {
+    title: "Huruf Darab Huruf",
+    content: `
+        <h3>Pilih</h3>
+        <div class="content-box" onclick="openNestedModal('Huruf Sama', '<h2>Tambah kuasa</h2>
+        Contoh : X² x X⁵  
+        Jawapan : X²⁺⁵ 
+        = X⁸
 
-                    Contoh 2 : -5y⁵ x 2y⁶ 
-                    Jawapan = (-5 x 2)y⁵⁺⁶ 
-                    = 10y⁹
-                    ">Huruf Sama</div>
+        Contoh 2 : -5y⁵ x 2y⁶ 
+        Jawapan = (-5 x 2)y⁵⁺⁶ 
+        = 10y⁹
+        ')">Huruf Sama</div>
 
-                    <div class="content-box" data-title="Huruf Tak Sama" data-content="Letak sebelah-sebelah
-                    Contoh : a⁷ x b¹¹ 
-                    Jawapan : a⁷b¹¹
+        <div class="content-box" onclick="openNestedModal('Huruf Tak Sama', 'Letak sebelah-sebelah
+        Contoh : a⁷ x b¹¹ 
+        Jawapan : a⁷b¹¹
 
-                    Contoh 2 : 4a² x 6b⁵
-                    Jawapan : (4x6)a²b⁵  
-                    = 24a²b⁵
-                    
-                    ">Huruf Tak Sama</div>
-                `
-            },
-            "🔎²": {
-                title: "Huruf darab no, No darab huruf",
-                content: `
-                <h3>Penjelasan</h3>
-                        Tulis nombor atau hasil darab nombor diikuti huruf
+        Contoh 2 : 4a² x 6b⁵
+        Jawapan : (4x6)a²b⁵  
+        = 24a²b⁵
+        
+')">Huruf Tak Sama</div>
+    `
+},
+"🔎²": {
+    title: "Huruf darab no, No darab huruf",
+    content: `
+       <h3>Penjelasan</h3>
+               Tulis nombor atau hasil darab nombor diikuti huruf
 
-                        Contoh : -3 x y²
-                        Jawapan : -3y²
+               Contoh : -3 x y²
+               Jawapan : -3y²
 
-                        Contoh 2 : 3 x 2x⁵
-                        Jawapan : 6x⁵
-                
-                `
-            },
-            "🔎³": {
-                title: "Huruf Bahagi Huruf",
-                content: `
-                    <h3>Pilih</h3>
-                    <div class="content-box" data-title="Huruf Sama" data-content="
-                    Tolak kuasa 
-                    Contoh : m⁸ ÷ m⁵
-                    Jawapan : m⁸⁻⁵ = m³
+               Contoh 2 : 3 x 2x⁵
+               Jawapan : 6x⁵
+    
+    `
+},
+"🔎³": {
+    title: "Huruf Bahagi Huruf",
+    content: `
+        <h3>Pilih</h3>
+        <div class="content-box" onclick="openNestedModal('Huruf Sama', '
+        Tolak kuasa 
+         Contoh : m⁸ ÷ m⁵
+         Jawapan : m⁸⁻⁵ = m³
 
-                    Contoh 2: 12p⁷ ÷ 3p²
-                            
-                    Jawapan : (12÷3)p⁷-²
-                            =4p³
-                    
-                    
-                    .">Huruf Bahagi Huruf</div>
-                    <div class="content-box" data-title="Huruf tak sama" data-content-ref="fixads-1">Huruf tak sama</div>
-                `
-            },
-            "🔎⁴": {
-                title: "Huruf Bahagi no, No bahagi huruf",
-                content: `
-                <div class="content-box" data-title="Huruf Bahagi Huruf" data-content-ref="fixads1-1">Huruf Bahagi Huruf</div>
-                `
-            },
-            "🔎⁵": {
-                title: "Sebutan Serupa",
-                content: `
-                    <h3>Penjelasan</h3>
-                    Jumlahkan nombor diikuti huruf.
-                    (TEKAN KALKULATOR)
-                  Contoh : 3x + 5x
-                  Jawapan : 8x
-                         
-                         
-                `
-            },
-            "🔎⁶": {
-                title: "Sebutan Tak Serupa",
-                content: `
-                    <h3>Penjelasan</h3>
-                    Salin balik soalan yang diberikan
-                    Contoh : 8x + 5y
-                    Jawapan : 8x + 5y
-                `
-            },
-            "🔎⁷": {
-                title: "Sebutan Tak Serupa",
-                content: `
-                     <h3>Penjelasan</h3>
-                  Tolakkan nombor diikuti huruf
-                  (TEKAN KALKULATOR)
+         Contoh 2: 12p⁷ ÷ 3p²
                   
-                  Contoh : 12x - 7x
-                  Jawapan : 5x
-                `
-            },
-            "🔎⁸": {
-                title: "Sebutan Tak Serupa",
-                content: `
-                    <h3>Penjelasan</h3>
-                    Salin balik soalan yang diberikan
-                    Contoh : 12x - x²
-                    Jawapan : 12x - x²
-                `
-            },
+         Jawapan : (12÷3)p⁷-²
+                 =4p³
+        
+        
+        .')">Huruf Bahagi Huruf</div>
+        <div class="content-box" onclick="openNestedModal('Huruf tak sama',fixads[1].a)">Huruf tak sama</div>
+    `
+},
+"🔎⁴": {
+    title: "Huruf Bahagi no, No bahagi huruf",
+    content: `
+       <div class="content-box" onclick="openNestedModal('Huruf Bahagi Huruf',fixads1[1].a)">Huruf Bahagi Huruf</div>
+    `
+},
+"🔎⁵": {
+    title: "Sebutan Serupa",
+    content: `
+        <h3>Penjelasan</h3>
+        Jumlahkan nombor diikuti huruf.
+        (TEKAN KALKULATOR)
+      Contoh : 3x + 5x
+      Jawapan : 8x
+             
+             
+    `
+},
+"🔎⁶": {
+    title: "Sebutan Tak Serupa",
+    content: `
+        <h3>Penjelasan</h3>
+        Salin balik soalan yang diberikan
+        Contoh : 8x + 5y
+        Jawapan : 8x + 5y
+    `
+},
+"🔎⁷": {
+    title: "Sebutan Tak Serupa",
+    content: `
+         <h3>Penjelasan</h3>
+      Tolakkan nombor diikuti huruf
+      (TEKAN KALKULATOR)
+      
+      Contoh : 12x - 7x
+      Jawapan : 5x
+    `
+},
+"🔎⁸": {
+    title: "Sebutan Tak Serupa",
+    content: `
+        <h3>Penjelasan</h3>
+        Salin balik soalan yang diberikan
+        Contoh : 12x - x²
+        Jawapan : 12x - x²
+    `
+},
+           
+
+
         };
 
-        // Improved processFractions function that preserves characters next to the fraction line
-        function processFractions(content) {
-            // Safety check
-            if (!content || typeof content !== 'string') {
-                return content;
-            }
-            
-            // If no fraction character, return content as is
-            if (!content.includes('─')) {
-                return content;
-            }
-            
-            // For multi-line fractions with possible characters next to the line
-            let result = content.replace(/([^\n]+)\n([^─\n]*)(─+)([^\n]*)\n([^\n]+)/g, function(match, numerator, beforeLine, line, afterLine, denominator) {
-                // Clean up the numerator and denominator
-                const cleanNumerator = numerator.trim();
-                const cleanDenominator = denominator.trim();
-                
-                // Preserve characters before and after the fraction line
-                const beforeText = beforeLine ? beforeLine.trim() : '';
-                const afterText = afterLine ? afterLine.trim() : '';
-                
-                // Create the fraction HTML with preserved characters
-                return `${beforeText}<div class="fraction"><span class="numerator">${cleanNumerator}</span><span class="denominator">${cleanDenominator}</span></div>${afterText}`;
-            });
-            
-            // For inline fractions with possible characters next to the line
-            result = result.replace(/(\S+)\s*([^─\s]*)(─+)([^─\s]*)\s*(\S+)/g, function(match, numerator, beforeLine, line, afterLine, denominator) {
-                // Preserve characters before and after the fraction line
-                const beforeText = beforeLine ? beforeLine : '';
-                const afterText = afterLine ? afterLine : '';
-                
-                // Create the fraction HTML with preserved characters
-                return `${beforeText}<div class="fraction"><span class="numerator">${numerator}</span><span class="denominator">${denominator}</span></div>${afterText}`;
-            });
-            
-            return result;
-        }
-
-        // Updated openModal function
-        function openModal(sectionName, customContent = null) {
-            const modal = document.getElementById('section-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalContent = document.getElementById('modal-content');
-            
-            // Get the section content from the sectionContent object
-            const section = sectionContent[sectionName] || {
-                title: sectionName,
-                content: `<p>Content for ${sectionName} will be available soon.</p>`
-            };
-
-            // Clear previous content
-            modalContent.innerHTML = '';
-
-            // Set modal title
-            modalTitle.textContent = section.title;
-
-            // Add custom content if provided
-            if (customContent) {
-                const contentDiv = document.createElement('div');
-                contentDiv.style.whiteSpace = 'pre-wrap';
-                contentDiv.style.wordBreak = 'keep-all';
-                contentDiv.style.textAlign = 'left';
-                
-                // Process content for fractions - ensure customContent is a string
-                customContent = customContent || "";
-                
-                // Check for fractions and process them
-                let processedContent = customContent;
-                if (customContent.includes('─')) {
-                    try {
-                        processedContent = processFractions(customContent);
-                    } catch (e) {
-                        console.error("Error processing fractions:", e);
-                    }
-                }
-                
-                // Add line breaks after processing fractions
-                processedContent = processedContent.replace(/\n/g, '<br>');
-                
-                contentDiv.innerHTML = processedContent;
-                modalContent.appendChild(contentDiv);
-            } else {
-                // Just use the existing content directly if it's already HTML
-                if (typeof section.content === 'string' && section.content.trim().startsWith('<')) {
-                    modalContent.innerHTML = section.content;
-                } else {
-                    // Process as regular content with possible fractions
-                    const contentDiv = document.createElement('div');
-                    contentDiv.style.whiteSpace = 'pre-wrap';
-                    contentDiv.style.wordBreak = 'keep-all';
-                    contentDiv.style.textAlign = 'left';
-                    
-                    // Ensure section.content is a string
-                    const sectionContent = section.content || "";
-                    
-                    // Check for fractions and process them
-                    let processedContent = sectionContent;
-                    if (sectionContent.includes('─')) {
-                        try {
-                            processedContent = processFractions(sectionContent);
-                        } catch (e) {
-                            console.error("Error processing fractions:", e);
-                        }
-                    }
-                    
-                    // Add line breaks after processing fractions
-                    processedContent = processedContent.replace(/\n/g, '<br>');
-                    
-                    contentDiv.innerHTML = processedContent;
-                    modalContent.appendChild(contentDiv);
-                }
-            }
-
-            modal.style.display = 'block';
-        }
-        
-        // Updated openNestedModal function to fix whitespace and add scrolling
-        function openNestedModal(title, content) {
-            document.getElementById('nested-modal-title').textContent = title;
-            
-            // Get the nested modal content element
-            const nestedModalContent = document.getElementById('nested-modal-content');
-            
-            // Process fractions in the content if needed
-            let processedContent = content;
-            if (content.includes('─')) {
-                processedContent = processFractions(content);
-            }
-            
-            // Fix spacing issues by replacing consecutive spaces and newlines with a single space
-            processedContent = processedContent.replace(/\s+/g, ' ');
-            
-            // Explicitly add line breaks for proper formatting
-            processedContent = processedContent
-                .replace(/Penjelasan/g, '<br><strong>Penjelasan</strong>')
-                .replace(/Contoh :/g, '<br><br><strong>Contoh :</strong>')
-                .replace(/Contoh 2 :/g, '<br><br><strong>Contoh 2 :</strong>')
-                .replace(/Contoh 3 :/g, '<br><br><strong>Contoh 3 :</strong>')
-                .replace(/Jawapan :/g, '<br><strong>Jawapan :</strong>');
-            
-            // Set the content with the processed text
-            nestedModalContent.innerHTML = processedContent;
-            
-            // Make sure scrolling is enabled
-            document.querySelector('.nested-modal-content').style.overflow = 'auto';
-            
-            // Show the modal
-            document.getElementById('nested-modal').style.display = 'block';
-        }
-
-        function closeNestedModal() {
-            document.getElementById('nested-modal').style.display = 'none';
-        }
-
-        // *** NEW CONTENT BOX HANDLER FOR MOBILE COMPATIBILITY ***
-        // This replaces the onclick attributes with event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set up event listeners for content boxes
-            setupContentBoxes();
-            
-            // Set up close button handlers
-            document.querySelectorAll('.close-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    let modal = this.closest('.modal, .nested-modal');
-                    if (modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-                
-                btn.addEventListener('touchend', function(e) {
-                    e.preventDefault();
-                    let modal = this.closest('.modal, .nested-modal');
-                    if (modal) {
-                        modal.style.display = 'none';
-                    }
-                }, { passive: false });
-            });
-            
-            // Specific nested modal close handler
-            document.querySelector('#nested-modal .close-btn').addEventListener('click', closeNestedModal);
-            document.querySelector('#nested-modal .close-btn').addEventListener('touchend', function(e) {
-                e.preventDefault();
-                closeNestedModal();
-            }, { passive: false });
-        });
-        
-        // New function to set up content box event listeners
-        function setupContentBoxes() {
-            // Wait for content boxes to be in the DOM
-            setTimeout(function() {
-                document.querySelectorAll('.content-box').forEach(box => {
-                    // Handle click
-                    box.addEventListener('click', handleContentBoxClick);
-                    
-                    // Handle touch separately for mobile
-                    box.addEventListener('touchend', function(e) {
-                        e.preventDefault();
-                        handleContentBoxClick.call(this, e);
-                    }, { passive: false });
-                });
-            }, 100);
-        }
-        
-        // Handler function for content box clicks and touches
-        function handleContentBoxClick(e) {
-            let title = this.getAttribute('data-title');
-            let content = this.getAttribute('data-content');
-            let contentRef = this.getAttribute('data-content-ref');
-            
-            // If we have a content reference instead of direct content
-            if (contentRef) {
-                const [objName, key] = contentRef.split('-');
-                if (objName === 'fixads' && fixads[key]) {
-                    content = fixads[key].a;
-                } else if (objName === 'fixads1' && fixads1[key]) {
-                    content = fixads1[key].a;
-                }
-            }
-            
-            if (title && (content || contentRef)) {
-                openNestedModal(title, content);
-            }
-        }
-        
-        // When modal content changes (like when opening a modal that has content boxes)
-        // we need to re-setup the event listeners
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                    setupContentBoxes();
-                }
-            });
-        });
-        
-        // Start observing modal content for added nodes
-        document.addEventListener('DOMContentLoaded', function() {
-            observer.observe(document.getElementById('modal-content'), {
-                childList: true,
-                subtree: true
-            });
-        });
-        
-        // Close modals when clicking or tapping outside
-        window.addEventListener('click', function(event) {
-            let nestedModal = document.getElementById('nested-modal');
-            let sectionModal = document.getElementById('section-modal');
-            
-            if (event.target == nestedModal) {
-                nestedModal.style.display = 'none';
-            } else if (event.target == sectionModal) {
-                sectionModal.style.display = 'none';
-            }
-        });
-        
-        window.addEventListener('touchend', function(event) {
-            let nestedModal = document.getElementById('nested-modal');
-            let sectionModal = document.getElementById('section-modal');
-            
-            if (event.target == nestedModal) {
-                nestedModal.style.display = 'none';
-            } else if (event.target == sectionModal) {
-                sectionModal.style.display = 'none';
-            }
-        });
-        
-        // The rest of the JavaScript remains the same
-        
-        // Create wheel sections function
+        // Create wheel sections
         function createWheelSections(wheelId, numSections, radius, labels, fontSize, labelRadiusPercent) {
-            // Your existing function remains unchanged
             const wheel = document.getElementById(wheelId);
             const angleStep = 360 / numSections;
             const isSecondLargerWheel = wheelId === 'larger-wheel-2';
