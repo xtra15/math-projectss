@@ -316,11 +316,7 @@
             z-index: 100; /* Above most elements */
             font-size: 14px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: background-color 0.3s, transform 0.2s ease;
-            min-width: 44px;
-            min-height: 44px;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.3s;
         }
 
         #theme-switcher:hover {
@@ -724,13 +720,6 @@
                 min-width: 44px;
                 min-height: 44px;
             }
-            
-            #theme-switcher {
-                top: 70px;
-                right: 10px;
-                padding: 12px 20px;
-                font-size: 14px;
-            }
            /* .section-label {
           /      font-size: 21px !important;
            /     padding: 8px;
@@ -908,7 +897,7 @@
     </style>
 </head>
 <body>
-<button id="theme-switcher" style="position: fixed; top: 90px; right: 20px; z-index: 100; padding: 10px 15px; background-color: #2970db; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; min-width: 44px; min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform 0.2s ease, background-color 0.2s ease;">Change Theme</button>
+<button id="theme-switcher">Change Theme</button>
     <button id="wheel-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1; padding: 15px 25px; background-color: #2970db; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; min-width: 44px; min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform 0.2s ease, background-color 0.2s ease;">🔄</button>
     
     <div class="wheel-container" id="wheel-container-1" style="display: block;">
@@ -998,19 +987,11 @@
                 e.target.style.transform = 'scale(0.95)';
                 e.target.style.backgroundColor = '#1e5bb0';
             }
-            if (e.target.id === 'theme-switcher') {
-                e.target.style.transform = 'scale(0.95)';
-                e.target.style.backgroundColor = '#1e5bb0';
-            }
             e.preventDefault();
         }, { passive: false });
 
         document.addEventListener('touchend', function(e) {
             if (e.target.id === 'wheel-toggle') {
-                e.target.style.transform = '';
-                e.target.style.backgroundColor = '#2970db';
-            }
-            if (e.target.id === 'theme-switcher') {
                 e.target.style.transform = '';
                 e.target.style.backgroundColor = '#2970db';
             }
@@ -2651,7 +2632,11 @@ document.addEventListener('touchend', function(e) {
     body.classList.add(themes[currentThemeIndex]);
     updateParticleTheme(themes[currentThemeIndex]); // Initialize particles for the default theme
 
-    themeSwitcherBtn.addEventListener('click', () => {
+    function handleThemeSwitch(event) {
+        if (event.type === 'touchend') {
+            event.preventDefault(); // Prevent ghost clicks and ensure consistent behavior
+        }
+
         // Remove current theme class
         body.classList.remove(themes[currentThemeIndex]);
 
@@ -2665,13 +2650,16 @@ document.addEventListener('touchend', function(e) {
         // Special handling for gradient background themes for the particle canvas
         const newThemeSettings = particleThemeSettings[newThemeName] || particleThemeSettings['theme-default'];
         if (typeof newThemeSettings.baseBg === 'string' && newThemeSettings.baseBg.includes('gradient')) {
-            // If it's a gradient, we don't set canvas background directly, CSS handles body
+            // If it's a gradient, the body class handles the background via CSS.
         } else {
-            // For solid colors, this is fine (though CSS also handles it)
+            // For solid colors, body class also handles it, but this was the existing logic structure.
         }
         // Update particle system for the new theme
         updateParticleTheme(newThemeName);
-    });
+    }
+
+    themeSwitcherBtn.addEventListener('click', handleThemeSwitch);
+    themeSwitcherBtn.addEventListener('touchend', handleThemeSwitch, { passive: false });
 
     animateParticles(); // Start the particle animation loop
     </script>
