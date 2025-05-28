@@ -303,7 +303,6 @@
             background: conic-gradient(#101030 0% 12.5%, #202040 12.5% 25%, #303050 25% 37.5%, #282860 37.5% 50%, #303050 50% 62.5%, #202040 62.5% 75%, #101030 75% 87.5%, #080820 87.5% 100%); /* Dark blues and purples */
         }
 
-
         #theme-switcher {
             position: fixed;
             top: 90px; /* Adjusted to be lower */
@@ -314,10 +313,14 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            z-index: 1005; /* Above most elements, ensure it's above modals if necessary or adjust accordingly */
+            z-index: 100; /* Above most elements */
             font-size: 14px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s ease;
+            min-width: 44px;
+            min-height: 44px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         #theme-switcher:hover {
@@ -721,6 +724,13 @@
                 min-width: 44px;
                 min-height: 44px;
             }
+            
+            #theme-switcher {
+                top: 70px;
+                right: 10px;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
            /* .section-label {
           /      font-size: 21px !important;
            /     padding: 8px;
@@ -895,71 +905,6 @@
 .fraction .denominator {
     padding: 0 3px;
 }
-/* Responsive adjustments for mobile */
-        @media (max-width: 768px) {
-            html {
-                font-size: 18px; /* Increase base font size for mobile, affects rem units */
-            }
-
-            .section-label {
-                font-size: 1rem; /* Approx 18px, scaled with html font-size */
-                padding: 10px 12px; /* Adjust padding for touch */
-            }
-
-            .modal-content, .nested-modal-content {
-                padding: 20px;
-                font-size: 0.9rem; /* Approx 16.2px, good for modals */
-                width: 95%; /* Make modals take more screen width */
-                max-height: 85vh; /* Limit height and allow scrolling if needed */
-                overflow-y: auto;
-            }
-
-            .modal-title {
-                font-size: 1.2rem; /* Approx 21.6px */
-            }
-
-            .text-box {
-                font-size: 0.9rem; /* Approx 16.2px */
-                padding: 12px 15px;
-            }
-
-            #theme-switcher {
-                font-size: 0.8rem; /* Approx 14.4px, keep it compact */
-                padding: 10px 12px;
-                top: 15px; /* Adjusted for potential navbar/status bar */
-                right: 15px;
-            }
-
-            /* Adjust wheel container for smaller screens */
-            .wheel-container {
-                width: 90vw; /* Use viewport width */
-                height: 90vw; /* Maintain aspect ratio */
-                max-width: 350px; /* Max size for smaller phones */
-                max-height: 350px;
-            }
-
-            /* Adjust wheel sizes to be relative to the new .wheel-container size */
-            /* Original fixed pixel sizes will be overridden by these percentage-based sizes */
-            .wheel-larger {
-                width: 100%;
-                height: 100%;
-            }
-
-            .wheel-large {
-                width: 85%;
-                height: 85%;
-            }
-
-            .wheel-medium {
-                width: 60%;
-                height: 60%;
-            }
-
-            .wheel-small {
-                width: 25%;
-                height: 25%;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1049,19 +994,23 @@
                 // Allow scrolling inside modals
                 return;
             }
-            // Allow default behavior for the theme switcher button so 'click' event can fire
-            if (e.target.id === 'theme-switcher') {
-                return;
-            }
             if (e.target.id === 'wheel-toggle') {
                 e.target.style.transform = 'scale(0.95)';
                 e.target.style.backgroundColor = '#1e5bb0';
             }
-            e.preventDefault(); // Prevent default for other elements to avoid unwanted scrolling
+            if (e.target.id === 'theme-switcher') {
+                e.target.style.transform = 'scale(0.95)';
+                e.target.style.backgroundColor = '#1e5bb0';
+            }
+            e.preventDefault();
         }, { passive: false });
 
         document.addEventListener('touchend', function(e) {
             if (e.target.id === 'wheel-toggle') {
+                e.target.style.transform = '';
+                e.target.style.backgroundColor = '#2970db';
+            }
+            if (e.target.id === 'theme-switcher') {
                 e.target.style.transform = '';
                 e.target.style.backgroundColor = '#2970db';
             }
@@ -1624,15 +1573,8 @@ window.addEventListener('touchend', function(event) {
         
         // Create wheel sections function
         function createWheelSections(wheelId, numSections, radius, labels, fontSize, labelRadiusPercent) {
+            // Your existing function remains unchanged
             const wheel = document.getElementById(wheelId);
-            if (!wheel) {
-                console.error(`Wheel element with ID '${wheelId}' not found.`);
-                return;
-            }
-            // Clear previous sections if any
-            while (wheel.firstChild) {
-                wheel.removeChild(wheel.firstChild);
-            }
             const angleStep = 360 / numSections;
             const isSecondLargerWheel = wheelId === 'larger-wheel-2';
             
@@ -2173,100 +2115,18 @@ Untuk x/÷ ⮕ Gabungan nombor dan huruf  x/÷
         
         
         
-        function getDynamicWheelConfig() {
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-            const baseSize = Math.min(viewportWidth, viewportHeight) * 0.9; // Use 90% of smallest dimension
-
-            // Define base radii and font sizes, then scale them
-            // These are proportions based on an original design assumption (e.g., 900px main wheel diameter)
-            const baseRadii = {
-                larger: 450,
-                large: 400,
-                medium: 250, // Corrected from 250 to 265 for better proportion if medium is 530px diameter
-                small: 100
-            };
-
-            const baseFontSizes = {
-                larger: 34,
-                large: 44,
-                medium: 16,
-                small: 47,
-                larger2Text: 20 // For the circular text on larger-wheel-2
-            };
-            
-            // Original largest wheel diameter was ~900px (radius 450)
-            // Scale factor based on this original assumption
-            const scaleFactor = baseSize / (baseRadii.larger * 2);
-
-            return {
-                radii: {
-                    larger: baseRadii.larger * scaleFactor,
-                    large: baseRadii.large * scaleFactor,
-                    medium: baseRadii.medium * scaleFactor,
-                    small: baseRadii.small * scaleFactor
-                },
-                fontSizes: {
-                    larger: Math.max(12, baseFontSizes.larger * scaleFactor), // Min font size 12px
-                    large: Math.max(12, baseFontSizes.large * scaleFactor),
-                    medium: Math.max(10, baseFontSizes.medium * scaleFactor),
-                    small: Math.max(12, baseFontSizes.small * scaleFactor),
-                    larger2Text: Math.max(10, baseFontSizes.larger2Text * scaleFactor)
-                }
-            };
-        }
-
-        function rebuildWheels() {
-            const config = getDynamicWheelConfig();
-
-            // Clear existing wheel containers if necessary (createWheelSections now handles clearing its own children)
-            // For wheel-container-1
-            createWheelSections('larger-wheel', 4, config.radii.larger, largerWheelLabels, config.fontSizes.larger, 0.93);
-            createWheelSections('small-wheel', 8, config.radii.small, smallWheelLabels, config.fontSizes.small, 0.6);
-            createWheelSections('medium-wheel', 8, config.radii.medium, mediumWheelLabels, config.fontSizes.medium, 0.79);
-            createWheelSections('large-wheel', 8, config.radii.large, largeWheelLabels, config.fontSizes.large, 0.8);
-
-            // For wheel-container-2
-            // Note: 'larger-wheel-2' and 'large-wheel-2' might be intended to be the same element or different.
-            // Assuming 'larger-wheel-2' is the outer one and 'large-wheel-2' is an inner one for the second set.
-            // If they are distinct elements, ensure their HTML exists.
-            // The original code had two createWheelSections for 'large-wheel-2', which is likely a typo and meant 'larger-wheel-2' and 'large-wheel-2'
-            
-            // Assuming 'larger-wheel-2' is the ID for the outermost wheel of the second set
-            // and 'large-wheel-2' is for an inner wheel of the second set.
-            // If 'large-wheel-2' is meant to be the same as 'large-wheel' but with different content,
-            // then the logic for toggling content rather than full re-creation might be better,
-            // but for resizing, re-creation is simpler.
-
-            // For wheel-container-2 (second set of wheels)
-            // Ensure these IDs exist in your HTML for wheel-container-2
-            const wheelContainer2 = document.getElementById('wheel-container-2');
-            if (wheelContainer2.querySelector('#larger-wheel-2') && wheelContainer2.querySelector('#large-wheel-2')) {
-                 createWheelSections('larger-wheel-2', 4, config.radii.larger, largerWheelLabels2, config.fontSizes.larger2Text, 0.93); // Uses specific font for circular
-                 createWheelSections('large-wheel-2', 4, config.radii.large, largeWheelLabels2, config.fontSizes.large, 0.6); // Assuming similar to first large wheel
-            } else {
-                // Fallback or simplified version if only one main wheel in container 2
-                // This assumes 'larger-wheel-2' is the primary wheel in the second container.
-                // If 'large-wheel-2' is also present and distinct, it should be handled.
-                // The original code had createWheelSections('large-wheel-2', 4, 400, ...) which implies an inner wheel.
-                // For simplicity, if only one wheel is in wheel-container-2, adjust as needed.
-                // The provided HTML structure for wheel-container-2 only shows one rotatable-wheel (rotatable-wheel-2)
-                // which implies it might contain one set of concentric wheels or just one main wheel.
-                // Let's assume 'rotatable-wheel-2' is the one to populate for the second view.
-                // If 'larger-wheel-2' and 'large-wheel-2' are IDs *inside* 'rotatable-wheel-2', that's fine.
-                // The original createWheelSections calls suggest 'larger-wheel-2' and 'large-wheel-2' are distinct target elements.
-                // Let's assume they are.
-                 createWheelSections('larger-wheel-2', 4, config.radii.larger, largerWheelLabels2, config.fontSizes.larger2Text, 0.93);
-                 // The second call was to 'large-wheel-2' with radius 400.
-                 // We need to ensure 'large-wheel-2' exists as an element to populate.
-                 // If it's meant to be the same structure as the first set's large wheel:
-                 createWheelSections('large-wheel-2', 4, config.radii.large, largeWheelLabels2, config.fontSizes.large, 0.8); // Using 0.8 like the first large wheel
-            }
-        }
-        
         // Create the wheels
         window.addEventListener('DOMContentLoaded', function() {
-            rebuildWheels(); // Initial setup
+            // Initialize first wheel set
+            createWheelSections('larger-wheel', 4, 450, largerWheelLabels, 34, 0.93);
+            createWheelSections('small-wheel', 8, 100, smallWheelLabels, 47, 0.6);
+            createWheelSections('medium-wheel', 8, 250, mediumWheelLabels, 16, 0.79);
+            createWheelSections('large-wheel', 8, 400, largeWheelLabels, 44, 0.8);
+
+            // Initialize second wheel set with different labels
+            createWheelSections('larger-wheel-2', 4, 450, largerWheelLabels2, 20, 0.93);
+            
+            createWheelSections('large-wheel-2', 4, 400, largeWheelLabels2, 44, 0.6);
 
             // Add wheel toggle functionality
             const wheelToggle = document.getElementById('wheel-toggle');
@@ -2379,25 +2239,30 @@ Untuk x/÷ ⮕ Gabungan nombor dan huruf  x/÷
             }
         });
         
-        // Handle orientation changes and window resize for better mobile and desktop experience
-        function handleResizeOrOrientationChange() {
-            // A small timeout can help ensure the viewport dimensions are stable
+        // Handle orientation changes for better mobile experience
+        window.addEventListener('orientationchange', function() {
             setTimeout(function() {
-                rebuildWheels();
-                // Also re-initialize particles if their layout depends on screen size
-                // updateParticleTheme(body.classList.contains(themes[currentThemeIndex]) ? themes[currentThemeIndex] : themes[0]);
-                // The above line for particles might be needed if particle canvas itself needs resize handling beyond CSS
-                if (typeof updateParticleTheme === "function" && typeof themes !== "undefined" && typeof currentThemeIndex !== "undefined" && document.body.classList.contains(themes[currentThemeIndex])) {
-                    updateParticleTheme(themes[currentThemeIndex]);
-                } else if (typeof updateParticleTheme === "function") {
-                     updateParticleTheme(themes[0]); // Fallback to default
+                const container1 = document.getElementById('wheel-container-1');
+                const container2 = document.getElementById('wheel-container-2');
+                const rotatableContainers = document.querySelectorAll('.rotatable-wheel-container');
+                
+                if (window.innerHeight > window.innerWidth) {
+                    // Portrait mode
+                    container1.style.transform = 'translate(-50%, -50%) scale(0.6)';
+                    container2.style.transform = 'translate(-50%, -50%) scale(0.6)';
+                    rotatableContainers.forEach(container => {
+                        container.style.transform = 'translate(-50%, -50%) scale(0.6)';
+                    });
+                } else {
+                    // Landscape mode
+                    container1.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    container2.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    rotatableContainers.forEach(container => {
+                        container.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    });
                 }
-
-            }, 250); // 250ms delay
-        }
-
-        window.addEventListener('orientationchange', handleResizeOrOrientationChange);
-        window.addEventListener('resize', handleResizeOrOrientationChange);
+            }, 200);
+        });
 
         // Add event delegation for content boxes
 // Add event delegation for content boxes
@@ -2812,4 +2677,3 @@ document.addEventListener('touchend', function(e) {
     </script>
 </body>
 </html>
-
