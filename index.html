@@ -577,6 +577,8 @@
             padding-bottom: 15px;
             border-bottom: 2px solid #eee;
             font-size: 24px;
+            text-align: center;
+            font-weight: bold;
         }
 
         .modal-body {
@@ -604,6 +606,257 @@
         .close-btn:hover {
             color: #000;
             text-decoration: none;
+        }
+/* Question Modal Styles */
+        .question-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .question-modal-content {
+            background-color: #fefefe;
+            margin: 0;
+            padding: 30px;
+            border: 1px solid #888;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            width: 90%;
+            max-width: 600px;
+        }
+        
+        #question-progress {
+            height: 12px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+            margin: 15px 0;
+            overflow: hidden;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        #question-progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #2970db, #64B5F6);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 6px;
+        }
+        
+        #question-counter {
+            text-align: center;
+            font-weight: bold;
+            color: #2970db;
+            margin-bottom: 10px;
+            font-size: 18px;
+            background-color: #e9f7ef;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            min-width: 120px;
+        }
+        
+        #question-text {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+            line-height: 1.4;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .answer-option {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+            font-size: 16px;
+            position: relative;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            transform: scale(1);
+            box-sizing: border-box;
+        }
+        
+        .answer-option:hover {
+            background-color: #e9e9e9;
+            border-color: #bbb;
+        }
+        
+        .answer-option.selected {
+            background-color: #2970db;
+            color: white;
+            border-color: #2970db;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .answer-option.skip-option {
+            background-color: #f8f9fa;
+            border-color: #6c757d;
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        .answer-option.skip-option:hover {
+            background-color: #e9ecef;
+            border-color: #5a6268;
+        }
+        
+        .answer-option.skip-option.selected {
+            background-color: #6c757d;
+            color: white;
+            border-color: #6c757d;
+        }
+        
+        .answer-option::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #999;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: white;
+            transition: all 0.3s;
+        }
+        
+        .answer-option.skip-option::before {
+            content: "↪";
+            width: auto;
+            height: auto;
+            border: none;
+            border-radius: 0;
+            margin-right: 10px;
+            background-color: transparent;
+            font-size: 18px;
+            font-style: normal;
+        }
+        
+        .answer-option.selected::before {
+            border-color: white;
+            background-color: white;
+        }
+        
+        .answer-option.selected::after {
+            content: "";
+            position: absolute;
+            left: 25px;
+            width: 6px;
+            height: 12px;
+            border: solid #2970db;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+            transition: all 0.3s;
+        }
+        
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            margin: 0 5px;
+            min-width: 80px;
+            transition: all 0.3s;
+        }
+        
+        #submit-answer-btn {
+            background-color: #2970db;
+            color: white;
+        }
+        
+        #skip-question-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        #reset-session-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .nav-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .nav-btn:hover:not(:disabled) {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        #question-results {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            display: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .result-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .result-item p {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+        
+        .correct-answer {
+            color: #28a745;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .incorrect-answer {
+            color: #dc3545;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            text-decoration: line-through;
+        }
+        
+        .score-display {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e9f7ef;
+            border-radius: 8px;
+            color: #28a745;
         }
 
        
@@ -716,6 +969,148 @@
                 top: 10px;
                 right: 10px;
                 padding: 12px 20px;
+/* Question Modal Responsive Styles */
+        @media (max-width: 768px) {
+            .question-modal-content {
+                width: 95%;
+                padding: 20px;
+                max-width: none;
+            }
+            
+            #question-text {
+                font-size: 18px;
+                padding: 8px 12px;
+            }
+            
+            .answer-option {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            
+            .answer-option.skip-option::before {
+                font-size: 16px;
+                margin-right: 8px;
+            }
+            
+            #question-progress {
+                height: 10px;
+            }
+            
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 13px;
+                margin: 0 3px;
+                min-width: 70px;
+            }
+            
+            #question-counter {
+                font-size: 14px;
+                padding: 6px 12px;
+                min-width: 100px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .question-modal-content {
+                padding: 15px;
+            }
+            
+            #question-text {
+                font-size: 16px;
+                padding: 6px 10px;
+            }
+            
+            .answer-option {
+                padding: 12px 15px;
+                font-size: 15px;
+                min-height: 45px;
+            }
+            
+            .answer-option.skip-option::before {
+                font-size: 14px;
+                margin-right: 6px;
+            }
+            
+            #question-progress {
+                height: 8px;
+            }
+            
+            .answer-option::before {
+                width: 18px;
+                height: 18px;
+                margin-right: 12px;
+            }
+            
+            .answer-option.selected::after {
+                left: 22px;
+                width: 5px;
+                height: 10px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+                margin: 0 2px;
+                min-width: 60px;
+            }
+            
+            #question-counter {
+                font-size: 13px;
+                padding: 5px 10px;
+                min-width: 80px;
+            }
+        }
+@media (max-width: 320px) {
+    .question-modal-content {
+        padding: 10px;
+    }
+    
+    #question-text {
+        font-size: 14px;
+        padding: 5px 8px;
+    }
+    
+    .answer-option {
+        padding: 8px 10px;
+        font-size: 13px;
+        min-height: 35px;
+        margin: 6px 0;
+    }
+    
+    .answer-option.skip-option::before {
+        font-size: 12px;
+        margin-right: 5px;
+    }
+    
+    #question-progress {
+        height: 6px;
+    }
+    
+    .answer-option::before {
+        width: 14px;
+        height: 14px;
+        margin-right: 8px;
+    }
+    
+    .answer-option.selected::after {
+        left: 15px;
+        width: 4px;
+        height: 7px;
+    }
+    
+    .nav-btn {
+        padding: 5px 10px;
+        font-size: 11px;
+        margin: 0 1px;
+        min-width: 50px;
+    }
+    
+    #question-counter {
+        font-size: 12px;
+        padding: 4px 8px;
+        min-width: 70px;
+    }
+}
                 font-size: 14px;
                 min-width: 44px;
                 min-height: 44px;
@@ -912,6 +1307,7 @@
 </head>
 <body>
 <button id="theme-switcher">Change Theme</button>
+<button id="question-button" style="position: fixed; top: 130px; right: 20px; padding: 10px 15px; background-color: #2970db; color: white; border: none; border-radius: 5px; cursor: pointer; z-index: 100; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: background-color 0.3s;">Question 📝</button>
     <button id="wheel-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1; padding: 15px 25px; background-color: #2970db; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; min-width: 44px; min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform 0.2s ease, background-color 0.2s ease;">🔄</button>
     
     <div class="wheel-container" id="wheel-container-1" style="display: block;">
@@ -986,6 +1382,31 @@
             <h2 class="modal-title" id="nested-modal-title">Nested Modal Title</h2>
             <div class="modal-body">
                 <div id="nested-modal-content" style="white-space: pre-line;"></div>
+            </div>
+        </div>
+    </div>
+<!-- Question Modal Template -->
+    <div id="question-modal" class="question-modal">
+        <div class="question-modal-content">
+            <span class="close-btn" id="question-modal-close">&times;</span>
+            <h2 class="modal-title">Latihan Soalan</h2>
+            <div id="question-container">
+                <div id="question-progress">
+                    <div id="question-progress-bar"></div>
+                </div>
+                <div id="question-counter">Soalan <span id="current-question">1</span> daripada <span id="total-questions">15</span></div>
+                <div id="question-text"></div>
+                <div id="answer-options"></div>
+                <div id="question-navigation">
+                    <button id="prev-question-btn" class="nav-btn" disabled>Sebelumnya</button>
+                    <button id="next-question-btn" class="nav-btn">Seterusnya</button>
+                    <button id="skip-question-btn" class="nav-btn">Langkau</button>
+                    <button id="submit-answer-btn" class="nav-btn">Hantar</button>
+                </div>
+                <div style="margin-top:18px;text-align:right;">
+                    <button id="reset-session-btn" class="nav-btn">Tetapkan Semula Sesi</button>
+                </div>
+                <div id="question-results"></div>
             </div>
         </div>
     </div>
@@ -1202,6 +1623,34 @@ Contoh 3 :
                 `
             },
         };
+// Question data structure
+        const questionData = [
+            {
+                question: "Berapakah 2 + 2?",
+                options: ["3", "4", "5", "6"],
+                correctAnswer: 1
+            },
+            {
+                question: "Berapakah 2 + 2?",
+                options: ["3", "4", "5", "6"],
+                correctAnswer: 1
+            },
+             {
+                question: "Berapakah 2 + 2?",
+                options: ["3", "4", "5", "6"],
+                correctAnswer: 1
+            },
+             {
+                question: "Berapakah 2 + 2?",
+                options: ["3", "4", "5", "6"],
+                correctAnswer: 1
+            },
+             {
+                question: "Berapakah 2 + 2?",
+                options: ["3", "4", "5", "6"],
+                correctAnswer: 1
+            },
+        ];
 
         // Improved processFractions function that preserves characters next to the fraction line
         function processFractions(content) {
@@ -2681,6 +3130,222 @@ document.addEventListener('touchend', function(e) {
     themeSwitcherBtn.addEventListener('click', handleThemeSwitch);
     themeSwitcherBtn.addEventListener('touchend', handleThemeSwitch, { passive: false });
 
+// Question Modal Functionality
+    let currentQuestionIndex = 0;
+    let selectedQuestions = [];
+    let userAnswers = [];
+    let sessionQuestions = [];
+    let sessionCompleted = false;
+    
+    // Initialize question session
+    function initQuestionSession() {
+        // Reset session variables
+        currentQuestionIndex = 0;
+        userAnswers = [];
+        sessionCompleted = false;
+        
+        // Select 15 random questions
+        sessionQuestions = [];
+        const shuffledQuestions = [...questionData].sort(() => 0.5 - Math.random());
+        sessionQuestions = shuffledQuestions.slice(0, 15);
+        
+        // Update UI
+        document.getElementById('question-results').style.display = 'none';
+        document.getElementById('question-results').innerHTML = '';
+        updateQuestionDisplay();
+        updateProgressBar();
+    }
+    
+    // Update question display
+    function updateQuestionDisplay() {
+        if (sessionQuestions.length === 0) return;
+        
+        const question = sessionQuestions[currentQuestionIndex];
+        document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+        document.getElementById('total-questions').textContent = sessionQuestions.length;
+        document.getElementById('question-text').textContent = question.question;
+        
+        // Clear previous options
+        const optionsContainer = document.getElementById('answer-options');
+        optionsContainer.innerHTML = '';
+        
+        // Add new options
+        question.options.forEach((option, index) => {
+            const optionElement = document.createElement('button');
+            optionElement.className = 'answer-option';
+            optionElement.textContent = option;
+            optionElement.addEventListener('click', () => selectAnswer(index));
+            
+            // If user already answered this question, show their answer
+            if (userAnswers[currentQuestionIndex] !== undefined) {
+                if (index === userAnswers[currentQuestionIndex]) {
+                    optionElement.classList.add('selected');
+                }
+            }
+            
+            optionsContainer.appendChild(optionElement);
+        });
+        
+        // Add skip option
+        const skipOptionElement = document.createElement('button');
+        skipOptionElement.className = 'answer-option skip-option';
+        skipOptionElement.textContent = 'Langkau soalan ini';
+        skipOptionElement.addEventListener('click', skipQuestion);
+        optionsContainer.appendChild(skipOptionElement);
+        
+        // Update navigation buttons
+        document.getElementById('prev-question-btn').disabled = currentQuestionIndex === 0;
+        document.getElementById('next-question-btn').disabled = currentQuestionIndex === sessionQuestions.length - 1;
+        document.getElementById('submit-answer-btn').style.display = 'inline-block';
+    }
+    
+    // Select an answer
+    function selectAnswer(optionIndex) {
+        // Store user's answer
+        userAnswers[currentQuestionIndex] = optionIndex;
+        
+        // Update UI to show selected answer
+        const options = document.querySelectorAll('.answer-option');
+        options.forEach((option, index) => {
+            if (index === optionIndex) {
+                option.classList.add('selected');
+            } else {
+                option.classList.remove('selected');
+            }
+        });
+        
+        // Add visual feedback
+        const selectedOption = options[optionIndex];
+        selectedOption.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            selectedOption.style.transform = '';
+        }, 100);
+    }
+    
+    // Update progress bar
+    function updateProgressBar() {
+        const progressPercent = ((currentQuestionIndex + 1) / sessionQuestions.length) * 100;
+        document.getElementById('question-progress-bar').style.width = progressPercent + '%';
+    }
+    
+    // Navigate to next question
+    function nextQuestion() {
+        if (currentQuestionIndex < sessionQuestions.length - 1) {
+            currentQuestionIndex++;
+            updateQuestionDisplay();
+            updateProgressBar();
+        }
+    }
+    
+    // Navigate to previous question
+    function prevQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            updateQuestionDisplay();
+            updateProgressBar();
+        }
+    }
+    
+    // Skip question
+    function skipQuestion() {
+        // Clear any selected answer for this question
+        userAnswers[currentQuestionIndex] = undefined;
+        
+        // Move to next question or show results
+        if (currentQuestionIndex < sessionQuestions.length - 1) {
+            nextQuestion();
+        } else {
+            showResults();
+        }
+    }
+    
+    // Submit answer
+    function submitAnswer() {
+        // Check if an answer is selected
+        // Allow blank answers - no check needed
+        
+        // Move to next question or show results
+        if (currentQuestionIndex < sessionQuestions.length - 1) {
+            nextQuestion();
+        } else {
+            showResults();
+        }
+    }
+    
+    // Show results
+    function showResults() {
+        sessionCompleted = true;
+        
+        // Calculate score
+        let correctCount = 0;
+        let resultsHTML = '<h3 style="text-align: center; margin-bottom: 20px;">Keputusan Kuiz</h3>';
+        
+        sessionQuestions.forEach((question, index) => {
+            const userAnswerIndex = userAnswers[index];
+            const isCorrect = userAnswerIndex === question.correctAnswer;
+            
+            if (isCorrect) {
+                correctCount++;
+            }
+            
+            resultsHTML += `
+                <div class="result-item">
+                    <p><strong>Soalan ${index + 1}:</strong> ${question.question}</p>
+                    <p>Jawapan anda: <span class="${isCorrect ? 'correct-answer' : 'incorrect-answer'}">
+                        ${userAnswerIndex !== undefined ? question.options[userAnswerIndex] : 'Dilangkau'}
+                    </span></p>
+                    <p>Jawapan betul: <span class="correct-answer">${question.options[question.correctAnswer]}</span></p>
+                </div>
+            `;
+        });
+        
+        // Add score display
+        resultsHTML += `<div class="score-display">Skor Anda: ${correctCount}/${sessionQuestions.length}</div>`;
+        resultsHTML += '<p style="text-align: center; font-style: italic;">Klik "Tetapkan Semula Sesi" untuk memulakan kuiz baru.</p>';
+        
+        document.getElementById('question-results').innerHTML = resultsHTML;
+        document.getElementById('question-results').style.display = 'block';
+        
+        // Hide question navigation
+        document.getElementById('question-navigation').style.display = 'none';
+        document.getElementById('answer-options').style.display = 'none';
+        document.getElementById('question-text').style.display = 'none';
+        document.getElementById('submit-answer-btn').style.display = 'none';
+    }
+    
+    // Reset session
+    function resetSession() {
+        // Show question elements again if they were hidden
+        document.getElementById('question-navigation').style.display = 'block';
+        document.getElementById('answer-options').style.display = 'block';
+        document.getElementById('question-text').style.display = 'block';
+        
+        // Initialize new session
+        initQuestionSession();
+    }
+    
+    // Event listeners for question modal
+    document.getElementById('question-button').addEventListener('click', function() {
+        document.getElementById('question-modal').style.display = 'flex';
+        initQuestionSession();
+    });
+    
+    document.getElementById('question-modal-close').addEventListener('click', function() {
+        document.getElementById('question-modal').style.display = 'none';
+    });
+    
+    document.getElementById('prev-question-btn').addEventListener('click', prevQuestion);
+    document.getElementById('next-question-btn').addEventListener('click', nextQuestion);
+    document.getElementById('skip-question-btn').addEventListener('click', skipQuestion);
+    document.getElementById('submit-answer-btn').addEventListener('click', submitAnswer);
+    document.getElementById('reset-session-btn').addEventListener('click', resetSession);
+    
+    // Close modal when clicking outside
+    document.getElementById('question-modal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            this.style.display = 'none';
+        }
+    });
     animateParticles(); // Start the particle animation loop
     </script>
 </body>
