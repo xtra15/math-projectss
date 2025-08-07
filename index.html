@@ -1718,33 +1718,129 @@ Contoh 3 :
             },
         };
 // Question data structure
-        const questionData = [
-            {
-                question: "Berapakah 2 + 2?",
-                options: ["3", "4", "5", "6"],
-                correctAnswer: 1
-            },
-            {
-                question: "Berapakah 2 + 2?",
-                options: ["3", "4", "5", "6"],
-                correctAnswer: 1
-            },
-             {
-                question: "Berapakah 2 + 2?",
-                options: ["3", "4", "5", "6"],
-                correctAnswer: 1
-            },
-             {
-                question: "Berapakah 2 + 2?",
-                options: ["3", "4", "5", "6"],
-                correctAnswer: 1
-            },
-             {
-                question: "Berapakah 2 + 2?",
-                options: ["3", "4", "5", "6"],
-                correctAnswer: 1
-            },
-        ];
+       // Question data structure
+const questionData = [
+    {
+        question: "Berapakah 11y + 2y?",
+        options: ["14", "15y", "14y", "11y + 2y"],
+        correctAnswer: 2
+    },
+    {
+        question: "Berapakah 17a - 4a + 6c - 5a + 9c?",
+        options: ["8a + 15c", "8a - 15c", "10a + 16c", "10a - 16c"],
+        correctAnswer: 0
+    },
+    {
+        question: "Selesaikan 3d² x (-4d⁵)",
+        options: ["12d⁷", "-12d⁷", "12d³", "-12d³"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 32x² ÷ 8x",
+        options: ["4x²", "4x", "4x³", "4"],
+        correctAnswer: 1
+    },
+    {
+        question: "Permudahkan 5x + 3x - 2x",
+        options: ["6x", "10x", "8x", "15x"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari nilai 4(3a + 2) - 5a",
+        options: ["7a + 8", "12a + 8", "7a - 8", "12a - 8"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 2x² × 3x³",
+        options: ["6x⁵", "6x⁶", "5x⁵", "5x⁶"],
+        correctAnswer: 3
+    },
+    {
+        question: "Permudahkan 8y - 3y + 7",
+        options: ["5y + 7", "11y", "5y - 7", "11y + 7"],
+        correctAnswer: 1
+    },
+    {
+        question: "Cari hasil 15a ÷ 3a",
+        options: ["5a", "5", "3", "15"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan (2x + 3) + (4x - 1)",
+        options: ["6x + 2", "6x + 4", "6x - 2", "8x + 2"],
+        correctAnswer: 2
+    },
+    {
+        question: "Permudahkan 9b² - 4b²",
+        options: ["5b²", "13b²", "5b", "13b"],
+        correctAnswer: 3
+    },
+    {
+        question: "Cari nilai 3(2x - 5) + 4x",
+        options: ["10x - 15", "6x - 15", "10x - 5", "6x - 5"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 20x⁴ ÷ 4x²",
+        options: ["5x²", "5x", "16x²", "16x"],
+        correctAnswer: 2
+    },
+    {
+        question: "Permudahkan 7a + 2b - 3a + 5b",
+        options: ["4a + 7b", "10a + 7b", "4a - 3b", "10a - 3b"],
+        correctAnswer: 3
+    },
+    {
+        question: "Cari hasil (3x - 2)(x + 4)",
+        options: ["3x² + 10x - 8", "3x² + 14x - 8", "3x² + 10x + 8", "3x² + 14x + 8"],
+        correctAnswer: 0
+    },
+    {
+        question: "Selesaikan 5(2a - 3) - 2(a + 4)",
+        options: ["8a - 23", "8a - 7", "10a - 23", "10a - 7"],
+        correctAnswer: 1
+    },
+    {
+        question: "Permudahkan 6x³ × 2x² ÷ 3x",
+        options: ["4x⁴", "4x³", "12x⁴", "12x³"],
+        correctAnswer: 2
+    },
+    {
+        question: "Cari nilai 4x² - 2x² + 7x - 3x",
+        options: ["2x² + 4x", "6x² + 10x", "2x² - 4x", "6x² - 10x"],
+        correctAnswer: 3
+    },
+    {
+        question: "Selesaikan (5a + 3b) - (2a - b)",
+        options: ["3a + 4b", "3a + 2b", "7a + 4b", "7a + 2b"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 8(2x - 3) + 3(4 - x)",
+        options: ["13x - 12", "13x - 36", "19x - 12", "19x - 36"],
+        correctAnswer: 1
+    },
+    {
+        question: "Cari hasil 3x(2x + 5) - 4x(x - 3)",
+        options: ["2x² + 27x", "2x² + 3x", "10x² + 27x", "10x² + 3x"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan (3x²)³",
+        options: ["27x⁶", "9x⁶", "27x⁵", "9x⁵"],
+        correctAnswer: 3
+    },
+    {
+        question: "Permudahkan 12a³b² ÷ 4ab",
+        options: ["3a²b", "3ab", "8a²b", "8ab"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari nilai (4x - 3)(2x + 1) + 5x",
+        options: ["8x² + 3x - 3", "8x² + 13x - 3", "8x² - x - 3", "8x² + 9x - 3"],
+        correctAnswer: 1
+    }
+];
 
         // Improved processFractions function that preserves characters next to the fraction line
         function processFractions(content) {
