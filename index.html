@@ -823,12 +823,16 @@
             background-color: #f8f9fa;
             display: none;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .result-item {
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .result-item:last-child {
@@ -840,6 +844,8 @@
         .result-item p {
             margin: 8px 0;
             line-height: 1.5;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .correct-answer {
@@ -848,6 +854,8 @@
             padding: 3px 8px;
             border-radius: 4px;
             display: inline-block;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .incorrect-answer {
@@ -857,6 +865,8 @@
             border-radius: 4px;
             display: inline-block;
             text-decoration: line-through;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .score-display {
@@ -868,6 +878,8 @@
             background-color: #e9f7ef;
             border-radius: 8px;
             color: #28a745;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
        
@@ -1019,6 +1031,30 @@
                 padding: 6px 12px;
                 min-width: 100px;
             }
+            
+            #question-results {
+                padding: 15px;
+            }
+            
+            .result-item {
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+            }
+            
+            .result-item p {
+                font-size: 14px;
+                margin: 6px 0;
+            }
+            
+            .correct-answer, .incorrect-answer {
+                padding: 2px 6px;
+                font-size: 14px;
+            }
+            
+            .score-display {
+                font-size: 18px;
+                padding: 12px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1120,6 +1156,30 @@
         font-size: 12px;
         padding: 4px 8px;
         min-width: 70px;
+    }
+    
+    #question-results {
+        padding: 10px;
+    }
+    
+    .result-item {
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+    }
+    
+    .result-item p {
+        font-size: 12px;
+        margin: 5px 0;
+    }
+    
+    .correct-answer, .incorrect-answer {
+        padding: 1px 4px;
+        font-size: 12px;
+    }
+    
+    .score-display {
+        font-size: 16px;
+        padding: 10px;
     }
 }
                 font-size: 14px;
@@ -1223,6 +1283,30 @@
                 width: 120px;
                 padding: 8px;
                 font-size: 15px;
+            }
+            
+            #question-results {
+                padding: 18px;
+            }
+            
+            .result-item {
+                margin-bottom: 18px;
+                padding-bottom: 12px;
+            }
+            
+            .result-item p {
+                font-size: 15px;
+                margin: 7px 0;
+            }
+            
+            .correct-answer, .incorrect-answer {
+                padding: 2px 7px;
+                font-size: 15px;
+            }
+            
+            .score-display {
+                font-size: 19px;
+                padding: 14px;
             }
         }
         
@@ -1424,7 +1508,7 @@
     <script>
         // Prevent default touch behavior to avoid unwanted scrolling
         document.addEventListener('touchstart', function(e) {
-            if (e.target.closest('.modal-content') || e.target.closest('.nested-modal-content')) {
+            if (e.target.closest('.modal-content') || e.target.closest('.nested-modal-content') || e.target.closest('.question-modal-content')) {
                 // Allow scrolling inside modals
                 return;
             }
@@ -1443,7 +1527,7 @@
         });
 
         document.addEventListener('touchmove', function(e) {
-            if (e.target.closest('.modal-content') || e.target.closest('.nested-modal-content')) {
+            if (e.target.closest('.modal-content') || e.target.closest('.nested-modal-content') || e.target.closest('.question-modal-content')) {
                 // Allow scrolling inside modals
                 return;
             }
