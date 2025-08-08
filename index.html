@@ -303,6 +303,142 @@
             background: conic-gradient(#101030 0% 12.5%, #202040 12.5% 25%, #303050 25% 37.5%, #282860 37.5% 50%, #303050 50% 62.5%, #202040 62.5% 75%, #101030 75% 87.5%, #080820 87.5% 100%); /* Dark blues and purples */
         }
 
+        /* --- Theme: Neon Cyber --- */
+        body.theme-neon-cyber {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* Deep purple gradient */
+        }
+        body.theme-neon-cyber .wheel-part { background-color: #6a11cb; } /* Purple */
+        body.theme-neon-cyber .section-label { color: #ffffff; text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff; } /* White with cyan glow for better readability */
+        body.theme-neon-cyber .modal-content, body.theme-neon-cyber .nested-modal-content {
+            background-color: rgba(10, 10, 30, 0.95);
+            color: #ffffff;
+            border-color: #ff00ff;
+            box-shadow: 0 0 15px #00ffff, 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+        body.theme-neon-cyber .modal-title { color: #ffffff; text-shadow: 0 0 5px #ff00ff; } /* White with magenta glow */
+        body.theme-neon-cyber .text-box {
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 2px solid #00ffff;
+            color: #ffffff;
+            box-shadow: 0 0 8px #00ffff;
+        }
+        body.theme-neon-cyber .text-box:hover {
+            background-color: rgba(0, 255, 255, 0.3);
+            color: #000000;
+            box-shadow: 0 0 12px #00ffff;
+        }
+        body.theme-neon-cyber #nested-modal-content strong { color: #00ffff; }
+        body.theme-neon-cyber .content-box {
+            background-color: rgba(0, 0, 0, 0.4);
+            border-color: #00ffff;
+            color: #ffffff;
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+        }
+        body.theme-neon-cyber .content-box:hover {
+            background-color: rgba(0, 255, 255, 0.3);
+            color: #000000;
+            box-shadow: 0 0 12px #00ffff;
+        }
+        body.theme-neon-cyber .close-btn { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; }
+        body.theme-neon-cyber .close-btn:hover { color: #ffffff; }
+        body.theme-neon-cyber .section-divider { background-color: rgba(0, 255, 255, 0.4); }
+        body.theme-neon-cyber .wheel-larger,
+        body.theme-neon-cyber .wheel-large,
+        body.theme-neon-cyber .wheel-medium,
+        body.theme-neon-cyber .wheel-small {
+            background: conic-gradient(#6a11cb 0% 12.5%, #2575fc 12.5% 25%, #00c9ff 25% 37.5%, #92fe9d 37.5% 50%, #ffff00 50% 62.5%, #ff0000 62.5% 75%, #ff00ff 75% 87.5%, #6a11cb 87.5% 100%) !important;
+        }
+
+        /* --- Theme: Lava Flow --- */
+        body.theme-lava-flow {
+            background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b); /* Purple to pink to orange */
+        }
+        body.theme-lava-flow .wheel-part { background-color: #ff416c; } /* Hot pink */
+        body.theme-lava-flow .section-label { color: #ffffff; text-shadow: 0 0 5px #ff416c; } /* White with pink glow */
+        body.theme-lava-flow .modal-content, body.theme-lava-flow .nested-modal-content {
+            background-color: rgba(255, 65, 108, 0.2);
+            color: #ffffff;
+            border-color: #ff8c00;
+            box-shadow: 0 0 15px #ff416c;
+        }
+        body.theme-lava-flow .modal-title { color: #ff8c00; text-shadow: 0 0 5px #ff8c00; } /* Orange */
+        body.theme-lava-flow .text-box {
+            background-color: rgba(255, 140, 0, 0.2);
+            border: 2px solid #ff416c;
+            color: #ffffff;
+            box-shadow: 0 0 5px #ff8c00;
+        }
+        body.theme-lava-flow .text-box:hover {
+            background-color: rgba(255, 65, 108, 0.3);
+            color: #ffffff;
+            box-shadow: 0 0 10px #ff416c;
+        }
+        body.theme-lava-flow #nested-modal-content strong { color: #ff8c00; }
+        body.theme-lava-flow .content-box {
+            background-color: rgba(255, 65, 108, 0.3);
+            border-color: #ff8c00;
+            color: #ffffff;
+            box-shadow: 0 0 5px rgba(255, 140, 0, 0.5);
+        }
+        body.theme-lava-flow .content-box:hover {
+            background-color: rgba(255, 140, 0, 0.4);
+            box-shadow: 0 0 10px #ff8c00;
+        }
+        body.theme-lava-flow .close-btn { color: #ff416c; text-shadow: 0 0 5px #ff416c; }
+        body.theme-lava-flow .close-btn:hover { color: #ff8c00; }
+        body.theme-lava-flow .section-divider { background-color: rgba(255, 255, 255, 0.4); }
+        body.theme-lava-flow .wheel-larger,
+        body.theme-lava-flow .wheel-large,
+        body.theme-lava-flow .wheel-medium,
+        body.theme-lava-flow .wheel-small {
+            background: conic-gradient(#ff416c 0% 12.5%, #ff4b2b 12.5% 25%, #ff8c00 25% 37.5%, #ffd700 37.5% 50%, #ff416c 50% 62.5%, #ff4b2b 62.5% 75%, #ff8c00 75% 87.5%, #ffd700 87.5% 100%) !important;
+        }
+
+        /* --- Theme: Rainbow Magic --- */
+        body.theme-rainbow-magic {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd); /* Soft rainbow gradient */
+        }
+        body.theme-rainbow-magic .wheel-part { background-color: #ff6b6b; } /* Red */
+        body.theme-rainbow-magic .section-label { color: #4834d4; text-shadow: 0 0 5px #ffffff; } /* Purple with white glow */
+        body.theme-rainbow-magic .modal-content, body.theme-rainbow-magic .nested-modal-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #4834d4;
+            border-color: #ff9ff3;
+            box-shadow: 0 0 15px #ff9ff3;
+        }
+        body.theme-rainbow-magic .modal-title { color: #ff9ff3; text-shadow: 0 0 5px #ff9ff3; } /* Pink */
+        body.theme-rainbow-magic .text-box {
+            background-color: rgba(255, 159, 243, 0.2);
+            border: 2px solid #4834d4;
+            color: #4834d4;
+            box-shadow: 0 0 5px #ff9ff3;
+        }
+        body.theme-rainbow-magic .text-box:hover {
+            background-color: rgba(72, 52, 212, 0.2);
+            color: #ffffff;
+            box-shadow: 0 0 10px #4834d4;
+        }
+        body.theme-rainbow-magic #nested-modal-content strong { color: #ff9ff3; }
+        body.theme-rainbow-magic .content-box {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-color: #4834d4;
+            color: #4834d4;
+            box-shadow: 0 0 5px rgba(255, 159, 243, 0.5);
+        }
+        body.theme-rainbow-magic .content-box:hover {
+            background-color: rgba(255, 159, 243, 0.3);
+            box-shadow: 0 0 10px #ff9ff3;
+        }
+        body.theme-rainbow-magic .close-btn { color: #ff6b6b; text-shadow: 0 0 5px #ff6b6b; }
+        body.theme-rainbow-magic .close-btn:hover { color: #4834d4; }
+        body.theme-rainbow-magic .section-divider { background-color: rgba(72, 52, 212, 0.3); }
+        body.theme-rainbow-magic .wheel-larger,
+        body.theme-rainbow-magic .wheel-large,
+        body.theme-rainbow-magic .wheel-medium,
+        body.theme-rainbow-magic .wheel-small {
+            background: conic-gradient(#ff6b6b 0% 12.5%, #feca57 12.5% 25%, #1dd1a1 25% 37.5%, #54a0ff 37.5% 50%, #ff9ff3 50% 62.5%, #ff6b6b 62.5% 75%, #feca57 75% 87.5%, #1dd1a1 87.5% 100%) !important;
+        }
+
         #theme-switcher {
             position: fixed;
             top: 90px; /* Adjusted to be lower */
@@ -1721,123 +1857,313 @@ Contoh 3 :
        // Question data structure
 const questionData = [
     {
-        question: "Berapakah 11y + 2y?",
-        options: ["14", "15y", "14y", "11y + 2y"],
-        correctAnswer: 2
-    },
-    {
-        question: "Berapakah 17a - 4a + 6c - 5a + 9c?",
-        options: ["8a + 15c", "8a - 15c", "10a + 16c", "10a - 16c"],
+        question: "Berapakah 3x + 5x?",
+        options: ["8x", "15x", "8x²", "2x"],
         correctAnswer: 0
     },
     {
-        question: "Selesaikan 3d² x (-4d⁵)",
-        options: ["12d⁷", "-12d⁷", "12d³", "-12d³"],
-        correctAnswer: 1
-    },
-    {
-        question: "Selesaikan 32x² ÷ 8x",
-        options: ["4x²", "4x", "4x³", "4"],
-        correctAnswer: 1
-    },
-    {
-        question: "Permudahkan 5x + 3x - 2x",
-        options: ["6x", "10x", "8x", "15x"],
+        question: "Berapakah 7y - 2y?",
+        options: ["5y", "9y", "14y", "5"],
         correctAnswer: 0
     },
     {
-        question: "Cari nilai 4(3a + 2) - 5a",
-        options: ["7a + 8", "12a + 8", "7a - 8", "12a - 8"],
-        correctAnswer: 2
-    },
-    {
-        question: "Selesaikan 2x² × 3x³",
-        options: ["6x⁵", "6x⁶", "5x⁵", "5x⁶"],
-        correctAnswer: 3
-    },
-    {
-        question: "Permudahkan 8y - 3y + 7",
-        options: ["5y + 7", "11y", "5y - 7", "11y + 7"],
-        correctAnswer: 1
-    },
-    {
-        question: "Cari hasil 15a ÷ 3a",
-        options: ["5a", "5", "3", "15"],
-        correctAnswer: 1
-    },
-    {
-        question: "Selesaikan (2x + 3) + (4x - 1)",
-        options: ["6x + 2", "6x + 4", "6x - 2", "8x + 2"],
-        correctAnswer: 2
-    },
-    {
-        question: "Permudahkan 9b² - 4b²",
-        options: ["5b²", "13b²", "5b", "13b"],
-        correctAnswer: 3
-    },
-    {
-        question: "Cari nilai 3(2x - 5) + 4x",
-        options: ["10x - 15", "6x - 15", "10x - 5", "6x - 5"],
-        correctAnswer: 1
-    },
-    {
-        question: "Selesaikan 20x⁴ ÷ 4x²",
-        options: ["5x²", "5x", "16x²", "16x"],
-        correctAnswer: 2
-    },
-    {
-        question: "Permudahkan 7a + 2b - 3a + 5b",
-        options: ["4a + 7b", "10a + 7b", "4a - 3b", "10a - 3b"],
-        correctAnswer: 3
-    },
-    {
-        question: "Cari hasil (3x - 2)(x + 4)",
-        options: ["3x² + 10x - 8", "3x² + 14x - 8", "3x² + 10x + 8", "3x² + 14x + 8"],
+        question: "Selesaikan 4a × 3b",
+        options: ["12ab", "7ab", "12a", "12b"],
         correctAnswer: 0
     },
     {
-        question: "Selesaikan 5(2a - 3) - 2(a + 4)",
-        options: ["8a - 23", "8a - 7", "10a - 23", "10a - 7"],
-        correctAnswer: 1
-    },
-    {
-        question: "Permudahkan 6x³ × 2x² ÷ 3x",
-        options: ["4x⁴", "4x³", "12x⁴", "12x³"],
-        correctAnswer: 2
-    },
-    {
-        question: "Cari nilai 4x² - 2x² + 7x - 3x",
-        options: ["2x² + 4x", "6x² + 10x", "2x² - 4x", "6x² - 10x"],
-        correctAnswer: 3
-    },
-    {
-        question: "Selesaikan (5a + 3b) - (2a - b)",
-        options: ["3a + 4b", "3a + 2b", "7a + 4b", "7a + 2b"],
+        question: "Selesaikan 15xy ÷ 3y",
+        options: ["5x", "5xy", "12xy", "18y"],
         correctAnswer: 0
     },
     {
-        question: "Permudahkan 8(2x - 3) + 3(4 - x)",
-        options: ["13x - 12", "13x - 36", "19x - 12", "19x - 36"],
-        correctAnswer: 1
-    },
-    {
-        question: "Cari hasil 3x(2x + 5) - 4x(x - 3)",
-        options: ["2x² + 27x", "2x² + 3x", "10x² + 27x", "10x² + 3x"],
-        correctAnswer: 2
-    },
-    {
-        question: "Selesaikan (3x²)³",
-        options: ["27x⁶", "9x⁶", "27x⁵", "9x⁵"],
-        correctAnswer: 3
-    },
-    {
-        question: "Permudahkan 12a³b² ÷ 4ab",
-        options: ["3a²b", "3ab", "8a²b", "8ab"],
+        question: "Permudahkan 6ab + 2ab",
+        options: ["8ab", "12ab", "4ab", "8a²b²"],
         correctAnswer: 0
     },
     {
-        question: "Cari nilai (4x - 3)(2x + 1) + 5x",
-        options: ["8x² + 3x - 3", "8x² + 13x - 3", "8x² - x - 3", "8x² + 9x - 3"],
+        question: "Cari nilai 9mn - 4mn",
+        options: ["36mn", "5mn", "13mn", "9mn"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 2pq × 7r",
+        options: ["9pqr", "5pq", "14pqr", "14pq"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 20xyz ÷ 4z",
+        options: ["5xy", "5xyz", "16xyz", "24z"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 8xy + 3xy - 2xy",
+        options: ["9xy", "13xy", "5xy", "24xy"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari hasil 12ab - 5ab + 3ab",
+        options: ["10ab", "19ab", "15ab", "12ab"],
+        correctAnswer: 0
+    },
+    {
+        question: "Selesaikan 3mn × 4p",
+        options: ["7mnp", "12mn", "12mnp", "12mp"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 18abc ÷ 6c",
+        options: ["3abc", "12abc", "3ab", "24c"],
+        correctAnswer: 2
+    },
+    {
+        question: "Permudahkan 5xy + 7xy - 3xy",
+        options: ["9xy", "15xy", "12xy", "35xy"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari nilai 10pq - 6pq + 2pq",
+        options: ["6pq", "18pq", "4pq", "12pq"],
+        correctAnswer: 0
+    },
+    {
+        question: "Selesaikan 6ab × 2c",
+        options: ["8abc", "4ab", "12abc", "12ab"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 24xyz ÷ 8y",
+        options: ["3xz", "16xyz", "3xyz", "32y"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 9mn + 4mn - 6mn",
+        options: ["7mn", "19mn", "3mn", "216mn"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari hasil 15ab - 7ab + 4ab",
+        options: ["8ab", "12ab", "26ab", "19ab"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 5xy × 3z",
+        options: ["2xyz", "8xyz", "15xyz", "15xy"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 36abc ÷ 9c",
+        options: ["4abc", "27abc", "4ab", "45c"],
+        correctAnswer: 2
+    },
+    {
+        question: "Berapakah 2ab + 3ab + 4ab?",
+        options: ["9ab", "24ab", "5ab", "9a²b²"],
+        correctAnswer: 0
+    },
+    {
+        question: "Berapakah 8xy - 3xy - 2xy?",
+        options: ["3xy", "13xy", "5xy", "6xy"],
+        correctAnswer: 0
+    },
+    {
+        question: "Selesaikan 5mn × 2pq",
+        options: ["7mnpq", "10mn", "10mnpq", "3mn"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 24ab ÷ 6a",
+        options: ["4b", "18ab", "4a", "30a"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 7xy + 3xy - 5xy",
+        options: ["5xy", "15xy", "9xy", "105xy"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari nilai 12mn - 8mn + 4mn",
+        options: ["8mn", "24mn", "16mn", "4mn"],
+        correctAnswer: 0
+    },
+    {
+        question: "Selesaikan 3ab × 4cd",
+        options: ["7abcd", "12ab", "12abcd", "12ac"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 30xyz ÷ 5yz",
+        options: ["6x", "25xyz", "6xyz", "35yz"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 9ab + 6ab - 4ab",
+        options: ["11ab", "216ab", "5ab", "19ab"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari hasil 14xy - 9xy + 7xy",
+        options: ["5xy", "12xy", "30xy", "20xy"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 4mn × 5pq",
+        options: ["9mnpq", "20mn", "20mnpq", "1pq"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 42abc ÷ 7bc",
+        options: ["6a", "35abc", "6abc", "49bc"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 10xy + 5xy - 8xy",
+        options: ["7xy", "23xy", "15xy", "400xy"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari nilai 16ab - 10ab + 3ab",
+        options: ["6ab", "9ab", "29ab", "13ab"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 6xy × 3z",
+        options: ["9xyz", "18xy", "18xyz", "3z"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 48mnp ÷ 8np",
+        options: ["6m", "40mnp", "6mnp", "56np"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 11ab + 4ab - 9ab",
+        options: ["6ab", "24ab", "15ab", "396ab"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari hasil 18xy - 12xy + 5xy",
+        options: ["6xy", "11xy", "35xy", "19xy"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 7ab × 2cd",
+        options: ["9abcd", "14ab", "14abcd", "5cd"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 54xyz ÷ 9yz",
+        options: ["6x", "45xyz", "6xyz", "63yz"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 12mn + 7mn - 6mn",
+        options: ["13mn", "25mn", "18mn", "504mn"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari nilai 20ab - 15ab + 4ab",
+        options: ["5ab", "9ab", "39ab", "16ab"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 8xy × 4z",
+        options: ["12xyz", "32xy", "32xyz", "4z"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 63abc ÷ 9bc",
+        options: ["7a", "54abc", "7abc", "72bc"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 13xy + 6xy - 10xy",
+        options: ["9xy", "29xy", "19xy", "780xy"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari hasil 22ab - 16ab + 5ab",
+        options: ["6ab", "11ab", "43ab", "19ab"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 9mn × 3pq",
+        options: ["12mnpq", "27mn", "27mnpq", "6pq"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 72xyz ÷ 8yz",
+        options: ["9x", "64xyz", "9xyz", "80yz"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 14ab + 8ab - 11ab",
+        options: ["11ab", "33ab", "22ab", "1232ab"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari nilai 24xy - 18xy + 6xy",
+        options: ["6xy", "12xy", "48xy", "20xy"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 10ab × 5cd",
+        options: ["15abcd", "50ab", "50abcd", "5cd"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 81mnp ÷ 9np",
+        options: ["9m", "72mnp", "9mnp", "90np"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 15xy + 9xy - 12xy",
+        options: ["12xy", "36xy", "24xy", "1620xy"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari hasil 26ab - 20ab + 7ab",
+        options: ["6ab", "13ab", "53ab", "23ab"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 11mn × 4pq",
+        options: ["15mnpq", "44mn", "44mnpq", "7pq"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 90abc ÷ 10bc",
+        options: ["9a", "80abc", "9abc", "100bc"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 16ab + 10ab - 13ab",
+        options: ["13ab", "39ab", "26ab", "2080ab"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari nilai 28xy - 22xy + 8xy",
+        options: ["6xy", "14xy", "58xy", "24xy"],
+        correctAnswer: 1
+    },
+    {
+        question: "Selesaikan 12pq × 3rs",
+        options: ["15pqrs", "36pq", "36pqrs", "9rs"],
+        correctAnswer: 2
+    },
+    {
+        question: "Selesaikan 100xyz ÷ 10z",
+        options: ["10xy", "90xyz", "10xyz", "110z"],
+        correctAnswer: 0
+    },
+    {
+        question: "Permudahkan 17mn + 8mn - 15mn",
+        options: ["10mn", "40mn", "30mn", "2040mn"],
+        correctAnswer: 0
+    },
+    {
+        question: "Cari hasil 30ab - 25ab + 9ab",
+        options: ["6ab", "14ab", "64ab", "28ab"],
         correctAnswer: 1
     }
 ];
@@ -3092,6 +3418,37 @@ document.addEventListener('touchend', function(e) {
             particleSize: [30, 80], // For lightning length and thunder maxRadius
             particleShape: ['lightning', 'thunder'], // Mix of shapes
             thunderCount: 2 // Max number of thunder particles at a time
+        },
+        // New vibrant themes
+        'theme-neon-cyber': {
+            baseBg: 'linear-gradient(135deg, #0f0c29, #302b63, #24243e)',
+            particleColor: 'rgba(0, 255, 255, 0.8)', // Cyan
+            outlineColor: 'rgba(255, 0, 255, 0.6)', // Magenta
+            numParticles: 40,
+            particleSpeed: 1.2,
+            particleSize: [5, 15],
+            particleShape: ['circle', 'square', 'triangle'],
+            glowEffect: true
+        },
+        'theme-lava-flow': {
+            baseBg: 'linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b)',
+            particleColor: 'rgba(255, 100, 0, 0.7)', // Orange
+            outlineColor: 'rgba(255, 0, 0, 0.8)', // Red
+            numParticles: 35,
+            particleSpeed: 0.8,
+            particleSize: [10, 25],
+            particleShape: ['circle', 'hollow-circle'],
+            pulseEffect: true
+        },
+        'theme-rainbow-magic': {
+            baseBg: 'linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd)',
+            particleColor: 'rgba(255, 255, 255, 0.9)', // White
+            outlineColor: 'rgba(0, 0, 0, 0.5)', // Black
+            numParticles: 50,
+            particleSpeed: 0.6,
+            particleSize: [3, 10],
+            particleShape: ['circle', 'square', 'triangle', 'star'],
+            rainbowEffect: true
         }
         // Soft Lavender removed
     };
@@ -3106,6 +3463,12 @@ document.addEventListener('touchend', function(e) {
             this.color = settings.particleColor;
             this.outlineColor = settings.outlineColor || 'rgba(0,0,0,0.1)';
             this.settings = settings; // Store settings
+
+            // Special effects for new themes
+            this.glowEffect = settings.glowEffect || false;
+            this.pulseEffect = settings.pulseEffect || false;
+            this.rainbowEffect = settings.rainbowEffect || false;
+            this.pulsePhase = Math.random() * Math.PI * 2;
 
             // Determine shape, especially if it's an array (like for thunderstorm)
             if (Array.isArray(settings.particleShape)) {
@@ -3140,9 +3503,17 @@ document.addEventListener('touchend', function(e) {
             } else if (this.shape === 'lightning') {
                 this.speedX = (Math.random() * 2 - 1) * settings.particleSpeed * (Math.random() * 0.5 + 0.5);
                 this.speedY = settings.particleSpeed * (Math.random() * 1 + 0.8);
+            } else if (this.shape === 'star') {
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.1;
             }
         }
         update() {
+            // Update pulse phase for pulsing effects
+            if (this.pulseEffect) {
+                this.pulsePhase += 0.05;
+            }
+
             if (this.shape === 'line') {
                 let dx = this.targetX - this.x;
                 let dy = this.targetY - this.y;
@@ -3179,8 +3550,15 @@ document.addEventListener('touchend', function(e) {
                     this.speedX = (Math.random() * 2 - 1) * this.settings.particleSpeed * (Math.random() * 0.5 + 0.5);
                     this.size = this.settings.particleSize[0] + Math.random() * (this.settings.particleSize[1] - this.settings.particleSize[0]);
                 }
-            }
-             else {
+            } else if (this.shape === 'star') {
+                this.rotation += this.rotationSpeed;
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < -this.size) this.x = canvas.width + this.size;
+                if (this.x > canvas.width + this.size) this.x = -this.size;
+                if (this.y < -this.size) this.y = canvas.height + this.size;
+                if (this.y > canvas.height + this.size) this.y = -this.size;
+            } else {
                 this.x += this.speedX;
                 this.y += this.speedY;
                 if (this.shape !== 'cloud' && this.size > 0.2) this.size -= 0.01;
@@ -3197,12 +3575,23 @@ document.addEventListener('touchend', function(e) {
             let actualShape = isHollow ? this.shape.substring(7) : this.shape;
             const outlineWidth = Math.max(1, this.size / 15);
 
-            if (actualShape === 'thunder') {
-                if (this.life > 0) {
-                    ctx.fillStyle = `rgba(100, 150, 255, ${this.alpha * 0.5})`; // Blue splash fill
-                    ctx.strokeStyle = `rgba(150, 200, 255, ${this.alpha * 0.7})`; // Brighter blue splash stroke
-                    ctx.lineWidth = this.currentRadius * 0.03 + 1;
-                }
+            // Apply pulse effect
+            let currentSize = this.size;
+            if (this.pulseEffect) {
+                currentSize = this.size * (0.8 + 0.2 * Math.sin(this.pulsePhase));
+            }
+
+            // Apply glow effect
+            if (this.glowEffect) {
+                ctx.shadowColor = this.color;
+                ctx.shadowBlur = 15;
+            }
+
+            // Apply rainbow effect
+            if (this.rainbowEffect) {
+                const hue = (Date.now() / 50 + this.x + this.y) % 360;
+                ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
+                ctx.strokeStyle = `hsl(${(hue + 30) % 360}, 100%, 70%)`;
             } else if (isHollow || actualShape === 'line' || actualShape === 'lightning') {
                 ctx.strokeStyle = this.color;
                 ctx.lineWidth = outlineWidth;
@@ -3213,12 +3602,12 @@ document.addEventListener('touchend', function(e) {
             }
 
             if (actualShape === 'square') {
-                ctx.rect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+                ctx.rect(this.x - currentSize / 2, this.y - currentSize / 2, currentSize, currentSize);
             } else if (actualShape === 'triangle') {
-                const height = this.size * Math.sqrt(3) / 2;
+                const height = currentSize * Math.sqrt(3) / 2;
                 ctx.moveTo(this.x, this.y - height / 2);
-                ctx.lineTo(this.x - this.size / 2, this.y + height / 2);
-                ctx.lineTo(this.x + this.size / 2, this.y + height / 2);
+                ctx.lineTo(this.x - currentSize / 2, this.y + height / 2);
+                ctx.lineTo(this.x + currentSize / 2, this.y + height / 2);
                 ctx.closePath();
             } else if (actualShape === 'line') {
                 ctx.moveTo(this.x, this.y);
@@ -3230,7 +3619,7 @@ document.addEventListener('touchend', function(e) {
                 let currentX = this.x;
                 let currentY = this.y;
                 const segments = 5 + Math.floor(Math.random() * 5);
-                const segmentLength = this.size / segments;
+                const segmentLength = currentSize / segments;
                 for (let i = 0; i < segments; i++) {
                     const nextX = currentX + (Math.random() - 0.5) * segmentLength * 2.5;
                     const nextY = currentY + segmentLength + (Math.random() - 0.8) * segmentLength * 0.5;
@@ -3239,7 +3628,7 @@ document.addEventListener('touchend', function(e) {
                     currentY = nextY;
                 }
             } else if (actualShape === 'cloud') {
-                const s = this.size / 3;
+                const s = currentSize / 3;
                 ctx.arc(this.x, this.y, s * 1.2, 0, Math.PI * 2);
                 ctx.arc(this.x + s * 0.9, this.y + s * 0.4, s, 0, Math.PI * 2);
                 ctx.arc(this.x - s * 0.8, this.y + s * 0.5, s * 0.9, 0, Math.PI * 2);
@@ -3249,8 +3638,29 @@ document.addEventListener('touchend', function(e) {
                 if (this.life > 0) {
                     ctx.arc(this.x, this.y, this.currentRadius, 0, Math.PI * 2);
                 }
+            } else if (actualShape === 'star') {
+                // Draw a 5-pointed star
+                const outerRadius = currentSize / 2;
+                const innerRadius = outerRadius * 0.5;
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.moveTo(0, -outerRadius);
+                for (let i = 0; i < 5; i++) {
+                    ctx.rotate(Math.PI / 5);
+                    ctx.lineTo(0, -innerRadius);
+                    ctx.rotate(Math.PI / 5);
+                    ctx.lineTo(0, -outerRadius);
+                }
+                ctx.closePath();
+                ctx.restore();
             } else {
-                ctx.arc(this.x, this.y, this.size / 2, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, currentSize / 2, 0, Math.PI * 2);
+            }
+
+            // Reset shadow
+            if (this.glowEffect) {
+                ctx.shadowBlur = 0;
             }
 
             if (actualShape === 'thunder') {
@@ -3303,7 +3713,7 @@ document.addEventListener('touchend', function(e) {
     const themeSwitcherBtn = document.getElementById('theme-switcher'); // Renamed to avoid conflict if 'themeSwitcher' is used elsewhere
     const body = document.body;
     // Ensure 'theme-soft-lavender' is removed if it was still in your array from a previous step
-    const themes = ['theme-default', 'theme-deep-ocean', 'theme-minty-fresh', 'theme-cool-slate', 'theme-earthy-tones', 'theme-monochrome-calm', 'theme-forest-canopy', 'theme-stormy-sky', 'theme-lightning-strike', 'theme-sky-clouds', 'theme-sunset-gradient', 'theme-thunderstorm'];
+    const themes = ['theme-default', 'theme-deep-ocean', 'theme-minty-fresh', 'theme-cool-slate', 'theme-earthy-tones', 'theme-monochrome-calm', 'theme-forest-canopy', 'theme-stormy-sky', 'theme-lightning-strike', 'theme-sky-clouds', 'theme-sunset-gradient', 'theme-thunderstorm', 'theme-neon-cyber', 'theme-lava-flow', 'theme-rainbow-magic'];
     let currentThemeIndex = 0;
 
     // Apply default theme and particles initially
@@ -3340,265 +3750,364 @@ document.addEventListener('touchend', function(e) {
     themeSwitcherBtn.addEventListener('touchend', handleThemeSwitch, { passive: false });
 
 // Question Modal Functionality
-    let currentQuestionIndex = 0;
-    let selectedQuestions = [];
-    let userAnswers = [];
-    let sessionQuestions = [];
-    let sessionCompleted = false;
+let currentQuestionIndex = 0;
+let selectedQuestions = [];
+let userAnswers = [];
+let sessionQuestions = [];
+let sessionCompleted = false;
+let savedSessionQuestions = null; // Variable to store saved questions
+let savedCurrentQuestionIndex = 0; // Variable to store current question index
+let savedUserAnswers = []; // Variable to store user answers
+
+// Initialize question session
+function initQuestionSession() {
+    // Reset session variables
+    sessionCompleted = false;
     
-    // Initialize question session
-    function initQuestionSession() {
-        // Reset session variables
-        currentQuestionIndex = 0;
-        userAnswers = [];
-        sessionCompleted = false;
-        
+    // Check if we have saved questions
+    if (savedSessionQuestions && savedSessionQuestions.length > 0) {
+        // Use saved questions
+        sessionQuestions = savedSessionQuestions;
+        // Restore current question index
+        currentQuestionIndex = savedCurrentQuestionIndex;
+        // Restore user answers
+        userAnswers = [...savedUserAnswers];
+    } else {
         // Select 15 random questions
         sessionQuestions = [];
         const shuffledQuestions = [...questionData].sort(() => 0.5 - Math.random());
         sessionQuestions = shuffledQuestions.slice(0, 15);
+        // Save the questions for future use
+        savedSessionQuestions = sessionQuestions;
+        // Reset current question index
+        currentQuestionIndex = 0;
+        // Reset user answers
+        userAnswers = [];
+        // Save initial state
+        savedCurrentQuestionIndex = 0;
+        savedUserAnswers = [];
+    }
+    
+    // Update UI
+    document.getElementById('question-results').style.display = 'none';
+    document.getElementById('question-results').innerHTML = '';
+    updateQuestionDisplay();
+    updateProgressBar();
+}
+
+// Save session questions when modal is closed
+function saveSessionQuestions() {
+    // Save the current session questions
+    if (sessionQuestions && sessionQuestions.length > 0) {
+        savedSessionQuestions = sessionQuestions;
+        // Save current question index
+        savedCurrentQuestionIndex = currentQuestionIndex;
+        // Save user answers
+        savedUserAnswers = [...userAnswers];
+    }
+}
+
+// Update question display
+function updateQuestionDisplay() {
+    if (sessionQuestions.length === 0) return;
+    
+    const question = sessionQuestions[currentQuestionIndex];
+    document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+    document.getElementById('total-questions').textContent = sessionQuestions.length;
+    document.getElementById('question-text').textContent = question.question;
+    
+    // Clear previous options
+    const optionsContainer = document.getElementById('answer-options');
+    optionsContainer.innerHTML = '';
+    
+    // Add new options
+    question.options.forEach((option, index) => {
+        const optionElement = document.createElement('button');
+        optionElement.className = 'answer-option';
+        optionElement.textContent = option;
+        optionElement.addEventListener('click', () => selectAnswer(index));
+        optionElement.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            selectAnswer(index);
+        }, { passive: false });
         
-        // Update UI
-        document.getElementById('question-results').style.display = 'none';
-        document.getElementById('question-results').innerHTML = '';
+        // If user already answered this question, show their answer
+        if (userAnswers[currentQuestionIndex] !== undefined) {
+            if (index === userAnswers[currentQuestionIndex]) {
+                optionElement.classList.add('selected');
+            }
+        }
+        
+        optionsContainer.appendChild(optionElement);
+    });
+    
+    // Add skip option
+    const skipOptionElement = document.createElement('button');
+    skipOptionElement.className = 'answer-option skip-option';
+    skipOptionElement.textContent = 'Langkau soalan ini';
+    skipOptionElement.addEventListener('click', skipQuestion);
+    skipOptionElement.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        skipQuestion();
+    }, { passive: false });
+    optionsContainer.appendChild(skipOptionElement);
+    
+    // Update navigation buttons
+    document.getElementById('prev-question-btn').disabled = currentQuestionIndex === 0;
+    document.getElementById('next-question-btn').disabled = currentQuestionIndex === sessionQuestions.length - 1;
+    document.getElementById('submit-answer-btn').style.display = 'inline-block';
+}
+
+// Select an answer
+function selectAnswer(optionIndex) {
+    // Store user's answer
+    userAnswers[currentQuestionIndex] = optionIndex;
+    
+    // Update UI to show selected answer
+    const options = document.querySelectorAll('.answer-option');
+    options.forEach((option, index) => {
+        if (index === optionIndex) {
+            option.classList.add('selected');
+        } else {
+            option.classList.remove('selected');
+        }
+    });
+    
+    // Add visual feedback
+    const selectedOption = options[optionIndex];
+    selectedOption.style.transform = 'scale(0.98)';
+    setTimeout(() => {
+        selectedOption.style.transform = '';
+    }, 100);
+}
+
+// Update progress bar
+function updateProgressBar() {
+    const progressPercent = ((currentQuestionIndex + 1) / sessionQuestions.length) * 100;
+    document.getElementById('question-progress-bar').style.width = progressPercent + '%';
+}
+
+// Navigate to next question
+function nextQuestion() {
+    if (currentQuestionIndex < sessionQuestions.length - 1) {
+        currentQuestionIndex++;
         updateQuestionDisplay();
         updateProgressBar();
     }
-    
-    // Update question display
-    function updateQuestionDisplay() {
-        if (sessionQuestions.length === 0) return;
-        
-        const question = sessionQuestions[currentQuestionIndex];
-        document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-        document.getElementById('total-questions').textContent = sessionQuestions.length;
-        document.getElementById('question-text').textContent = question.question;
-        
-        // Clear previous options
-        const optionsContainer = document.getElementById('answer-options');
-        optionsContainer.innerHTML = '';
-        
-        // Add new options
-        question.options.forEach((option, index) => {
-            const optionElement = document.createElement('button');
-            optionElement.className = 'answer-option';
-            optionElement.textContent = option;
-            optionElement.addEventListener('click', () => selectAnswer(index));
-            optionElement.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                selectAnswer(index);
-            }, { passive: false });
-            
-            // If user already answered this question, show their answer
-            if (userAnswers[currentQuestionIndex] !== undefined) {
-                if (index === userAnswers[currentQuestionIndex]) {
-                    optionElement.classList.add('selected');
-                }
-            }
-            
-            optionsContainer.appendChild(optionElement);
-        });
-        
-        // Add skip option
-        const skipOptionElement = document.createElement('button');
-        skipOptionElement.className = 'answer-option skip-option';
-        skipOptionElement.textContent = 'Langkau soalan ini';
-        skipOptionElement.addEventListener('click', skipQuestion);
-        skipOptionElement.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            skipQuestion();
-        }, { passive: false });
-        optionsContainer.appendChild(skipOptionElement);
-        
-        // Update navigation buttons
-        document.getElementById('prev-question-btn').disabled = currentQuestionIndex === 0;
-        document.getElementById('next-question-btn').disabled = currentQuestionIndex === sessionQuestions.length - 1;
-        document.getElementById('submit-answer-btn').style.display = 'inline-block';
+}
+
+// Navigate to previous question
+function prevQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        updateQuestionDisplay();
+        updateProgressBar();
     }
+}
+
+// Skip question
+function skipQuestion() {
+    // Clear any selected answer for this question
+    userAnswers[currentQuestionIndex] = undefined;
     
-    // Select an answer
-    function selectAnswer(optionIndex) {
-        // Store user's answer
-        userAnswers[currentQuestionIndex] = optionIndex;
-        
-        // Update UI to show selected answer
-        const options = document.querySelectorAll('.answer-option');
-        options.forEach((option, index) => {
-            if (index === optionIndex) {
-                option.classList.add('selected');
-            } else {
-                option.classList.remove('selected');
-            }
-        });
-        
-        // Add visual feedback
-        const selectedOption = options[optionIndex];
-        selectedOption.style.transform = 'scale(0.98)';
-        setTimeout(() => {
-            selectedOption.style.transform = '';
-        }, 100);
-    }
-    
-    // Update progress bar
-    function updateProgressBar() {
-        const progressPercent = ((currentQuestionIndex + 1) / sessionQuestions.length) * 100;
-        document.getElementById('question-progress-bar').style.width = progressPercent + '%';
-    }
-    
-    // Navigate to next question
-    function nextQuestion() {
-        if (currentQuestionIndex < sessionQuestions.length - 1) {
-            currentQuestionIndex++;
-            updateQuestionDisplay();
-            updateProgressBar();
-        }
-    }
-    
-    // Navigate to previous question
-    function prevQuestion() {
-        if (currentQuestionIndex > 0) {
-            currentQuestionIndex--;
-            updateQuestionDisplay();
-            updateProgressBar();
-        }
-    }
-    
-    // Skip question
-    function skipQuestion() {
-        // Clear any selected answer for this question
-        userAnswers[currentQuestionIndex] = undefined;
-        
-        // Move to next question or show results
-        if (currentQuestionIndex < sessionQuestions.length - 1) {
-            nextQuestion();
-        } else {
-            showResults();
-        }
-    }
-    
-    // Submit answer
-    function submitAnswer() {
-        // Check if an answer is selected
-        // Allow blank answers - no check needed
-        
-        // Move to next question or show results
-        if (currentQuestionIndex < sessionQuestions.length - 1) {
-            nextQuestion();
-        } else {
-            showResults();
-        }
-    }
-    
-    // Show results
-    function showResults() {
-        sessionCompleted = true;
-        
-        // Calculate score
-        let correctCount = 0;
-        let resultsHTML = '<h3 style="text-align: center; margin-bottom: 20px;">Keputusan Kuiz</h3>';
-        
-        sessionQuestions.forEach((question, index) => {
-            const userAnswerIndex = userAnswers[index];
-            const isCorrect = userAnswerIndex === question.correctAnswer;
-            
-            if (isCorrect) {
-                correctCount++;
-            }
-            
-            resultsHTML += `
-                <div class="result-item">
-                    <p><strong>Soalan ${index + 1}:</strong> ${question.question}</p>
-                    <p>Jawapan anda: <span class="${isCorrect ? 'correct-answer' : 'incorrect-answer'}">
-                        ${userAnswerIndex !== undefined ? question.options[userAnswerIndex] : 'Dilangkau'}
-                    </span></p>
-                    <p>Jawapan betul: <span class="correct-answer">${question.options[question.correctAnswer]}</span></p>
-                </div>
-            `;
-        });
-        
-        // Add score display
-        resultsHTML += `<div class="score-display">Skor Anda: ${correctCount}/${sessionQuestions.length}</div>`;
-        resultsHTML += '<p style="text-align: center; font-style: italic;">Klik "Tetapkan Semula Sesi" untuk memulakan kuiz baru.</p>';
-        
-        document.getElementById('question-results').innerHTML = resultsHTML;
-        document.getElementById('question-results').style.display = 'block';
-        
-        // Hide question navigation
-        document.getElementById('question-navigation').style.display = 'none';
-        document.getElementById('answer-options').style.display = 'none';
-        document.getElementById('question-text').style.display = 'none';
-        document.getElementById('submit-answer-btn').style.display = 'none';
-    }
-    
-    // Reset session
-    function resetSession() {
-        // Show question elements again if they were hidden
-        document.getElementById('question-navigation').style.display = 'block';
-        document.getElementById('answer-options').style.display = 'block';
-        document.getElementById('question-text').style.display = 'block';
-        
-        // Initialize new session
-        initQuestionSession();
-    }
-    
-    // Event listeners for question modal
-    document.getElementById('question-button').addEventListener('click', function() {
-        document.getElementById('question-modal').style.display = 'flex';
-        initQuestionSession();
-    });
-    
-    document.getElementById('question-button').addEventListener('touchend', function(e) {
-        e.preventDefault();
-        document.getElementById('question-modal').style.display = 'flex';
-        initQuestionSession();
-    }, { passive: false });
-    
-    document.getElementById('question-modal-close').addEventListener('click', function() {
-        document.getElementById('question-modal').style.display = 'none';
-    });
-    
-    document.getElementById('question-modal-close').addEventListener('touchend', function(e) {
-        e.preventDefault();
-        document.getElementById('question-modal').style.display = 'none';
-    }, { passive: false });
-    
-    document.getElementById('prev-question-btn').addEventListener('click', prevQuestion);
-    document.getElementById('prev-question-btn').addEventListener('touchend', function(e) {
-        e.preventDefault();
-        prevQuestion();
-    }, { passive: false });
-    
-    document.getElementById('next-question-btn').addEventListener('click', nextQuestion);
-    document.getElementById('next-question-btn').addEventListener('touchend', function(e) {
-        e.preventDefault();
+    // Move to next question or show results
+    if (currentQuestionIndex < sessionQuestions.length - 1) {
         nextQuestion();
-    }, { passive: false });
+    } else {
+        showResults();
+    }
+}
+
+// Submit answer
+function submitAnswer() {
+    // Check if an answer is selected
+    // Allow blank answers - no check needed
     
-    document.getElementById('submit-answer-btn').addEventListener('click', submitAnswer);
-    document.getElementById('submit-answer-btn').addEventListener('touchend', function(e) {
-        e.preventDefault();
-        submitAnswer();
-    }, { passive: false });
+    // Move to next question or show results
+    if (currentQuestionIndex < sessionQuestions.length - 1) {
+        nextQuestion();
+    } else {
+        showResults();
+    }
+}
+
+// Show results
+function showResults() {
+    sessionCompleted = true;
     
-    document.getElementById('reset-session-btn').addEventListener('click', resetSession);
-    document.getElementById('reset-session-btn').addEventListener('touchend', function(e) {
-        e.preventDefault();
-        resetSession();
-    }, { passive: false });
+    // Calculate score
+    let correctCount = 0;
+    let resultsHTML = '<h3 style="text-align: center; margin-bottom: 20px;">Keputusan Kuiz</h3>';
     
-    // Close modal when clicking outside
-    document.getElementById('question-modal').addEventListener('click', function(event) {
-        if (event.target === this) {
-            this.style.display = 'none';
+    sessionQuestions.forEach((question, index) => {
+        const userAnswerIndex = userAnswers[index];
+        const isCorrect = userAnswerIndex === question.correctAnswer;
+        
+        if (isCorrect) {
+            correctCount++;
         }
+        
+        resultsHTML += `
+            <div class="result-item">
+                <p><strong>Soalan ${index + 1}:</strong> ${question.question}</p>
+                <p>Jawapan anda: <span class="${isCorrect ? 'correct-answer' : 'incorrect-answer'}">
+                    ${userAnswerIndex !== undefined ? question.options[userAnswerIndex] : 'Dilangkau'}
+                </span></p>
+                <p>Jawapan betul: <span class="correct-answer">${question.options[question.correctAnswer]}</span></p>
+            </div>
+        `;
     });
     
-    document.getElementById('question-modal').addEventListener('touchend', function(event) {
-        if (event.target === this) {
-            this.style.display = 'none';
+    // Add score display
+    resultsHTML += `<div class="score-display">Skor Anda: ${correctCount}/${sessionQuestions.length}</div>`;
+    resultsHTML += '<p style="text-align: center; font-style: italic;">Klik "Tetapkan Semula Sesi" untuk memulakan kuiz baru.</p>';
+    
+    document.getElementById('question-results').innerHTML = resultsHTML;
+    document.getElementById('question-results').style.display = 'block';
+    
+    // Hide question navigation
+    document.getElementById('question-navigation').style.display = 'none';
+    document.getElementById('answer-options').style.display = 'none';
+    document.getElementById('question-text').style.display = 'none';
+    document.getElementById('submit-answer-btn').style.display = 'none';
+}
+
+// Reset session
+function resetSession() {
+    // Clear saved session questions
+    savedSessionQuestions = null;
+    // Reset saved current question index
+    savedCurrentQuestionIndex = 0;
+    // Reset saved user answers
+    savedUserAnswers = [];
+    
+    // Show question elements again if they were hidden
+    document.getElementById('question-navigation').style.display = 'block';
+    document.getElementById('answer-options').style.display = 'block';
+    document.getElementById('question-text').style.display = 'block';
+    
+    // Initialize new session
+    initQuestionSession();
+}
+
+// Event listeners for question modal
+document.getElementById('question-button').addEventListener('click', function() {
+    document.getElementById('question-modal').style.display = 'flex';
+    initQuestionSession();
+});
+
+document.getElementById('question-button').addEventListener('touchend', function(e) {
+    e.preventDefault();
+    document.getElementById('question-modal').style.display = 'flex';
+    initQuestionSession();
+}, { passive: false });
+
+document.getElementById('question-modal-close').addEventListener('click', function() {
+    // Save the session questions before closing
+    saveSessionQuestions();
+    document.getElementById('question-modal').style.display = 'none';
+});
+
+document.getElementById('question-modal-close').addEventListener('touchend', function(e) {
+    e.preventDefault();
+    // Save the session questions before closing
+    saveSessionQuestions();
+    document.getElementById('question-modal').style.display = 'none';
+}, { passive: false });
+
+document.getElementById('prev-question-btn').addEventListener('click', prevQuestion);
+document.getElementById('prev-question-btn').addEventListener('touchend', function(e) {
+    e.preventDefault();
+    prevQuestion();
+}, { passive: false });
+
+document.getElementById('next-question-btn').addEventListener('click', nextQuestion);
+document.getElementById('next-question-btn').addEventListener('touchend', function(e) {
+    e.preventDefault();
+    nextQuestion();
+}, { passive: false });
+
+document.getElementById('submit-answer-btn').addEventListener('click', submitAnswer);
+document.getElementById('submit-answer-btn').addEventListener('touchend', function(e) {
+    e.preventDefault();
+    submitAnswer();
+}, { passive: false });
+
+document.getElementById('reset-session-btn').addEventListener('click', resetSession);
+document.getElementById('reset-session-btn').addEventListener('touchend', function(e) {
+    e.preventDefault();
+    resetSession();
+}, { passive: false });
+
+// Close modal when clicking outside
+document.getElementById('question-modal').addEventListener('click', function(event) {
+    if (event.target === this) {
+        // Save the session questions before closing
+        saveSessionQuestions();
+        this.style.display = 'none';
+    }
+});
+
+document.getElementById('question-modal').addEventListener('touchend', function(event) {
+    if (event.target === this) {
+        // Save the session questions before closing
+        saveSessionQuestions();
+        this.style.display = 'none';
+    }
+});
+// Special click interaction - Ripple effect
+function createRipple(event) {
+    const ripple = document.createElement('div');
+    ripple.classList.add('ripple');
+    ripple.style.left = `${event.clientX}px`;
+    ripple.style.top = `${event.clientY}px`;
+    
+    // Add ripple to body
+    document.body.appendChild(ripple);
+    
+    // Remove ripple after animation completes
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
+
+// Add click event listener to the entire document
+document.addEventListener('click', function(e) {
+    // Only create ripple if it's not on a button or interactive element
+    if (!e.target.closest('button, .content-box, .section-label, .text-box')) {
+        createRipple(e);
+    }
+});
+
+// Add CSS for ripple effect
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `
+    .ripple {
+        position: fixed;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        animation: ripple-animation 0.6s linear;
+        z-index: 9999;
+    }
+    
+    @keyframes ripple-animation {
+        from {
+            width: 0;
+            height: 0;
+            opacity: 0.6;
         }
-    });
-    animateParticles(); // Start the particle animation loop
+        to {
+            width: 200px;
+            height: 200px;
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(rippleStyle);
+
+animateParticles(); // Start the particle animation loop
     </script>
 </body>
 </html>
